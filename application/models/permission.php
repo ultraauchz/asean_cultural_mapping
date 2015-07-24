@@ -4,9 +4,9 @@
  */
 class Permission extends ORM {
 	
-	var $table = "ma_permission";
+	var $table = "acm_permissions";
 	
-	var $has_one = array("user_type");
+	var $has_one = array("acm_user_types");
 	
 	function __construct($id=null) {
 		parent::__construct($id);

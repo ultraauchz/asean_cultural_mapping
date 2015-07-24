@@ -10,7 +10,7 @@ class Signin extends Base_Controller {
 	}
 	
 	public function action() {
-		if(login($this->input->post("email"), $this->input->post("passwords"))) {
+		if(login($this->input->post("username"), $this->input->post("password"))) {
 			set_notify('success', 'ยินดีต้อนรับเข้าสู่ระบบ');
 			redirect("admin");
 		} else {

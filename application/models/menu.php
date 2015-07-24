@@ -5,7 +5,7 @@
  */
 class Menu extends ORM {
 
-	var $table = "ma_menu";
+	var $table = "acm_system_menus";
 
 	// var $has_one = array();
 

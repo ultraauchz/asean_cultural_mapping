@@ -6,7 +6,7 @@
     <base href="<?php echo base_url()?>" ></base>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>กรมฝนหลวงและการบินเกษตร</title>
+    <title>ASEAN CULTURAL MAPPING ::: BackEnd</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@
 			<div class="col-sm-6 col-md-4 col-md-offset-4">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<strong>กรมฝนหลวงและการบินเกษตร</strong>
+						<strong>ASEAN CULTURAL MAPPING</strong>
 					</div>
 					<div class="panel-body">
 						<form role="form" action="admin/signin/action" method="POST">
@@ -71,7 +71,7 @@
 												<span class="input-group-addon">
 													<i class="glyphicon glyphicon-user"></i>
 												</span> 
-												<input class="form-control" placeholder="อีเมล์" name="email" type="text" autofocus>
+												<input class="form-control" placeholder="Username" name="username" type="text" autofocus>
 											</div>
 										</div>
 										<div class="form-group">
@@ -79,11 +79,11 @@
 												<span class="input-group-addon">
 													<i class="glyphicon glyphicon-lock"></i>
 												</span>
-												<input class="form-control" placeholder="รหัสผ่าน" name="passwords" type="password" value="">
+												<input class="form-control" placeholder="Password" name="password" type="password" value="">
 											</div>
 										</div>
 										<div class="form-group">
-											<input type="submit" class="btn btn-lg btn-success btn-block" value="เข้าสู่ระบบ">
+											<input type="submit" class="btn btn-lg btn-success btn-block" value="Sing In">
 										</div>
 									</div>
 								</div>

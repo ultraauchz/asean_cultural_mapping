@@ -4,8 +4,9 @@
  */
 class User extends ORM {
 	
-	var $table = "ma_user";
-	
+	var $table = "acm_users";
+	var $has_one = array("acm_organizations","acm_user_types");
+	/*
 	var $has_one = array("operation_center","user_type",
 		'center' => array(
 			            'class' => 'center',
@@ -22,7 +23,7 @@ class User extends ORM {
 	);
 
 	var $has_many = array("forum_comment","forum_topic","log","request_rain_progess");
-	
+	*/
 	function __construct($id=null) {
 		parent::__construct($id);
 	}

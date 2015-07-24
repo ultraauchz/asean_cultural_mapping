@@ -57,6 +57,7 @@ class Admin extends Admin_Controller {
 	}
 
 	public function inc_menu() {
+		/*	
 		$data["has_permission"] = 0;
 		
 		$data["contents"] = new Content_Group();
@@ -81,6 +82,8 @@ class Admin extends Admin_Controller {
 		}
 		
 		$this->load->view("inc_menu",$data);
+		 * 
+		 */
 	}
 	
 	public function inc_statistic()
@@ -128,8 +131,8 @@ class Admin extends Admin_Controller {
 	}
 
 	public function index() {
-		$data['complain'] = new Complain();
-		$data['complain']->get_page(10);
+		//$data['complain'] = new Complain();
+		//$data['complain']->get_page(10);
 		$this->template->build("index",@$data);
 	}
 	

@@ -1,10 +1,9 @@
 <?php
 if(!function_exists("login")) {
 	function login($username,$password) {
-		$password = encrypt_password($password);
-		$CI =& get_instance();
+		$CI =& get_instance();		
 		$foo = new User();
-		$foo->where("username",$username)->where("passwords",$password)->where("status",1)->get(1);
+		$foo->where("username",$username)->where("password",$password)->where("status",1)->get(1);
 		if($foo->id) {
 
 			$CI->session->set_userdata("id",$foo->id);
