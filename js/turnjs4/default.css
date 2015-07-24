@@ -1,0 +1,16 @@
+.ebook * {
+	font-family:tahoma;
+}
+.ebook div.page {
+	background:#fff;
+}
+
+.ebook div.hard {
+	background:#fff;
+}
+
+.shadow { width:100%; height:100%; position:absolute; }
+
+.page_no { position:absolute; width:100%; font-size:10px; text-shadow: -1px 0 #eee, 0 1px #eee, 1px 0 #eee, 0 -1px #eee;/* ใส่ขอบให้ตัวอักษร*/ }
+.page_no.left { padding-top:10px; margin-left:-10px; text-align:right; }
+.page_no.right { padding:10px; text-align:left; }
