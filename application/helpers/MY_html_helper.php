@@ -158,3 +158,27 @@ if(!function_exists("online_users")) {
 		print_r($users->num_rows());
 	}
 }
+
+if(!function_exists("bread_crumb")) {
+	function bread_crumb($menu_id){		
+		$CI =& get_instance();
+		//$CI->load->model('Menu','menu');
+		$menu = new Menu();
+		$menu->where("id",$menu_id)->get(1);
+		//$menu = $CI->menu->get($menu_id);
+		
+		$bread_crumb='<!-- Content Header (Page header) -->
+		<section class="content-header">
+		  <h1>
+		    '.$menu->title.'
+		    <small>'.$menu->description.'</small>
+		  </h1>
+		  <ol class="breadcrumb">
+		    <li><a href="siteadmin/dashboard/index"><i class="fa fa-dashboard"></i> Home</a></li>
+		    <li class="active">'.$menu->title.'</li>
+		  </ol>
+		</section>';
+		
+		return $bread_crumb;	
+	} 
+}

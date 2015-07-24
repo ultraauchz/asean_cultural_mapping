@@ -1,8 +1,8 @@
 <?php
 $CI =& get_instance();
+$current_menu = new Menu();
+$current_menu->where("id",$menu_id)->get(1);
 $CI->load->model('Menu','menu');
-$menu_id = 1;
-$current_menu = $CI->menu->get($menu_id);
 $main_menu = $CI->menu->where("parent_id = 0 and show_state='y'")->order_by('title','asc')->get();
 ?>
 <!-- sidebar: style can be found in sidebar.less -->

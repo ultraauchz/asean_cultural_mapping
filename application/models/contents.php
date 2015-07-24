@@ -1,13 +1,11 @@
 <?php
 /*
- * Content_Group Model
+ * Content Model
  */
-class Content_Group extends ORM {
+class Contents extends ORM {
 
-	var $table = "ma_content_group";
-
-	var $has_many = array("content");
-
+	var $table = "acm_contents";
+	
     function __construct($id = NULL)
 	{
 		parent::__construct($id);
