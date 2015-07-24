@@ -1,0 +1,15 @@
+.table_data th{
+	background:#3C8DBC !important;
+	color:#FFFFFF;
+}
+.th_manage{
+	width:170px;	
+}
+.th_ordering{
+	width:100px;	
+	text-align:center;
+}
+.td_ordering{
+	text-align:center;
+}
+.table-hover>tbody>tr:hover{background-color:#fff2c1 !important;}
