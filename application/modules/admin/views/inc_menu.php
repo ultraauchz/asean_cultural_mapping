@@ -19,6 +19,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
             	<li class="hidden-sm" ><a href="<?php echo base_url()?>" title="ดูหน้าเว็บไซต์" target="_blank" ><span class="glyphicon glyphicon-home" ></span></a></li>
+
+                <li><a href="">Home</a></li>
+                <li><a href="noa">Network Of Asean</a></li>
+                <li><a href="achs">Asean Cultural Heritage Sites</a></li>
+                <hr>
+
                 <li<?php if(uri_segment(2,null)) echo " class=\"active\" "?>><a href="admin">หน้าแรก</a></li>
                 
                 <?php if((permission("menus","views")) || (permission("sidebars","views"))):?>
