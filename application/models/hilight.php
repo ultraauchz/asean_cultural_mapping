@@ -5,7 +5,7 @@
  */
 class Hilight extends ORM {
 
-	var $table = "ma_hilight";
+	var $table = "acm_hilights";
 
     function __construct($id = NULL)
 	{

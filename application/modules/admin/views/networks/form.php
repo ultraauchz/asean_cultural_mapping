@@ -10,26 +10,13 @@
 			
 			<div class="box-body">
 				<div class="form-group">
-		              <label for="exampleInputEmail1">TITLE</label>
-		              <input type="text" class="form-control" name="title" value="<?php echo @$value->title;?>">
+		              <label for="exampleInputEmail1">Name</label>
+		              <input type="text" class="form-control" name="name" value="<?php echo @$item['name'];?>">
 	            </div>
 				<div class="form-group">
-		              <label for="exampleInputEmail1">DETAIL</label>
-		              <textarea class="form-control"  name="detail" id="detail" ><?php echo @$value->detail;?></textarea>
+		              <label for="exampleInputEmail1">Description</label>
+		              <textarea class="form-control"  name="description" id="description" ><?php echo @$item['description'];?></textarea>
 	            </div>	  
-	            <div class="form-group">
-		              <label for="exampleInputEmail1">URL</label>
-		              <input type="text" class="form-control" name="url" value="<?php echo @$value->url;?>">
-	            </div>
-	            <div class="form-group">
-		              <label for="exampleInputEmail1">HILIGHT IMAGE</label>
-		              <div class="input-group">
-						    <input type="text" id="image_path" class="form-control" name="image_path" placeholder="select hilight image" value="<?php echo $value->image_path?>" />
-						    <span class="input-group-btn">
-						    	<a href="js/tinymce/plugins/filemanager/dialog.php?type=1&field_id=image_path" class="btn btn-primary iframe-btn" >เลือกไฟล์</a>
-							</span>
-					  </div>
-	            </div>	
 	            <table>
 	            	<tr>
 	            		<td>

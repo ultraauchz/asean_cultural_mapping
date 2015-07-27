@@ -133,6 +133,7 @@ class Admin extends Admin_Controller {
 	public function index() {
 		//$data['complain'] = new Complain();
 		//$data['complain']->get_page(10);
+		$data['menu_id'] = 1;
 		$this->template->build("index",@$data);
 	}
 	

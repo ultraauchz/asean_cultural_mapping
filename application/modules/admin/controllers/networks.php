@@ -4,6 +4,7 @@ class Networks extends Admin_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->menu_id = 15;
+		$this->modules_name = 'networks';
 		/*
 		if(!permission("organizations","views")) {
 			redirect("admin");
@@ -14,6 +15,7 @@ class Networks extends Admin_Controller {
 	
 	public function index() {
 		$data['menu_id'] = $this->menu_id;
+		$data['modules_name'] = $this->modules_name;
 		$data['result'] = new Network();
 		$data["result"]->order_by("id","ASC")->get_page();
 		$this->template->build('networks/index',$data);
@@ -31,6 +33,7 @@ class Networks extends Admin_Controller {
 	}
 	
 	public function form($id=null) {
+		/*
 		if(permission("departments","create")) {
 			$data["value"] = new Department($id);
 			if (empty($id)) {
@@ -43,6 +46,11 @@ class Networks extends Admin_Controller {
 		} else {
 			redirect("admin/departments");
 		}
+		 * 
+		 */
+		 $data['menu_id'] = $this->menu_id;
+		 $data['modules_name'] = $this->modules_name;
+		 $this->template->build("networks/form",$data);
 	}
 	
 	public function forms($parent_id=null) {

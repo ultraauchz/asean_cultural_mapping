@@ -6,12 +6,18 @@ class Hilights extends Admin_Controller {
 	
 	function __construct() {
 		parent::__construct();
+		$this->menu_id = 13;
+		$this->modules_name = 'hilights';
+		/*
 		if(!permission("hilights","views")) {
 			redirect("admin");
 		}
+		 * 
+		 */
 	}
 
 	public function index() {
+		/*
 		if(permission("hilights","views")) {
 			$data["variable"] = new Hilight();
 			$data["variable"]->order_by("orders","ASC")->get_page();
@@ -19,15 +25,29 @@ class Hilights extends Admin_Controller {
 		} else {
 			redirect("admin");
 		}
+		 * 
+		 */
+		 $data['menu_id'] = $this->menu_id;
+		 $data['modules_name'] = $this->modules_name;
+		 $data["variable"] = new Hilight();
+		 $data["variable"]->order_by("orders","ASC")->get_page();
+		 $this->template->build("hilights/index",$data);
 	}
 
 	public function form($id=null) {
+		/*
 		if(permission("hilights","create")) {
 			$data["value"] = new Hilight($id);
 			$this->template->build("hilights/form",$data);
 		} else {
 			redirect("admin/hilights");
 		}
+		 * 
+		 */
+		 $data['menu_id'] = $this->menu_id;
+		 $data['modules_name'] = $this->modules_name;
+		 $data["value"] = new Hilight($id);
+		 $this->template->build("hilights/form",$data);
 	}
 
 	public function save($id=null) {

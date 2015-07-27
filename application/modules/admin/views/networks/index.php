@@ -50,7 +50,7 @@
 			    </tfoot>
 			  </table>
 			  <div style="text-align:right;">
-			  	<a href="<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
+			  	<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
 			  </div>
 			  <?php echo $result->pagination()?>
 			</div><!-- /.box-body -->
