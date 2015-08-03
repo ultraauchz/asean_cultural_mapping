@@ -16,7 +16,31 @@
 				<div class="form-group">
 		              <label for="exampleInputEmail1">Description</label>
 		              <textarea class="form-control"  name="description" id="description" ><?php echo @$item['description'];?></textarea>
-	            </div>	  
+	            </div>	
+	            <fieldset>
+	            	<legend>Members</legend>
+	            	<input type="button" name="btn_add_member" class="btn btn-success" value="Add Member">
+	            	<table class="table table-bordered">
+	            		<thead>
+	            			<tr>
+	            				<th>No.</th>
+	            				<th>Organization Name</th>
+	            				<th>Country</th>
+	            				<th>Manage</th>
+	            			</tr>
+	            		</thead>
+	            		<tbody>
+	            			<tr>
+	            				<td>1</td>
+	            				<td>Finearts</td>
+	            				<td>Thailand</td>
+	            				<td>
+	            					<input type="button" name="btn_delete" id="btn_delete" class="btn_delete btn btn-danger" value="X">
+	            				</td>
+	            			</tr>
+	            		</tbody>
+	            	</table>
+	            </fieldset>  
 	            <table>
 	            	<tr>
 	            		<td>

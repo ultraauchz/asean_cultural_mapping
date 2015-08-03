@@ -148,7 +148,7 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar">
-
+AAAAAAAAA
 	<?php echo Modules::run("home/inc_header")?>
 
     <!--Header Ends================================================ -->

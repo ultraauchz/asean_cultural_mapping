@@ -1,88 +1,19 @@
-<div id="cssmenu" style="margin:30px 0 0 50px;">
-    <ul>
-    	<?php
-    		$active = 0;
-			if(base_url()==currentURL()) {
-				$active=1;
-			}
-			
-    		foreach ($variable as $key => $value):
-							
-				switch ($value->route) {
-					case 1:
-						$links = $value->links;
-						break;
-					case 2:
-						$links = $value->links;
-						break;
-					case 3:
-						$links = "m/".$value->slug;
-						break;
-					default:
-						$links = "javascript:void();";
-						break;
-				}
-				$class = null;
-				
-				if($roots->where("parent_id",$value->id)->where("status",1)->get(1)->result_count()) {
-					$class .= "has-sub";
-				}
-				
-				//	วนหา ลิงค์ภายใน
-				foreach ($roots->where("parent_id",$value->id)->where("status",1)->get() as $x => $y) {
-	    			switch ($y->route) {
-						case 1:
-							$l = $y->links;
-							break;
-						case 2:
-							$l = $y->links;
-							break;
-						case 3:
-							$l = "m/".$y->slug;
-							break;
-						default:
-							$l = "#";
-							break;
-					}
-					
-					if(base_url($l)==urldecode(currentURL()) && $active==0) {
-						$class .= " active";
-						$active = 1;
-					}
-					
-				}
-				
-				if(base_url($links)==urldecode(currentURL()) && $active==0) {
-					$class .= " active";
-					$active = 1;
-				}
-
-		?>
-    	<li class="<?php echo $class?>" >
-    		<a href="<?php echo $links?>" title="<?php echo $value->title?>" ><?php echo $value->title?></a>
-    		<?php if($roots->where("parent_id",$value->id)->where("status",1)->get(1)->result_count()):?>
-    		<ul>
-    			<?php foreach ($roots->where("parent_id",$value->id)->where("status",1)->order_by('orders','ASC')->get() as $num => $row):
-	    			switch ($row->route) {
-						case 1:
-							$links = $row->links;
-							break;
-						case 2:
-							$links = $row->links;
-							break;
-						case 3:
-							$links = "m/".$row->slug;
-							break;
-						default:
-							$links = "javascript:void();";
-							break;
-					}
-				?>
-    			<li><a href="<?php echo $links?>" title="<?php echo $row->title?>" ><?php echo $row->title?></a></li>
-    			<?php endforeach?>
-    		</ul>
-    		<?php endif?>
-		</li>
-    	<?php endforeach?>
-    </ul>
+<div id="topmenu">
+        <div id="cssmenu">
+            <ul>
+                <li><a href='#'><img src="images/home.png" width="20" height="23" /></a></li>
+                 <li><a href='#'>About us</a></li>
+                 <li class='active has-sub'><a href='#'><span>Asean declaration on <br>cultural heritage</span></a>
+                          <ul>
+                             <li><a href='#'><span>Asean declaration 1</span></a>
+                             <li class='last'><a href='#'><span>Asean declaration 2</span></a></li>
+                          </ul>
+                </li>
+                <li><a href='#'>Asean blueprint</a></li>
+                <li><a href='#'>Network of asean</a></li>
+                <li><a href='#'>Asean cultural<br>organization</a></li>
+                <li class='last'><a href='#'>Asean cultural<br>heritage sites</a></li>
+            </ul>
+        </div>            
+        <div class="clearfix">&nbsp;</div>
 </div>
