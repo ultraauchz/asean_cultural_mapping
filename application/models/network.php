@@ -5,7 +5,7 @@ class Network extends ORM {
 
 	// var $has_one = array();
 
-	 //var $has_many = array('acm_network_organizations');
+	 var $has_many = array('network_organization');
 	
 	function __construct($id=null) {
 		parent::__construct($id);
