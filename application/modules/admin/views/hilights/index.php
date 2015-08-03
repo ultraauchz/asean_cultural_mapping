@@ -10,7 +10,7 @@
 						<th style="width: 80px;" >STATUS</th>
 						<th>TITLE</th>
 						<th style="width: 160px;" >CREATED/UPDATED DATE</th>
-						<th style="width: 160px;" >
+						<th style="width: 180px;" >
 							MANAGE
 						</th>
 					</tr>

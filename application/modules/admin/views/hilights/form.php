@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-12">
 		<div class="box">
-			<form method="post" enctype="multipart/form-data" action="siteadmin/policy/save">
+			<form method="post" enctype="multipart/form-data" action="admin/hilights/save/<?=@$value->id?>">
 			<div class="box-header">
 			  <h3 class="box-title">Add/Edit</h3>			  
 			</div><!-- /.box-header -->
@@ -19,7 +19,7 @@
 	            </div>	  
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">URL</label>
-		              <input type="text" class="form-control" name="url" value="<?php echo @$value->url;?>">
+		              <input type="text" class="form-control" name="links" value="<?php echo @$value->links;?>">
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">HILIGHT IMAGE</label>
@@ -37,7 +37,7 @@
 					              <label for="exampleInputEmail1">Create By / Created Date</label>
 					              <div class="input-group" style="width:350px;">
 						              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$item['create_name'].'  '.@$item['created_date'];?>">
+						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$value->create_name.'  '.@$value->created;?>">
 					              </div>
 				            </div>			
 	            		</td>
@@ -46,14 +46,14 @@
 					              <label for="exampleInputEmail1">Update By / Updated Date</label>
 					              <div class="input-group" style="width:350px;">
 						              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$item['update_name'].'  '.@$item['updated_date'];?>">
+						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$value->update_name.'  '.@$value->updated;?>">
 					              </div>
 				            </div>
 	            		</td>
 	            	</tr>
 	            </table>
 	            <div class="form-group">
-	            	  <input type="hidden" name="id" value="<?php echo @$item['id'];?>">
+	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
 		              <input type="submit" class="btn btn-primary" value="Save">		              
 	            </div>          	            	           	           
             </div>            

@@ -51,28 +51,28 @@ class Hilights extends Admin_Controller {
 	}
 
 	public function save($id=null) {
-		if(permission("hilights","create")) {
+		// if(permission("hilights","create")) {
 			if($_POST) {
 				$data = new Hilight($id);
 				$data->from_array($_POST);
 				$data->save();
 				
-				$type = ($id)?'edit':'add'; // for logs.
-				save_logs($type, $data->id);
+				// $type = ($id)?'edit':'add'; // for logs.
+				// save_logs($type, $data->id);
 			}
-		}
+		// }
 		redirect("admin/hilights");
 	}
 
 	public function delete($id) {
-		if(permission("hilights","delete")) {
+		// if(permission("hilights","delete")) {
 			if($id) {
 				$data = new Hilight($id);
 				$data->delete();
 				
-				save_logs('delete', $id);
+				// save_logs('delete', $id);
 			}
-		}
+		// }
 		redirect("admin/hilights");
 	}
 	
