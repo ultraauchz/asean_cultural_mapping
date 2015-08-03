@@ -20,14 +20,20 @@ class blueprint extends Admin_Controller {
 			redirect("admin/poll");
 		}
 			 */
-		$contents = new Contents();
-		$data['contents'] = $contents->where("slug='blueprint'");
+		$rs = new Contents();
+		$data['rs'] = $rs->where("slug","blueprint")->get(1);
 		$data['menu_id'] = $this->menu_id;
 		$this->template->build("contents/form",$data);
 	}
 	
 	public function save(){
+		$data = new Contents();
+		$data->from_array($_POST);
+		$data->save();
 		
+		// $data->check_last_query();
+		
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
 }
