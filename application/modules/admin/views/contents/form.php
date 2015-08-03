@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-12">
 		<div class="box">
-			<form method="post" enctype="multipart/form-data" action="siteadmin/policy/save">
+			<form method="post" enctype="multipart/form-data" action="admin/<?=$this->uri->segment(2)?>/save">
 			<div class="box-header">
 			  <h3 class="box-title">Add/Edit</h3>			  
 			</div><!-- /.box-header -->
@@ -11,7 +11,7 @@
 			<div class="box-body">
 				<div class="form-group">
 		              <label for="exampleInputEmail1">Detail</label>
-		              <textarea name="detail" id="detail" ><?php echo @$item['detail'];?></textarea>
+		              <textarea name="detail" id="detail" ><?=@$rs->detail?></textarea>
 	            </div>	  
 	            <table>
 	            	<tr>
@@ -36,7 +36,7 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
-	            	  <input type="hidden" name="id" value="<?php echo @$item['id'];?>">
+	            	  <input type="hidden" name="id" value="<?=@$rs->id?>">
 		              <input type="submit" class="btn btn-primary" value="Save">		              
 	            </div>          	            	           	           
             </div>            
