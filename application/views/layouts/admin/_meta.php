@@ -4,6 +4,7 @@
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.2 -->
 <link href="medias/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="js/fancybox/jquery.fancybox.css" media="screen" />
 <link href="medias/plugins/file_upload/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 <link href="medias/css/pagination.css" rel="stylesheet" type="text/css" />        
 <!-- FontAwesome 4.3.0 -->
@@ -87,7 +88,15 @@
 <script src="medias/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 <script src="medias/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
 <script src="medias/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js" ></script>
+	<script type="text/javascript">
+		$('.iframe-btn').fancybox({	
+			'width'		: 800,
+			'height'		: 600,
+			'type'			: 'iframe',
+	        'autoSize'  	: false
+	    });
+	</script>
 <script>
 	$(document).ready(function(){
 		$(".datepicker").datepicker({ format: 'yyyy-mm-dd' });
