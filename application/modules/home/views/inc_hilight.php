@@ -1,25 +1,21 @@
-<div id="carouselSection" class="cntr">
-    <div id="myCarousel" class="carousel slide">
-        <ol class="carousel-indicators hide">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            <?php foreach ($variable as $key => $value):
-                $links = "javascript:void()";
-                if($value->links && $value->links!="#") {
-                    $links = $value->links;
-                }
-            ?>
-            <div class="item<?php if($key==0) echo " active"?>" >
-                <a class="cntr" href="<?php echo $links?>" ><img src="<?php echo $value->image_path?>" alt="<?php echo($value->title) ? $value->title : "กรมฝนหลวงและการบินเกษตร"?>" style="width:1100px;height:244px;"></a>
-            </div>
-            <?php endforeach?>
+<div id="wraphilight">
+    	<div id="highlight">
+            <ul>
+              <li><a href="#"><img src="images/slide1.jpg" width="1399" height="387" /></a></li>
+            </ul>
         </div>
-        <!-- Carousel nav -->
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div>
-</div>
+      	<div id="arrowHilight">
+        	<ul>
+                <li class="arrowHilight-left"><a href="#">&nbsp;</a></li>
+                <li class="arrowHilight-right"><a href="#">&nbsp;</a></li>
+            </ul>
+        </div>
+        <div id="run">
+            <ol>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#" class="active">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+           </ol>
+        </div>
+  </div>
