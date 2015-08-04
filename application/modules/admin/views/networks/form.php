@@ -3,23 +3,27 @@
   <div class="row">
     <div class="col-xs-12">
 		<div class="box">
-			<form method="post" enctype="multipart/form-data" action="siteadmin/policy/save">
+			<form method="post" enctype="multipart/form-data" action="admin/networks/save">
 			<div class="box-header">
 			  <h3 class="box-title">Add/Edit</h3>			  
 			</div><!-- /.box-header -->
 			
 			<div class="box-body">
 				<div class="form-group">
-		              <label for="exampleInputEmail1">Name</label>
-		              <input type="text" class="form-control" name="name" value="<?php echo @$item['name'];?>">
+		              <label for="exampleInputEmail1">Title</label>
+		              <input type="text" class="form-control" name="title" value="<?php echo @$value->title;?>">
+	            </div>
+	            <div class="form-group">
+		              <label for="exampleInputEmail1">Code</label>
+		              <input type="text" class="form-control" name="code" value="<?php echo @$value->code;?>">
 	            </div>
 				<div class="form-group">
 		              <label for="exampleInputEmail1">Description</label>
-		              <textarea class="form-control"  name="description" id="description" ><?php echo @$item['description'];?></textarea>
+		              <textarea class="form-control"  name="description" id="description" ><?php echo @$value->description;?></textarea>
 	            </div>	
 	            <fieldset>
 	            	<legend>Members</legend>
-	            	<input type="button" name="btn_add_member" class="btn btn-success" value="Add Member">
+	            	<a href="admin/organizations/iframe_list?id=<?=@$value->id;?>&area=admin&ctrl=networks&action=save_network_organization" class="btn btn-success iframe-btn" >Add Member</a>
 	            	<table class="table table-bordered">
 	            		<thead>
 	            			<tr>
@@ -30,14 +34,16 @@
 	            			</tr>
 	            		</thead>
 	            		<tbody>
+	            			<?php foreach ($network_org as $key => $item): ?>
 	            			<tr>
 	            				<td>1</td>
-	            				<td>Finearts</td>
-	            				<td>Thailand</td>
+	            				<td><?php echo $item->organization->name;?></td>
+	            				<td><?php echo $item->country->country_name;?></td>
 	            				<td>
 	            					<input type="button" name="btn_delete" id="btn_delete" class="btn_delete btn btn-danger" value="X">
 	            				</td>
 	            			</tr>
+	            			<?php endforeach;?>
 	            		</tbody>
 	            	</table>
 	            </fieldset>  
@@ -64,7 +70,7 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
-	            	  <input type="hidden" name="id" value="<?php echo @$item['id'];?>">
+	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
 		              <input type="submit" class="btn btn-primary" value="Save">		              
 	            </div>          	            	           	           
             </div>            

@@ -6,9 +6,11 @@ class Organizations extends Admin_Controller {
 	
 	function __construct() {
 		parent::__construct();
-		if(!permission("organizations","views")) {
+		/*if(!permission("organizations","views")) {
 			redirect("admin");
 		}
+		 * 
+		 */
 	}
 	
 	public function index() {
@@ -138,6 +140,15 @@ class Organizations extends Admin_Controller {
 			}
 		}
 		redirect("admin/departments");
+	}
+	
+	public function iframe_list(){
+		$org = new Organization();
+		$org->get_page();
+		$data['result'] = $org;
+		$action_url = $_GET['area'].'/'.$_GET['ctrl'].'/'.@$_GET['action'].'/'.@$_GET['id'];
+		$data['action_url'] = $action_url;
+		$this->load->view('organizations/iframe_list', $data);
 	}
 	
 	public function orders($parent_id=null, $id=null) {

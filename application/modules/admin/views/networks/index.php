@@ -23,19 +23,25 @@
 			  <table id="example1" class="table table-bordered table-striped table-hover table_data">
 			    <thead>
 			      <tr>
+			        <th>NO</th>
 			        <th>Name</th>			        
+			        <th>Code</th>
 			        <th class="th_manage">Manage</th>
 			      </tr>
 			    </thead>
 			    <tbody>
-					<?php foreach ($result as $key => $item):?>
+					<?php foreach ($result as $key => $item):
+						$no++;
+					?>
 						<tr>
+							<td><?php echo $no;?></td>
 							<td><?php echo $item->title;?></td>
+							<td><?php echo $item->code;?></td>
 							<td>
-								<a class="btn btn-info" href="siteadmin/users/form/<?=$item->id;?>">
+								<a class="btn btn-info" href="admin/networks/form/<?=$item->id;?>">
 				                    <i class="fa fa-edit"></i> Edit
 				                </a>
-								<a class="btn btn-danger btn_delete" href="siteadmin/users/delete/<?php echo $item->id;?>">
+								<a class="btn btn-danger btn_delete" href="admin/networks/delete/<?php echo $item->id;?>">
 				                    <i class="fa fa-trash-o"></i> delete
 				                </a>
 							</td>
@@ -44,7 +50,9 @@
 			    </tbody>
 			    <tfoot>
 			      <tr>
-			        <th>Name</th>			        
+			      	<th>NO</th>
+			        <th>Name</th>
+			        <th>Code</th>				        
 			        <th class="th_manage">Manage</th>
 			      </tr>
 			    </tfoot>
