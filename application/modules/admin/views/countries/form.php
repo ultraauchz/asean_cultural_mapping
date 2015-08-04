@@ -3,35 +3,16 @@
   <div class="row">
     <div class="col-xs-12">
 		<div class="box">
-			<form method="post" enctype="multipart/form-data" action="admin/settings/<?php echo $modules_name;?>/save">
+			<form method="post" enctype="multipart/form-data" action="admin/<?php echo $modules_name;?>/save">
 			<div class="box-header">
 			  <h3 class="box-title">Add/Edit</h3>			  
 			</div><!-- /.box-header -->
 			
 			<div class="box-body">
 				<div class="form-group">
-		              <label for="exampleInputEmail1">User Type Name</label>
-		              <input type="text" class="form-control" name="title" value="<?php echo @$value->title;?>">
-	            </div>	         
-	            <fieldset>
-	            	<legend>Permission</legend>
-	            	<table class="table">
-	            		<tr>
-	            			<th>Menu</th>
-	            			<th>Action</th>
-	            		</tr>
-	            		<?php foreach($menus as $key=> $menu_item):?>
-	            		<tr>
-	            			<td><?php echo $menu_item->title;?></td>
-	            			<td>
-	            				<?php
-	            					if($menu_item->have_create_access)
-	            				?>
-	            			</td>
-	            		</tr>
-	            		<?php endforeach;?>
-	            	</table>
-	            </fieldset>   
+		              <label for="exampleInputEmail1">Country Name</label>
+		              <input type="text" class="form-control" name="country_name" value="<?php echo @$value->country_name;?>">
+	            </div>	            
 	            <table>
 	            	<tr>
 	            		<td>
@@ -62,5 +43,5 @@
 			</form>						
 		</div><!-- /.box -->
 	</div>
-</div>
+  </div>
 </section>

@@ -2,10 +2,10 @@
 /*
  * Content Model
  */
-class Country extends ORM {
+class State extends ORM {
 
-	var $table = "acm_country";
-	var $has_many = array("organization", "state");
+	var $table = "acm_state";
+	var $has_one = array('country');
     
     function __construct($id = NULL)
 	{
