@@ -101,6 +101,17 @@ if(!function_exists("permission")) {
 	}
 }
 
+	function get_permission($menu_id,$user_type_id,$id=null) {
+		$CI =& get_instance();		
+		if($id > 0 ){
+			$foo = new User_Type_Permission($id);	
+		}else{
+			$foo = new User_Type_Permission();
+			$foo->where('menu_id = '.$menu_id.' AND user_type_id = '.$user_type_id)->get();	
+		}				
+		return $foo;
+	}
+
 if(!function_exists("debug")) {
 	function debug($value) {
 		echo "<pre>";

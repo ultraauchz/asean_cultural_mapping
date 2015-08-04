@@ -65,7 +65,6 @@ class Networks extends Admin_Controller {
 	
 	public function save($id=null) {
 			$current_user_id = $this->session->userdata("id");
-			
 			if ($_POST) {
 				$save = new Network();
 				if($_POST['id']==''){

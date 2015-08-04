@@ -15,9 +15,9 @@
 	            </div>	         
 	            <fieldset>
 	            	<legend>Permission</legend>
-	            	<table class="table">
+	            	<table class="table table-bordered table-hover">
 	            		<tr>
-	            			<th>Menu</th>
+	            			<th style="width:300px;">Menu</th>
 	            			<th>Action</th>
 	            		</tr>
 	            		<?php foreach($menus as $key=> $menu_item):?>
@@ -25,7 +25,49 @@
 	            			<td><?php echo $menu_item->title;?></td>
 	            			<td>
 	            				<?php
+	            					$perm = get_permission($menu_item->id, @$value->id, null);
+	            					if($menu_item->have_view_access)
+									{												
+										$checked = $perm->can_view == 'y' ? 'checked="checked"' : "";							
+										echo '<div class="checkbox" style="margin-right:25px;display:inline;">												
+    												<label>
+														<input type="checkbox" name="chk_'.$menu_item->id.'_view_access" value="y" '.$checked.'> Can View
+													</label>
+											  </div>';
+									} 
+	            				?>
+	            				<?php
 	            					if($menu_item->have_create_access)
+									{
+										$checked = $perm->can_create == 'y' ? 'checked="checked"' : "";		
+										echo '<div class="checkbox" style="margin-right:25px;display:inline;">												
+    												<label>
+														<input type="checkbox" name="chk_'.$menu_item->id.'_create_access" value="y" '.$checked.'> Can Create/Edit
+													</label>
+											 </div>';
+									} 
+	            				?>
+	            				<?php
+	            					if($menu_item->have_delete_access)
+									{
+										$checked = $perm->can_delete == 'y' ? 'checked="checked"' : "";		
+										echo '<div class="checkbox" style="margin-right:25px;display:inline;">												
+    												<label>
+														<input type="checkbox" name="chk_'.$menu_item->id.'_delete_access" value="y" '.$checked.'> Can Delete
+													</label>
+											 </div>';
+									} 
+	            				?>
+	            				<?php
+	            					if($menu_item->have_access_all)
+									{
+										$checked = $perm->can_access_all == 'y' ? 'checked="checked"' : "";
+										echo '<div class="checkbox" style="margin-right:25px;display:inline;">												
+    												<label>
+														<input type="checkbox" name="chk_'.$menu_item->id.'_access_all" value="y" '.$checked.'> Can Access All
+													</label>
+											 </div>';
+									} 
 	            				?>
 	            			</td>
 	            		</tr>
@@ -39,7 +81,7 @@
 					              <label for="exampleInputEmail1">Create By / Created Date</label>
 					              <div class="input-group" style="width:350px;">
 						              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$item['create_name'].'  '.@$item['created_date'];?>">
+						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo '  '.@$item['created_date'];?>">
 					              </div>
 				            </div>			
 	            		</td>
@@ -56,7 +98,8 @@
 	            </table>
 	            <div class="form-group">
 	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">	
+		              <a href="admin/settings/<?php echo $modules_name;?>/index" class="btn btn-default">Back</a>	              
 	            </div>          	            	           	           
             </div>            
 			</form>						
