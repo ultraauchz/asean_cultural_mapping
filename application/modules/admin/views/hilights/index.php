@@ -11,7 +11,7 @@
 						<th>TITLE</th>
 						<th style="width: 160px;" >CREATED/UPDATED DATE</th>
 						<th style="width: 180px;" >
-							MANAGE
+							<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
 						</th>
 					</tr>
 				</thead>
@@ -42,11 +42,47 @@
 					<?php endforeach?>
 				</tbody>
 			</table>
-			<div style="text-align:right;">
+			<!-- <div style="text-align:right;">
 			  	<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
-			  </div>
+			  </div> -->
 			<?php echo $variable->pagination()?>
 		</div>
 	</div>
 </div>	
 </section>
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('button[data-loading-text]').click(function () {
+		    var btn = $(this);
+		    if(btn.val()==1) {
+				btn.val(0);
+		    	btn.removeClass("btn-primary");
+		    	btn.addClass("btn-danger");
+		    	var status = 0;
+		    	var textstatus = "Off";
+		    } else {
+				btn.val(1);
+		    	btn.removeClass("btn-danger");
+		    	btn.addClass("btn-primary");
+		    	var status = 1;
+		    	var textstatus = "On";
+		    }
+		    btn.button('loading');
+		    
+		    setTimeout(function(){
+				btn.button('reset');
+				btn.html(textstatus);
+		    },1000);
+		    
+		    var id = btn.attr("id");
+		    $.post("admin/approve/hilight/"+id,{status:status});
+		    return false;
+		    
+		});
+		
+	});
+</script>
