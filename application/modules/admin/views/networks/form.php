@@ -85,3 +85,12 @@
 	</div>
   </div>
 </section>
+<script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="js/tinymce/config.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		tiny("description","");
+		
+	});
+</script>  
