@@ -20,6 +20,10 @@
 				<div class="form-group">
 		              <label for="exampleInputEmail1">Description</label>
 		              <textarea class="form-control"  name="description" id="description" ><?php echo @$value->description;?></textarea>
+	            </div>
+				<div class="form-group">
+		              <label for="exampleInputEmail1">Detail</label>
+		              <textarea class="form-control"  name="detail" id="detail" ><?php echo @$value->detail;?></textarea>
 	            </div>	
 	            <?php if(@$value->id > 0) : ?>
 	            <fieldset>
@@ -90,7 +94,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		tiny("description","");
+		tiny("detail","");
 		
 	});
 </script>  
