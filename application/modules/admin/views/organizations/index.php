@@ -49,8 +49,6 @@
 </div>	
 </section>
 
-
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -77,7 +75,7 @@
 		    },1000);
 		    
 		    var id = btn.attr("id");
-		    $.post("admin/approve/hilight/"+id,{status:status});
+		    $.post("admin/approve/organization/"+id,{status:status});
 		    return false;
 		    
 		});

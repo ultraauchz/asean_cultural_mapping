@@ -9,8 +9,8 @@
 			</div><!-- /.box-header -->
 			<div style="float:left;width:100%;">
 			  <div class="col-xs-3">
-			  	<span>User type name</span> 
-			  	<input type="text" name="search" class="form-control" placeholder="Enter User type name" value="<?=@$_GET['search'];?>">
+			  	<span>Country name</span> 
+			  	<input type="text" name="search" class="form-control" placeholder="Enter Country name" value="<?=@$_GET['search'];?>">
 			  </div>
 			  <div class="col-xs-3">
 			  	<br>
@@ -19,7 +19,7 @@
 			</div>
 			</form>
 			<div class="box-body">
-			  <?php echo $variable->pagination()?>
+			  <?php echo $result->pagination()?>
 			  <table id="example1" class="table table-bordered table-striped table-hover table_data">
 			    <thead>
 			      <tr>
@@ -29,17 +29,17 @@
 			      </tr>
 			    </thead>
 			    <tbody>
-					<?php foreach ($variable as $key => $item):
+					<?php foreach ($result as $key => $item):
 						$no++;
 					?>
 						<tr>
 							<td><?php echo $no;?></td>							
-							<td><?php echo $item->title;?></td>
+							<td><?php echo $item->country_name;?></td>
 							<td>
-								<a class="btn btn-info" href="admin/settings/user_types/form/<?=$item->id;?>">
+								<a class="btn btn-info" href="admin/<?php echo $modules_name;?>/form/<?=$item->id;?>">
 				                    <i class="fa fa-edit"></i> Edit
 				                </a>
-								<a class="btn btn-danger btn_delete" href="admin/settings/user_types/delete/<?php echo $item->id;?>">
+								<a class="btn btn-danger btn_delete" href="admin/<?php echo $modules_name;?>/delete/<?php echo $item->id;?>">
 				                    <i class="fa fa-trash-o"></i> delete
 				                </a>
 							</td>
@@ -55,9 +55,9 @@
 			    </tfoot>
 			  </table>
 			  <div style="text-align:right;">
-			  	<a href="admin/settings/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
+			  	<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
 			  </div>
-			  <?php echo $variable->pagination()?>
+			  <?php echo $result->pagination()?>
 			</div><!-- /.box-body -->
 		</div><!-- /.box -->
 	</div>

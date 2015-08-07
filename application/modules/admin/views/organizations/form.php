@@ -91,4 +91,4 @@ $(document).ready(function() {
 	tiny("detail","");
 	
 });
-</script>  
+</script>

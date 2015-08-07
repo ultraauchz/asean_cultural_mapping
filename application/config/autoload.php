@@ -64,7 +64,7 @@ $autoload['libraries'] = array("database","datamapper","pagination","parser","se
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array("authen","form","date","download","html","url", "logs", "notify");
+$autoload['helper'] = array("authen","form","date","download","html","url", "logs", "notify","my_custom");
 
 
 /*

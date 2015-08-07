@@ -62,7 +62,9 @@ class Home extends Base_Controller {
 	}
 	
 	public function inc_network_asean(){
-		$this->load->view('inc_network_asean');
+		$data['networks'] = new Network();
+		$data['networks']->order_by('show_no','desc')->get();
+		$this->load->view('inc_network_asean',$data);
 	}
 	
 	public function inc_heritage(){

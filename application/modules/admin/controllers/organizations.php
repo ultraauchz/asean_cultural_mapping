@@ -6,6 +6,8 @@ class Organizations extends Admin_Controller {
 	
 	function __construct() {
 		parent::__construct();
+		$this->menu_id = 5;;
+		$this->modules_name = 'organizations';
 		/*if(!permission("organizations","views")) {
 			redirect("admin");
 		}
@@ -14,15 +16,31 @@ class Organizations extends Admin_Controller {
 	}
 	
 	public function index() {
-		// if(permission("departments","views")) {
+		/*if(permission("departments","views")) {
 			$data["variable"] = new Department();
 			$data["variable"]->where('parent_id','0');
 			$data["variable"]->order_by('orders', 'asc');
 			$data["variable"]->get();
 			$this->template->build("departments/index",$data);
-		// } else {
-			// redirect("admin");
-		// }
+		} else {
+			redirect("admin");
+		}
+		 * 
+		 */
+		$data['menu_id'] = $this->menu_id;
+		$data['modules_name'] = $this->modules_name;
+		$data['result'] = new Organization();
+		if(@$_GET['search']!=''){
+			$condition = "  org_name LIKE '%".$_GET['search']."%'";
+			$data['result']->where($condition);
+		}
+		if(@$_GET['country_id']!=''){
+			$data['result']->where('country_id',$_GET['country_id']);
+		}
+		$data["result"]->order_by("org_name","DESC")->get_page();
+		$data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
+		$data['page'] = (empty($_GET['page']))? 1 : $_GET['page'];
+		$this->template->build('organizations/index',$data);	
 	}
 	
 	public function form($id=null) {

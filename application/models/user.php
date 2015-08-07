@@ -28,16 +28,9 @@ class User extends ORM {
 		parent::__construct($id);
 	}
 	
-	public function center() {
+	public function Organization() {
 		$value = new Center();
-		$value->get_by_org_id($this->center_id);
+		$value->get_by_org_id($this->org_id);
 		return $value;
 	}
-	
-	public function heap() {
-		$value = new Heap();
-		$value->get_by_org_id($this->heap_id);
-		return $value;
-	}
-	
 }

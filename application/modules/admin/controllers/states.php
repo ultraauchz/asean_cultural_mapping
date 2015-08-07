@@ -1,10 +1,10 @@
 <?php
-class Networks extends Admin_Controller {
+class States extends Admin_Controller {
 	
 	function __construct() {
 		parent::__construct();
-		$this->menu_id = 14;;
-		$this->modules_name = 'networks';
+		$this->menu_id = 7;
+		$this->modules_name = 'states';
 		/*
 		if(!permission("organizations","views")) {
 			redirect("admin");
@@ -16,15 +16,18 @@ class Networks extends Admin_Controller {
 	public function index() {		
 		$data['menu_id'] = $this->menu_id;
 		$data['modules_name'] = $this->modules_name;
-		$data['result'] = new Network();
+		$data['result'] = new State();
 		if(@$_GET['search']!=''){
-			$condition = "  title LIKE '%".$_GET['search']."%'";
+			$condition = "  state_name LIKE '%".$_GET['search']."%'";
 			$data['result']->where($condition);
 		}
-		$data["result"]->order_by("show_no","DESC")->get_page();
+		if(@$_GET['country_id']!=''){
+			$data['result']->where('country_id',$_GET['country_id']);
+		}
+		$data["result"]->order_by("state_name","ASC")->get_page();
 		$data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
 		$data['page'] = (empty($_GET['page']))? 1 : $_GET['page'];
-		$this->template->build('networks/index',$data);
+		$this->template->build('states/index',$data);
 		/*
 		if(permission("departments","views")) {
 			$data["variable"] = new Department();
@@ -56,20 +59,16 @@ class Networks extends Admin_Controller {
 		 */		 
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
-		 $data["value"] = new Network($id);
-		 $network_org = new Network_Org();
-		 $network_org->where('network_id',$id)->get();
-		 $data['network_org'] = $network_org; 
-		 $this->template->build("networks/form",$data);
+		 $data["value"] = new State($id);		 
+		 $this->template->build("countries/form",$data);
 	}
 	
 	public function save($id=null) {
 			$current_user_id = $this->session->userdata("id");
+			
 			if ($_POST) {
-				$save = new Network();
-				if($_POST['id']==''){
-					$show_no = $this->db->query("SELECT MAX(show_no)show_no FROM acm_network")->result();
-					$_POST['show_no'] = @$show_no[0]->show_no < 1 ? 1 : $show_no[0]->show_no + 1;
+				$save = new State();
+				if($_POST['id']==''){					
 					$_POST['created_by'] = $current_user_id; 
 				}else{
 					$_POST['updated_by'] = $current_user_id;
@@ -77,27 +76,8 @@ class Networks extends Admin_Controller {
 				$save->from_array($_POST);
 				$save->save();
 			}
-		redirect("admin/networks");
-	}
-	
-	public function save_network_organization($network_id=null){
-		if($network_id > 0){			
-			foreach($_POST['chk_org_id'] as $key){						
-				$ext= new Network_Org();
-				$ext->where('network_id',$network_id)->where("org_id", $key)->get(1);
-				if($ext->id) {
-					
-				}else{					
-					$data['network_id'] = $network_id;
-					$data['org_id'] = $key;
-					$save = new Network_Org();	
-					$save->from_array($data);
-					$save->save();
-				}
-			}			
-		}	
-		redirect('admin/networks/form/'.$network_id);	
-	}
+		redirect("admin/".$this->modules_name);
+	}	
 	
 	public function delete($id=null) {
 			if($id) {
@@ -118,29 +98,11 @@ class Networks extends Admin_Controller {
 					}
 				}
 				*/
-				$data = new Network($id);
+				$data = new State($id);
 				$data->delete();
 				
 				//save_logs('delete', $id);
 			}
-		redirect("admin/networks");
-	}
-	
-	function delete_network_org($id){
-		$network_org = new Network_Org($id);
-		$network_id = $network_org->network_id;
-		$this->db->query("DELETE FROM acm_network_org WHERE id = ".$id);
-		redirect('admin/networks/form/'.$network_id);
-	}
-	
-	function ordering() {
-		$mode = @$_GET['mode'];
-		$table_name = 'acm_network';
-		$id = @$_GET['id'];
-		$step=1;
-		$ext_condition = '';
-		$ext_condition = @$_GET['search']!='' ? " AND title LIKE '%".$_GET['search']."%' " : "";
-		ordering_data($mode,$table_name,$id,$ext_condition,$step);
-		redirect('admin/networks/index?search='.@$_GET['search']);
-	}
+		redirect("admin/".$this->modules_name);
+	}	
 }

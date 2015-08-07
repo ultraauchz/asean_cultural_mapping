@@ -20,7 +20,12 @@
 				<div class="form-group">
 		              <label for="exampleInputEmail1">Description</label>
 		              <textarea class="form-control"  name="description" id="description" ><?php echo @$value->description;?></textarea>
+	            </div>
+				<div class="form-group">
+		              <label for="exampleInputEmail1">Detail</label>
+		              <textarea class="form-control"  name="detail" id="detail" ><?php echo @$value->detail;?></textarea>
 	            </div>	
+	            <?php if(@$value->id > 0) : ?>
 	            <fieldset>
 	            	<legend>Members</legend>
 	            	<a href="admin/organizations/iframe_list?id=<?=@$value->id;?>&area=admin&ctrl=networks&action=save_network_organization" class="btn btn-success iframe-btn" >Add Member</a>
@@ -34,19 +39,24 @@
 	            			</tr>
 	            		</thead>
 	            		<tbody>
-	            			<?php foreach ($network_org as $key => $item): ?>
+	            			<?php
+	            			$no = 0; 
+	            			foreach ($network_org as $key => $network_org_item):
+								$no++; 
+	            			?>
 	            			<tr>
-	            				<td>1</td>
-	            				<td><?php echo $item->organization->name;?></td>
-	            				<td><?php echo $item->country->country_name;?></td>
+	            				<td><?php echo $no;?></td>
+	            				<td><?php echo $network_org_item->organization->org_name;?></td>
+	            				<td><?php echo $network_org_item->organization->country->country_name;?></td>
 	            				<td>
-	            					<input type="button" name="btn_delete" id="btn_delete" class="btn_delete btn btn-danger" value="X">
+	            					<a href="admin/networks/delete_network_org/<?=$network_org->id;?>" class="btn_delete btn btn-danger">X</a>
 	            				</td>
 	            			</tr>
 	            			<?php endforeach;?>
 	            		</tbody>
 	            	</table>
 	            </fieldset>  
+	            <?php endif;?>
 	            <table>
 	            	<tr>
 	            		<td>
@@ -79,3 +89,12 @@
 	</div>
   </div>
 </section>
+<script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="js/tinymce/config.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		tiny("detail","");
+		
+	});
+</script>  

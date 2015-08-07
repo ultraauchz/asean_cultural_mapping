@@ -6,9 +6,13 @@ class Users extends Admin_Controller {
 
 	function __construct() {
 		parent::__construct();
+		$this->menu_id = 3;
+		$this->modules_name = 'users';
 	}
 
 	public function index() {
+		$data['menu_id'] = $this->menu_id;
+		$data['modules_name'] = $this->modules_name;
 		$data["variable"] = new User();
 
 		if(@$_GET["u"]) {
@@ -19,28 +23,22 @@ class Users extends Admin_Controller {
 			$data["variable"]->group_start()->like("firstname",$_GET["f"])->or_like("lastname",$_GET["f"])->group_end();
 		}
 
-		if(@$_GET["c"]) {
-			$data["variable"]->where("center_id",$_GET["c"]);
-		}
-
-		if(@$_GET["h"]) {
-			$data["variable"]->where("heap_id",$_GET["h"]);
-		}
-
 		if(@$_GET["s"]) {
 			$data["variable"]->where("status",$_GET["s"]);
 		}
 
-		$data["variable"]->where("id !=",user()->id)->where("fd_admin !=",1)->get_page(50);
+		$data["variable"]->where("id !=",user()->id)->get_page(50);
 		$this->template->build("users/index",$data);
 	}
 
 	public function form($id=false) {
+		$data['menu_id'] = $this->menu_id;
+		$data['modules_name'] = $this->modules_name;
 		$data["value"] = new User($id);
 
-		if($data["value"]->fd_admin==1 || $id==user()->id) {
-			redirect("admin/settings/users");
-		}
+		//if($data["value"]->fd_admin==1 || $id==user()->id) {
+			//redirect("admin/settings/users");
+		//}
 
 		$this->template->build("users/form",$data);
 	}

@@ -23,7 +23,8 @@
 			  <table id="example1" class="table table-bordered table-striped table-hover table_data">
 			    <thead>
 			      <tr>
-			        <th>NO</th>
+			      	<th style="width:100px;">Ordering</th>
+			        <th>NO</th>			        
 			        <th>Name</th>			        
 			        <th>Code</th>
 			        <th class="th_manage">Manage</th>
@@ -34,7 +35,15 @@
 						$no++;
 					?>
 						<tr>
-							<td><?php echo $no;?></td>
+							<td>
+								<a class="btn btn-default" href="admin/networks/ordering?search=<?php echo @$_GET['search'];?>&mode=up&id=<?=$item->id;?>&page=<?php echo $page;?>">
+				                    <i class="fa fa-angle-up"></i> 
+				                </a>
+				                <a class="btn btn-default" href="admin/networks/ordering?search=<?php echo @$_GET['search'];?>&mode=down&id=<?=$item->id;?>&page=<?php echo $page;?>">
+				                    <i class="fa fa-angle-down"></i> 
+				                </a>
+							</td>
+							<td><?php echo $no;?></td>							
 							<td><?php echo $item->title;?></td>
 							<td><?php echo $item->code;?></td>
 							<td>
@@ -50,6 +59,7 @@
 			    </tbody>
 			    <tfoot>
 			      <tr>
+			      	<th>Ordering</th>
 			      	<th>NO</th>
 			        <th>Name</th>
 			        <th>Code</th>				        
