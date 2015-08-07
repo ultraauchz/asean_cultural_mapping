@@ -88,7 +88,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	tiny("detail","");
+	tiny("org_detail","");
 	
 });
 </script>
