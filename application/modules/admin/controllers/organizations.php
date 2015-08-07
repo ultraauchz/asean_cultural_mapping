@@ -14,15 +14,15 @@ class Organizations extends Admin_Controller {
 	}
 	
 	public function index() {
-		if(permission("departments","views")) {
+		// if(permission("departments","views")) {
 			$data["variable"] = new Department();
 			$data["variable"]->where('parent_id','0');
 			$data["variable"]->order_by('orders', 'asc');
 			$data["variable"]->get();
 			$this->template->build("departments/index",$data);
-		} else {
-			redirect("admin");
-		}
+		// } else {
+			// redirect("admin");
+		// }
 	}
 	
 	public function form($id=null) {
