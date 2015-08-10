@@ -14,22 +14,44 @@
 		              <input type="text" class="form-control" name="title" value="<?=@$rs->title;?>">
 	            </div>
 	            <div class="form-group">
+		              <label for="exampleInputEmail1">Location</label>
+		              <input type="text" class="form-control" name="location" value="<?=@$rs->location;?>">
+	            </div>
+	            <div class="form-group">
+		              <label>COUNTRY</label>
+		              <?php echo form_dropdown('country_id',get_option('id','country_name','acm_country','order by id asc'),@$rs->country_id,'class="form-control"','--- COUNTRY ---') ?>
+	            </div> 
+				<div class="form-group">
+		              <label>STATE</label>
+		              <?php echo form_dropdown('state_id',get_option('id','state_name','acm_state','order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') ?>
+	            </div>
+	            <div class="form-group">
+		              <label>ZIPCODE</label>
+		              <input type="text" class="form-control" name="zipcode" value="<?php echo @$rs->zipcode;?>">
+	            </div>
+	            <div class="col-xs-2" style="padding:0px;">
+	            <div class="form-group">
+		              <label>LATITUDE</label>
+		              <input type="text" class="form-control" name="org_latitude" value="<?php echo @$rs->org_latitude;?>">
+	            </div>
+	            </div>
+	            <div class="col-xs-2" style="padding-left:5px;">
+	            <div class="form-group">
+		              <label>LONGTITUDE</label>
+		              <input type="text" class="form-control" name="org_longitude" value="<?php echo @$rs->org_longitude;?>">
+	            </div>
+	            </div>
+	            <div class="clearfix"></div>
+	            <div class="form-group">
 		              <label for="exampleInputEmail1">DESCRIPTION</label>
 		              <textarea class="form-control"  name="description"><?=@$rs->description;?></textarea>
 	            </div>	
 				<div class="form-group">
 		              <label for="exampleInputEmail1">DETAIL</label>
 		              <textarea class="form-control"  name="detail" id="detail" ><?=@$rs->detail;?></textarea>
-	            </div>	  
-	            <!-- <div class="form-group">
-		              <label for="exampleInputEmail1">HILIGHT IMAGE</label>
-		              <div class="input-group">
-						    <input type="text" id="image_path" class="form-control" name="image_path" placeholder="select hilight image" value="<?php echo $value->image_path?>" />
-						    <span class="input-group-btn">
-						    	<a href="js/tinymce/plugins/filemanager/dialog.php?type=1&field_id=image_path" class="btn btn-primary iframe-btn" >เลือกไฟล์</a>
-							</span>
-					  </div>
-	            </div>	 -->
+	            </div>	  	            
+	            <fieldset>
+	            	<legend>Heritage Gallery</legend>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">UPLOAD MULTIPLE IMAGE</label>
 		              <style>
@@ -40,7 +62,7 @@
 					  }
 					</style>
 					
-					<input type="file" id="files" name="files[]" multiple />
+					<input type="file" id="files" name="files[]" multiple accept='image/*' />
 					<output id="list"></output>
 						
 					<table id="tbimg" class="table table-striped table-bordered">
@@ -97,6 +119,39 @@
 					</script>
 					
 	            </div>	
+	            </fieldset>
+	            <?php if(@$rs->id > 0) : ?>
+	            <fieldset>
+	            	<legend>Responsibility Of Organization</legend>
+	            	<a href="admin/organizations/iframe_list?id=<?=@$rs->id;?>&area=admin&ctrl=heritages&action=save_heritage_organization" class="btn btn-success iframe-btn" >Add Member</a>
+	            	<table class="table table-bordered">
+	            		<thead>
+	            			<tr>
+	            				<th>No.</th>
+	            				<th>Organization Name</th>
+	            				<th>Country</th>
+	            				<th>Manage</th>
+	            			</tr>
+	            		</thead>
+	            		<tbody>
+	            			<?php
+	            			$no = 0; 
+	            			foreach ($heritage_org as $key => $heritage_org_item):
+								$no++; 
+	            			?>
+	            			<tr>
+	            				<td><?php echo $no;?></td>
+	            				<td><?php echo $heritage_org_item->organization->org_name;?></td>
+	            				<td><?php echo $heritage_org_item->organization->country->country_name;?></td>
+	            				<td>
+	            					<a href="admin/heritage/delete_heritage_org/<?=$heritage_org_item->id;?>" class="btn_delete btn btn-danger">X</a>
+	            				</td>
+	            			</tr>
+	            			<?php endforeach;?>
+	            		</tbody>
+	            	</table>
+	            </fieldset>  
+	            <?php endif;?>
 	            <table>
 	            	<tr>
 	            		<td>

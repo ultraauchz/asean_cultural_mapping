@@ -49,7 +49,7 @@
 	            				<td><?php echo $network_org_item->organization->org_name;?></td>
 	            				<td><?php echo $network_org_item->organization->country->country_name;?></td>
 	            				<td>
-	            					<a href="admin/networks/delete_network_org/<?=$network_org->id;?>" class="btn_delete btn btn-danger">X</a>
+	            					<a href="admin/networks/delete_network_org/<?=$network_org_item->id;?>" class="btn_delete btn btn-danger">X</a>
 	            				</td>
 	            			</tr>
 	            			<?php endforeach;?>

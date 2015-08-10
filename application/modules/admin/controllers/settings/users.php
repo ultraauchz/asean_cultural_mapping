@@ -47,10 +47,6 @@ class Users extends Admin_Controller {
 		if($_POST) {
 			$data = new User($id);
 
-			if($data->fd_admin==1) {
-				redirect("admin/settings/users");
-			}
-
 			//	ตรวจสอบชื่อ username ซ้ำ
 			if(@$_POST["username"]) {
 				$chk = new User();
@@ -84,21 +80,21 @@ class Users extends Admin_Controller {
 			//	Username
 			//	$data->username = strip_tags(trim($_POST["username"]));
 
-			if((!empty($_POST["password"])) && ($_POST["password"]===$_POST["passwords"])) {
-				$data->passwords = encrypt_password(strip_tags(trim($_POST["passwords"])));
+			
+			if(!empty($_POST["password"])) {
+				$data->passwords = encrypt_password(strip_tags(trim($_POST["password"])));
 			}
 
+			$data->titulation = strip_tags($_POST["titulation"]);
 			$data->firstname = strip_tags($_POST["firstname"]);
 			$data->lastname = strip_tags($_POST["lastname"]);
 			$data->email = strip_tags($_POST["email"]);
 			$data->tel = strip_tags($_POST["tel"]);
-			$data->heap_id = @$_POST["heap_id"];
-			$data->per_cardno = @$_POST["per_cardno"];
-			$data->center_id = @($_POST["center_id"]) ? $_POST["center_id"] : 0;
-			$data->user_type_id = @($_POST["user_type_id"]) ? $_POST["user_type_id"] : 0;
-			$data->request_rain = (@$_POST["request_rain"]==1) ? 1 : 0;
+			$data->org_id = $_POST['org_id'];
+			echo $data->position = strip_tags($_POST['position']);
+			$data->user_type_id = $_POST['user_type_id'];			
 			$data->username = strip_tags($_POST['username']);
-
+			$data->status = !empty($_POST['status']) ? '1' : '0';
 			$data->save();
 		}
 		redirect("admin/settings/users");

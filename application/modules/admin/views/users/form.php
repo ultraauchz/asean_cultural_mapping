@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-12">
 		<div class="box">
-			<form method="post" enctype="multipart/form-data" action="admin/settings/<?php echo $modules_name;?>/save">
+			<form method="post" enctype="multipart/form-data" action="admin/settings/<?php echo $modules_name;?>/save/<?php echo @$value->id;?>">
 			<div class="box-header">
 			  <h3 class="box-title">Add/Edit</h3>			  
 			</div><!-- /.box-header -->
@@ -15,38 +15,48 @@
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Username</label>
-		              <input type="text" class="form-control" name="username">		              
+		              <input type="text" class="form-control" name="username" value="<?php echo @$value->username;?>">		              
 	            </div>	         	            
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Password</label>
-		              <input type="text" class="form-control" name="password">		              
+		              <input type="password" class="form-control" name="password">		              
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Confirm Password</label>
-		              <input type="text" class="form-control" name="confirm_password">		              
+		              <input type="password" class="form-control" name="confirm_password">		              
 	            </div>
 	            <div class="form-group">
-	            	  <div class="col-xs-12">
-		              <label for="exampleInputEmail1">Fullname</label>
-		              </div>
-		              <div class="col-xs-1">
-		              	<input type="text" class="form-control" name="titulation" placeholder="Titulation">
+		              <label for="exampleInputEmail1">Fullname</label><br>
+		              <div class="col-xs-1" style="padding:0px;">
+		              	<input type="text" class="form-control" name="titulation" placeholder="Titulation" value="<?php echo @$value->titulation;?>">
 		              </div>
 		              <div class="col-xs-2">
-		              	<input type="text" class="form-control" name="firstname" placeholder="Firstname">
+		              	<input type="text" class="form-control" name="firstname" placeholder="Firstname" value="<?php echo @$value->firstname;?>"> 
 		              </div>
 		              <div class="col-xs-2">
-		              	<input type="text" class="form-control" name="lastname" placeholder="Lastname">
+		              	<input type="text" class="form-control" name="lastname" placeholder="Lastname" value="<?php echo @$value->lastname;?>">
 		              </div>
 		              <div class="clearfix"></div>
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Organization</label>
-		              <?php echo form_dropdown('org_id',get_option('id','org_name','acm_organization'),@$value->org_id,'class="form-control"','--select organization--');?>		              
+		              <?php echo form_dropdown('org_id',get_option('id','org_name','acm_organization'),@$value->org_id,'class="form-control required"','--select organization--');?>		              
+	            </div>
+	            <div class="form-group">
+		              <label for="exampleInputEmail1">Position</label>
+		              <input type="text" class="form-control" name="position" value="<?php echo @$value->position;?>">		              
+	            </div>
+	            <div class="form-group">
+		              <label for="exampleInputEmail1">Tel</label>
+		              <input type="text" class="form-control" name="tel" value="<?php echo @$value->tel;?>">		              
 	            </div>	            
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Email</label>
-		              <input type="email" class="form-control" name="email">		              
+		              <input type="email" class="form-control" name="email" value="<?php echo @$value->email;?>">		              
+	            </div>
+	            <div class="form-group">
+		              <label for="exampleInputEmail1">Status</label><br>
+		              <input type="checkbox" name="status" value="1" <?php if(@$value->status=='1')echo 'checked="checked"';?>> Actived		              
 	            </div>
 	            <table>
 	            	<tr>

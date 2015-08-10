@@ -13,34 +13,43 @@
 		              <label>NAME</label>
 		              <input type="text" class="form-control" name="org_name" value="<?php echo @$rs->org_name;?>">
 	            </div>
-				<div class="form-group">
-		              <label>ADDRESS</label>
-		              <textarea class="form-control" name="org_address"><?php echo @$rs->org_address;?></textarea>
-	            </div>	
 	            <div class="form-group">
 		              <label>CODE</label>
 		              <input type="text" class="form-control" name="org_code" value="<?php echo @$rs->org_code;?>">
-	            </div>	 
-				<div class="form-group">
-		              <label>STATE</label>
-		              <?php echo form_dropdown('state_id',get_option('id','state_name','acm_state','order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') ?>
 	            </div>	
+				<div class="form-group">
+		              <label>ADDRESS</label>
+		              <textarea class="form-control" name="org_address"><?php echo @$rs->org_address;?></textarea>
+	            </div>		            
 	            <div class="form-group">
 		              <label>COUNTRY</label>
 		              <?php echo form_dropdown('country_id',get_option('id','country_name','acm_country','order by id asc'),@$rs->country_id,'class="form-control"','--- COUNTRY ---') ?>
+	            </div> 
+				<div class="form-group">
+		              <label>STATE</label>
+		              <?php echo form_dropdown('state_id',get_option('id','state_name','acm_state','order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') ?>
+	            </div>
+	            <div class="form-group">
+		              <label>ZIPCODE</label>
+		              <input type="text" class="form-control" name="zipcode" value="<?php echo @$rs->zipcode;?>">
 	            </div>	
 	            <div class="form-group">
 		              <label>EMAIL</label>
-		              <input type="text" class="form-control" name="org_email" value="<?php echo @$rs->org_email;?>">
+		              <input type="email" class="form-control" name="org_email" value="<?php echo @$rs->org_email;?>">
 	            </div>
+	            <div class="col-xs-2" style="padding:0px;">
 	            <div class="form-group">
 		              <label>LATITUDE</label>
 		              <input type="text" class="form-control" name="org_latitude" value="<?php echo @$rs->org_latitude;?>">
 	            </div>
+	            </div>
+	            <div class="col-xs-2" style="padding-left:5px;">
 	            <div class="form-group">
-		              <label>LONGITUDE</label>
+		              <label>LONGTITUDE</label>
 		              <input type="text" class="form-control" name="org_longitude" value="<?php echo @$rs->org_longitude;?>">
 	            </div>
+	            </div>
+	            <div class="clearfix"></div>
 	            <div class="form-group">
 		              <label>DESCRIPTION</label>
 		              <textarea class="form-control" name="org_description"><?php echo @$rs->org_description;?></textarea>

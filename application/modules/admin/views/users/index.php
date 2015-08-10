@@ -21,20 +21,20 @@
 			<button type="submit" class="btn btn-default" >ค้นหา</button>
 		</form>
 		<div class="box-body">
-			<table class="table table-bordered table-hover table-responsive table-striped" >
-				
-				<thead>
-					<tr>
-						<th style="width: 80px;" >สถานะ</th>
-						<th>User</th>
-						<th>Firstname Lastname</th>
-						<th>Organization</th>
-						<th>Country</th>
-						<th>Email</th>
-						<th style="width: 160px;" ><a href="admin/settings/users/form" class="btn btn-primary" ><span class="glyphicon glyphicon-edit" ></span> เพิ่ม</a></th>
-					</tr>
-				</thead>
-				
+			<?php echo $variable->pagination()?>
+			<table id="example1" class="table table-bordered table-striped table-hover table_data">
+			    <thead>
+			      <tr>
+			        <th style="width: 80px;" >Status</th>
+					<th>User</th>
+					<th>Firstname Lastname</th>
+					<th>Organization</th>
+					<th>Position</th>
+					<th>Country</th>
+					<th>Email</th>			        
+			        <th class="th_manage">Manage</th>
+			      </tr>
+			    </thead>
 				<tbody>
 					<?php foreach ($variable as $key => $value):?>
 					<tr>
@@ -46,23 +46,37 @@
 						<td><?php echo $value->username?></td>
 						<td><?php echo $value->firstname." ".$value->lastname?></td>
 						<td><?php echo $value->organization->org_name?></td>
-						<td><?php echo $value->country->country_name?></td>
+						<td><?php echo $value->position?></td>
+						<td><?php echo $value->organization->country->country_name?></td>
 						<td><small><?php echo $value->email?></small></td>
 						<td>
-							<a href="admin/settings/users/form/<?php echo $value->id?>" class="btn btn-primary" ><span class="glyphicon glyphicon-wrench" ></span> แก้ไข</a>
-							<a href="admin/settings/users/delete/<?php echo $value->id?>" class="btn btn-danger" onclick="return confirm('ต้องการลบ <?php echo $value->title?> หรือไม่')" ><span class="glyphicon glyphicon-trash" ></span> ลบ</a>
+							<a class="btn btn-info" href="admin/settings/users/form/<?=$value->id;?>">
+				                    <i class="fa fa-edit"></i> Edit
+				                </a>
+								<a class="btn btn-danger btn_delete" href="admin/settings/users/delete/<?php echo $value->id;?>">
+				                    <i class="fa fa-trash-o"></i> delete
+				                </a>
 						</td>
 					</tr>
 					<?php endforeach?>
 				</tbody>
-				
 				<tfoot>
-					<tr>
-						<td colspan="7" ><?php echo $variable->pagination()?></td>
-					</tr>
-				</tfoot>
-				
+			      <tr>
+			        <th style="width: 80px;" >Status</th>
+					<th>User</th>
+					<th>Firstname Lastname</th>
+					<th>Organization</th>
+					<th>Position</th>
+					<th>Country</th>
+					<th>Email</th>			        
+			        <th class="th_manage">Manage</th>
+			      </tr>
+			    </tfoot>
 			</table>
+			<div style="text-align:right;">
+			  	<a href="admin/settings/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
+			</div>
+			<?php echo $variable->pagination()?>
 		</div>
 		</div><!-- /.box -->
 	</div>
