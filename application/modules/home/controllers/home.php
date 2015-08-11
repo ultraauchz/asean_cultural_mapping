@@ -68,7 +68,9 @@ class Home extends Base_Controller {
 	}
 	
 	public function inc_heritage(){
-		$this->load->view('inc_heritage');
+		$data['rs'] = new Heritage();
+		$data['rs']->order_by('id','desc')->get(10);
+		$this->load->view('inc_heritage', $data);
 	}
 	
 	public function inc_layout() {

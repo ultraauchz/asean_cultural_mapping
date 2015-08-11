@@ -47,8 +47,10 @@ class Heritages extends Admin_Controller {
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
 		 $data["rs"] = new Heritage($id);
-		 $data["heritage_org"] = new Heritage_Organization();
-		 $data["heritage_org"]->where('heritage_id = '.$id)->get();
+		 if($id>0){
+		 	$data["heritage_org"] = new Heritage_Organization();
+		 	$data["heritage_org"]->where('heritage_id = '.$id)->get();
+		 }
 		 $this->template->build("heritages/form",$data);
 	}
 
@@ -58,7 +60,7 @@ class Heritages extends Admin_Controller {
 				$data = new Heritage($id);
 				$data->from_array($_POST);
 				$data->save();
-				
+				$id = $data->id;
 				// $type = ($id)?'edit':'add'; // for logs.
 				// save_logs($type, $data->id);
 				
@@ -95,7 +97,7 @@ class Heritages extends Admin_Controller {
 			}
 		// }
 		// redirect("admin/heritages");
-		redirect($_SERVER['HTTP_REFERER']);
+		redirect('admin/heritages/form/'.$id);
 	}
 
 	public function save_heritage_organization($heritage_id=null){

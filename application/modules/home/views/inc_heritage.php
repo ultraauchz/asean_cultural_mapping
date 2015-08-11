@@ -6,70 +6,39 @@
       </div>
       <div id="content-asean-cultural">
             <ul>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/indo_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Borobudur</div>
-					<div class="title-country">Indonesia</div>
-					<div class="intro">The 1,200-year-old Borobudur temple is home to hundreds of Buddhist statues.</div></a>
+            	<?php 
+            			$i=0;
+						foreach($rs as $key=>$heritage):
+						$i++;
+						if($i==5){
+							$i=0;
+							$li_style = 'class="last-ac"';
+							$clear_div = '<div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><br></div>';
+						}else{
+							$li_style = '';
+							$clear_div = '';
+						}
+						$h_image = $heritage->heritage_image->get(1);	
+				?>
+            	<li <?php echo $li_style;?>>
+            		<a href="heritages/detail/<?php echo $heritage->id;?>" >
+                	<div class="pic-culture-country">
+                		<div style="max-width:174px;max-height:174px;overflow: hidden;margin:0 auto;">
+                		<img src="uploads/heritage_image/<?php echo $h_image->image;?>" height="174" />
+                		</div>
+                	</div>
+                	<div style="overflow: hidden;max-height: 210px;">
+                	<div class="title-culture"><?php echo $heritage->title;?></div>
+					<div class="title-country"><?php echo $heritage->country->country_name;?></div>
+					<div class="intro" style="max-height:110px;overflow: hidden;"><?php echo $heritage->description;?></div>
+					</div>
+					</a>
                 </li>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/philippin_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Ati-Atihan</div>
-					<div class="title-country">Philippines</div>
-					<div class="intro">The Ati-Atihan is a festival in honour of the Santo Niño, celebrated in the third week of January. </div></a>
-                </li>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/vietnam_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Mausoleum of Emperor Khai<br>Dinh-Hue</div>
-					<div class="title-country">Vietnam</div>
-					<div class="intro">This place is definitely one of must visit places in Hue. I really amaze, </div></a>
-                </li>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/thailand_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Ban Chiang Archaeological Site</div>
-					<div class="title-country">Thailand</div>
-					<div class="intro">Ban Chiang is considered the most important prehistoric settlement </div></a>
-                </li>
-            	<li class="last-ac"><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/malaysia_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Mal Dancer</div>
-					<div class="title-country">Malaysia</div>
-					<div class="intro">Mal Dancer features Malaysia's rich culture through the traditional music instruments.</div></a>
-                </li>
-                <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><br></div>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/laos_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Wat Xieng Thong</div>
-					<div class="title-country">Laos</div>
-					<div class="intro">This is one of the most beautiful temples in Luang Prabang and well worth the visit. It's small but worth seeing.</div></a>
-                </li>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/cambodia_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Angkor Wat</div>
-					<div class="title-country">Cambodia</div>
-					<div class="intro">Exhibiting key style and elements of classic Khmer architecture, Angkor Wat remained shrouded in a </div></a>
-                </li>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/myanmar_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Dhamma Yan Gyi temple</div>
-					<div class="title-country">Myanmar</div>
-					<div class="intro">Myanmar is a Buddhist country with thousands of temples, stupas, and rich</div></a>
-                </li>
-            	<li><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/singapore_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Mid Autumn<br>Lantern Festival</div>
-					<div class="title-country">Singapore</div>
-					<div class="intro">The Mid-Autumn Festival is a harvest festival celebrated by ethnic</div></a>
-                </li>
-            	<li class="last-ac"><a href="#">
-                	<div class="pic-culture-country"><img src="images/10/brunei_pic1.png" width="174" height="174" /></div>
-                	<div class="title-culture">Brunei crafts</div>
-					<div class="title-country">Brunei</div>
-					<div class="intro">Menganyam, which can be translated as plaiting or weaving certain parts of bamboo, rattan and the</div></a>
-                </li>
+                <?php echo $clear_div;?>
+                <?php endforeach;?>            	
             </ul>
             <div class="clearfix">&nbsp;</div>
-            <div id="btn-viewmore-ac"><a href="#">+ View all</a></div>
+            <div id="btn-viewmore-ac"><a href="heritages/index">+ View all</a></div>
       </div>
         <br>
     </div>

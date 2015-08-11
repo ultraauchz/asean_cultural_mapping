@@ -7,14 +7,16 @@ class Heritages extends Base_Controller {
 	
 	function index(){
 		$data['rs'] = new Heritage();
-		$data['rs']->order_by('id','desc')->get();
+		$data['rs']->order_by('id','desc')->get_page();
 		$this->template->build('heritages/index',$data);
 	}
 
 	function detail($id){
 		$data['rs'] = new Heritage($id);
-		$data['network_org'] = new Network_Org();
-		$data['network_org']->where('network_id = '.$id)->get();
+		if($id>0){
+		 	$data["heritage_org"] = new Heritage_Organization();
+		 	$data["heritage_org"]->where('heritage_id = '.$id)->get();
+		 }
 		$this->template->build('heritages/detail',$data);
 	}	
 }	
