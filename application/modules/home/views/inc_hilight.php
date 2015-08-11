@@ -40,7 +40,7 @@ $(document).ready(function(){
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
   	<?foreach($variable as $key=>$row):?>
-  	<div class="item <?=$key==0?"active":"";?>">
+  	<div class="item <?=$key==0?"active":"";?>" align="center">
       <img src="<?=$row->image_path?>" alt="...">
       <div class="carousel-caption">
 	    <h3><?=$row->title?></h3>

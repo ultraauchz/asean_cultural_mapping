@@ -40,9 +40,27 @@
     <![endif]-->
     <!-- Imbeded font from Google -->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    
     <script type="text/javascript" src="js/jquery-1.11.2.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js" ></script>
+    <script>
+    $(document).ready(function(){
+		$(window).scroll(function() {
+		    if ($(this).scrollTop()) {
+		        $('#footer-back-to-top').fadeIn();
+		    } else {
+		        $('#footer-back-to-top').fadeOut();
+		    }
+		});
+		
+		$("#footer-back-to-top").click(function () {
+		   //1 second of animation time
+		   //html works for FFX but not Chrome
+		   //body works for Chrome but not FFX
+		   //This strange selector seems to work universally
+		   $("html, body").animate({scrollTop: 0}, 1000);
+		});
+	});
+	</script>
 </head>
 
 <body>
@@ -53,7 +71,13 @@
 	<?php echo Modules::run("home/inc_org_map");?>
 	<?php echo Modules::run("home/inc_network_asean");?>
 	<?php echo Modules::run("home/inc_heritage");?>
+	<div id="footer">
 	<?php echo Modules::run("home/inc_footer");?>
+	</div>
+	<a id="footer-back-to-top" class="WhiteButton badge-back-to-top" style="font-size: 13px;">
+    <strong>Back to Top</strong>
+    <span></span>
+	</a>
 </div>	
 </body>
 </html>

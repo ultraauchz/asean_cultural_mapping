@@ -11,7 +11,8 @@ function tiny(name,url) {
 		height: 500,
 		menubar : false,
 		relative_urls: true,
-		document_base_url: url
+		document_base_url: url,
+		extended_valid_elements : "map[name],area[href|shape|coords|style|title|alt|target],iframe[src|style|width|scrolling|frameborder|height|name|align],applet[style|width|code|archive|height]"
 	});
 }
 

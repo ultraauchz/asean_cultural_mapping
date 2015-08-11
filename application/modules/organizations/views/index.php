@@ -1,3 +1,5 @@
+<div id="breadcrumb"><a href="home/index">Home</a> > ASEAN Cultural Organizations</div>
+<div id="title-page">ASEAN Cultural Organizations</div>
 <div id="bg-map">
      <div id="map">
      <div id="title-map">ASEAN CULTURAL ORGANIZATION</div>
@@ -12,7 +14,7 @@
             <li class="philippines"><a href="organizations/chart/206">Philippines</a></li>
             <li class="brunei"><a href="organizations/chart/39">Brunei</a></li>  
             <li class="singapore"><a href="organizations/chart/220">Singapore</a></li>  
-            <li class="indonesia"><a href="organizations/chart/113">Indonesia</a></li>     
+            <li class="indonesia"><a href="organizations/chart/113">Indonesia</a></li>    
         </ul>
     </div>
  </div>
