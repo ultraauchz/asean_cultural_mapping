@@ -89,6 +89,8 @@
 <script src="medias/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
 <script src="medias/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js" ></script>
+<script type="text/javascript" src="js/tinymce/tiny_mce.js"></script>
+<script type="text/javascript" src="js/tinymce/config.js"></script>
 	<script type="text/javascript">
 		$('.iframe-btn').fancybox({	
 			'width'		: 800,

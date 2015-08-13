@@ -15,5 +15,9 @@ class Organizations extends Base_Controller {
 		$data['org_chart']->where('country_id = '.$country_id)->get();
 		$this->template->build('organizations/chart',$data);
 	}	
+	function detail($id){
+		$data['org'] = new Organization($id);
+		$this->template->build('organizations/detail',$data);
+	}
 }	
 ?>
