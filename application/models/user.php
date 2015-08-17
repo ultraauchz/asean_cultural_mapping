@@ -6,6 +6,7 @@ class User extends ORM {
 	
 	var $table = "acm_user";
 	var $has_one = array("organization","acm_user_type");
+	var $has_many = array("log");
 	/*
 	var $has_one = array("operation_center","user_type",
 		'center' => array(

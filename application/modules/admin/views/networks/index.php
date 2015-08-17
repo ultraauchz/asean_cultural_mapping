@@ -10,7 +10,7 @@
 			<div style="float:left;width:100%;">
 			  <div class="col-xs-3">
 			  	<span>Network name</span> 
-			  	<input type="text" name="search" class="form-control" placeholder="Enter Fullname / Username" value="<?=@$_GET['search'];?>">
+			  	<input type="text" name="search" class="form-control" placeholder="Enter Network Name / ABBR" value="<?=@$_GET['search'];?>">
 			  </div>
 			  <div class="col-xs-3">
 			  	<br>

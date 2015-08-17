@@ -46,9 +46,6 @@
 						<td>
 							<?php echo $value->title?>							
 						</td>
-						<td>
-							<?php echo $value->country->country_name;?>
-						</td>
 						<td><?php echo $value->country->country_name?></td>
 						<td><small><?php echo $value->created."<br />".$value->updated?></small></td>
 						<td>

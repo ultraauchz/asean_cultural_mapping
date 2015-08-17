@@ -58,7 +58,8 @@
 	            </table>
 	            <div class="form-group">
 	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">		
+		              <a href="admin/hilights/index" class="btn btn-default">Back</a>              
 	            </div>          	            	           	           
             </div>            
 			</form>						

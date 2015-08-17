@@ -14,8 +14,11 @@ class User_Types extends Admin_Controller {
 		$data['menu_id'] = $this->menu_id;
 		$data['modules_name'] = $this->modules_name;
 		$data["variable"] = new User_Type();
+		if(@$_GET['search']!='')$data['variable']->where("title LIKE '%".$_GET['search']."%' ");
 		$data["variable"]->where("id !=",1)->get_page();
 		$data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
+		$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+		save_logs($this->menu_id, 'View', 0 , 'View User Types ');
 		$this->template->build("user_types/index",$data);
 	}
 	
@@ -25,6 +28,7 @@ class User_Types extends Admin_Controller {
 		$data["value"] = new User_Type($id);
 		$data["menus"] = new System_Menu();
 		$data['menus']->where('url IS NOT NULL')->order_by("title","ASC")->get();		
+		save_logs($this->menu_id, 'View', @$data['value']->id , 'View User Type Detail');
 		$this->template->build("user_types/form",$data);
 	}
 	
@@ -39,6 +43,8 @@ class User_Types extends Admin_Controller {
 			$data = new User_Type();
 			$data->from_array($_POST);
 			$data->save();
+			$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+			save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->title.' User Type Detail');
 			$perm['user_type_id'] = $data->id;
 			$this->db->query("DELETE FROM acm_user_type_permission WHERE user_type_id = ".$_POST['id']);
 			$menus = new System_Menu();
@@ -51,7 +57,7 @@ class User_Types extends Admin_Controller {
 				$perm['can_access_all'] = @$_POST['chk_'.$menu_item->id.'_access_all'];
 				$user_type_perm = new User_Type_Permission();
 				$user_type_perm->from_array($perm);
-				$user_type_perm->save();
+				$user_type_perm->save();				
 			endforeach;
 		}
 		redirect("admin/settings/user_types");
@@ -60,6 +66,8 @@ class User_Types extends Admin_Controller {
 	public function delete($id) {
 		if($id) {
 			$data = new User_Type($id);
+			$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+			save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->title.' User Type Detail');
 			$data->delete();
 		}
 		redirect("admin/settings/user_types");

@@ -9,12 +9,12 @@
 			</div><!-- /.box-header -->
 			<div style="float:left;width:100%;">
 				<div class="col-xs-3">
-			  	<span>Country</span> 
+			  	<label for="country_id">Country</label> 
 			  	<?php echo form_dropdown('country_id',get_option('id','country_name','acm_country'),@$_GET['country_id'],'class="form-control"','-- all country --');?>
-			  </div>
+			    </div>
 			  <div class="col-xs-3">
-			  	<span>State name</span> 
-			  	<input type="text" name="search" class="form-control" placeholder="Enter Country name" value="<?=@$_GET['search'];?>">
+			  	<label for="search">State name</label> 
+			  	<input type="text" name="search" class="form-control" placeholder="Enter State name" value="<?=@$_GET['search'];?>">
 			  </div>
 			  <div class="col-xs-3">
 			  	<br>
@@ -27,7 +27,7 @@
 			  <table id="example1" class="table table-bordered table-striped table-hover table_data">
 			    <thead>
 			      <tr>
-			        <th>NO</th>		
+			        <th style="width:50px;">NO</th>		
 			        <th>Country</th>	        
 			        <th>Name</th>			        
 			        <th class="th_manage">Manage</th>

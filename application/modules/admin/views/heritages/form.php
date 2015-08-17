@@ -32,7 +32,9 @@
 	            </div> 
 				<div class="form-group">
 		              <label>STATE</label>
+		              <span class="td_states">
 		              <?php echo form_dropdown('state_id',get_option('id','state_name','acm_state','order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') ?>
+		              </span>
 	            </div>
 	            <div class="form-group">
 		              <label>ZIPCODE</label>
@@ -145,7 +147,8 @@
 	            </table>
 	            <div class="form-group">
 	            	  <input type="hidden" name="id" value="<?=@$rs->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">	
+		              <a href="admin/heritages/index" class="btn btn-default">Back</a>	              
 	            </div>          	            	           	           
             </div>            
 			</form>						
@@ -177,6 +180,16 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+	
+	$("select[name=country_id]").change(function(){
+		var country_id = $(this).val();
+		$.post('admin/states/load_states',{
+		'country_id' : country_id,
+		},function(data){
+			$(".td_states").html(data);												
+		});	
+	})
+	
 	
 	$(".fancybox").fancybox();
 });

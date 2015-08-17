@@ -5,7 +5,7 @@
  */
 class Log extends ORM {
 
-	public $table = "log";
+	public $table = "acm_system_log";
 
 	public $has_one = array("user");
 

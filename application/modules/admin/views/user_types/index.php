@@ -9,7 +9,7 @@
 			</div><!-- /.box-header -->
 			<div style="float:left;width:100%;">
 			  <div class="col-xs-3">
-			  	<span>User type name</span> 
+			  	<label for="search">User type name</label> 
 			  	<input type="text" name="search" class="form-control" placeholder="Enter User type name" value="<?=@$_GET['search'];?>">
 			  </div>
 			  <div class="col-xs-3">
@@ -23,7 +23,7 @@
 			  <table id="example1" class="table table-bordered table-striped table-hover table_data">
 			    <thead>
 			      <tr>
-			        <th>NO</th>			        
+			        <th style="width:50px;">NO</th>			        
 			        <th>Name</th>			        
 			        <th class="th_manage">Manage</th>
 			      </tr>

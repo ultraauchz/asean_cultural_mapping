@@ -20,7 +20,7 @@ class declaration extends Admin_Controller {
 			redirect("admin/poll");
 		}
 			 */
-		
+		save_logs($this->menu_id, 'View', $this->session->userdata("id"), ' View ASEAN Declaration ');
 		$rs = new Contents();
 		$data['rs'] = $rs->where("slug","declaration")->get(1);
 		$data['menu_id'] = $this->menu_id;
@@ -31,7 +31,7 @@ class declaration extends Admin_Controller {
 		$data = new Contents();
 		$data->from_array($_POST);
 		$data->save();
-		
+		save_logs($this->menu_id, 'Update', $this->session->userdata("id"), ' Update ASEAN Declaration ');
 		// $data->check_last_query();
 		
 		redirect($_SERVER['HTTP_REFERER']);

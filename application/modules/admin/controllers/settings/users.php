@@ -14,20 +14,11 @@ class Users extends Admin_Controller {
 		$data['menu_id'] = $this->menu_id;
 		$data['modules_name'] = $this->modules_name;
 		$data["variable"] = new User();
-
-		if(@$_GET["u"]) {
-			$data["variable"]->like("username",$_GET["u"]);
-		}
-
-		if(@$_GET["f"]) {
-			$data["variable"]->group_start()->like("firstname",$_GET["f"])->or_like("lastname",$_GET["f"])->group_end();
-		}
-
-		if(@$_GET["s"]) {
-			$data["variable"]->where("status",$_GET["s"]);
-		}
-
+		if(@$_GET['search']!='')$data["variable"]->where("username LIKE '%".$_GET['search']."%' OR firstname LIKE '%".$_GET['search']."%' OR lastname LIKE '%".$_GET['search']."%' ");
+		if(@$_GET['org_id']>0)$data["variable"]->where("org_id = ".$_GET['org_id']);
+		if(@$_GET['country_id'])$data['variable']->where("org_id IN (SELECT id FROM acm_organization WHERE country_id = ".$_GET['country_id'].") ");
 		$data["variable"]->where("id !=",user()->id)->get_page(50);
+		save_logs($this->menu_id, 'View', 0 , 'View Users ');
 		$this->template->build("users/index",$data);
 	}
 
@@ -35,11 +26,7 @@ class Users extends Admin_Controller {
 		$data['menu_id'] = $this->menu_id;
 		$data['modules_name'] = $this->modules_name;
 		$data["value"] = new User($id);
-
-		//if($data["value"]->fd_admin==1 || $id==user()->id) {
-			//redirect("admin/settings/users");
-		//}
-
+		save_logs($this->menu_id, 'View', @$data['value']->id , 'View User Detail');
 		$this->template->build("users/form",$data);
 	}
 
@@ -96,27 +83,19 @@ class Users extends Admin_Controller {
 			$data->username = strip_tags($_POST['username']);
 			$data->status = !empty($_POST['status']) ? '1' : '0';
 			$data->save();
+			$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+			save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->firstname.' '.$data->lastname.' User Detail');
 		}
 		redirect("admin/settings/users");
 	}
 
 	public function delete($id = null) {
 		if(!$id) {
-			redirect('admin/settings/users');
-		}
-		
-		$this->db->query("delete from ma_user where id = '".$id."'");		
-		
+		$data  = new User($id);
+		$action = 'DELETE';
+		save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->firstname.' '.$data->lastname.' User Detail');
+		$data->delete();
+		}		
 		redirect('admin/settings/users');
 	}
-
-	public function get_center($id=null) {
-		if($id) {
-			$foo = new Heap();
-			$foo->get_by_org_id($id);
-			$heap_id = $foo->id;
-			echo @form_dropdown("center_id",get_option("org_id","center_name","ma_center","WHERE heap_id = $heap_id"),null,"class=\"form-control\"","เลือกสำนัก/กอง","");
-		}
-	}
-
 }

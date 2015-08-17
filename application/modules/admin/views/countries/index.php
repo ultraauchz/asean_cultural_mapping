@@ -23,7 +23,7 @@
 			  <table id="example1" class="table table-bordered table-striped table-hover table_data">
 			    <thead>
 			      <tr>
-			        <th>NO</th>			        
+			        <th style="width:50px;">NO</th>			        
 			        <th>Name</th>			        
 			        <th class="th_manage">Manage</th>
 			      </tr>

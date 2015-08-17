@@ -24,39 +24,15 @@ class Countries extends Admin_Controller {
 		$data["result"]->order_by("country_name","ASC")->get_page();
 		$data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
 		$data['page'] = (empty($_GET['page']))? 1 : $_GET['page'];
+		save_logs($this->menu_id, 'View', 0 , 'View Countries ');
 		$this->template->build('countries/index',$data);
-		/*
-		if(permission("departments","views")) {
-			$data["variable"] = new Department();
-			$data["variable"]->where('parent_id','0');
-			$data["variable"]->order_by('orders', 'asc');
-			$data["variable"]->get();
-			$this->template->build("departments/index",$data);
-		} else {
-			redirect("admin");
-		}*/
-		
 	}
 	
 	public function form($id=null) {
-		/*
-		if(permission("departments","create")) {
-			$data["value"] = new Department($id);
-			if (empty($id)) {
-				@$data['value']->orders = $this->orders(0);
-				@$data['max_orders'] = $data['value']->orders;
-			} else {
-				@$data['max_orders'] = $this->orders($data["value"]->parent_id, $id);
-			}
-			$this->template->build("departments/form",$data);
-		} else {
-			redirect("admin/departments");
-		}
-		 * 
-		 */		 
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
 		 $data["value"] = new Country($id);		 
+		 save_logs($this->menu_id, 'View', $data['value']->id , 'View Country Detail');
 		 $this->template->build("countries/form",$data);
 	}
 	
@@ -72,33 +48,18 @@ class Countries extends Admin_Controller {
 				}
 				$save->from_array($_POST);
 				$save->save();
+				$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+				save_logs($this->menu_id, $action, $save->id , $action.' '.$save->country_name.' Country');
 			}
 		redirect("admin/".$this->modules_name);
 	}	
 	
 	public function delete($id=null) {
-			if($id) {
-				/*
-				$tmp = new Department($id);
-				$tmp2 = new Department();
-				$tmp2->where('orders >=', $tmp->orders);
-				$tmp2->where('parent_id', $tmp->parent_id);
-				$tmp2->order_by('orders', 'asc');
-				$tmp2->get_page();
-				foreach ($tmp2 as $key => $item2) {
-					$save_update = new Department();
-					if ($item2->id != $id) {
-						$update['id'] = $item2->id;
-						$update['orders'] = $item2->orders-1;
-						$save_update->from_array($update);
-						$save_update->save();
-					}
-				}
-				*/
+			if($id) {				
 				$data = new Country($id);
-				$data->delete();
-				
-				//save_logs('delete', $id);
+				$action = 'DELETE';
+				save_logs($this->menu_id, $action, $data->id , $action.' '.$data->country_name.' Country');
+				$data->delete();				
 			}
 		redirect("admin/".$this->modules_name);
 	}	

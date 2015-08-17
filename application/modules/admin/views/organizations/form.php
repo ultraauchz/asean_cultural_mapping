@@ -27,7 +27,9 @@
 	            </div> 
 				<div class="form-group">
 		              <label>STATE</label>
+		              <span class="span_state_id">
 		              <?php echo form_dropdown('state_id',get_option('id','state_name','acm_state','order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') ?>
+		              </span>
 	            </div>
 	            <div class="form-group">
 		              <label>ZIPCODE</label>
@@ -82,7 +84,8 @@
 	            </table>
 	            <div class="form-group">
 	            	  <input type="hidden" name="id" value="<?php echo @$rs->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">		    
+		              <a href="admin/settings/organizations/index" class="btn btn-default">Back</a>          
 	            </div>          	            	           	           
             </div>            
 			</form>						
@@ -98,6 +101,15 @@
 $(document).ready(function() {
 	
 	tiny("org_detail","");
+	
+	$("select[name=country_id]").change(function(){
+		var country_id = $(this).val();
+		$.post('admin/states/load_states',{
+		'country_id' : country_id,
+		},function(data){
+			$(".span_state_id").html(data);												
+		});	
+	})
 	
 });
 </script>

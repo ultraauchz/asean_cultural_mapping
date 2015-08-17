@@ -12,6 +12,8 @@ class Signin extends Base_Controller {
 	public function action() {
 		if(login($this->input->post("username"), $this->input->post("password"))) {
 			set_notify('success', 'ยินดีต้อนรับเข้าสู่ระบบ');
+			//save_logs($menu_id, $action, $data_id, $description)
+			save_logs(19, 'Log In', $this->session->userdata("id"), $_POST['username'].' Logged In ');
 			redirect("admin");
 		} else {
 		

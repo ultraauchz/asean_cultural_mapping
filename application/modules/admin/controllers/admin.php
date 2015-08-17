@@ -133,7 +133,9 @@ class Admin extends Admin_Controller {
 	public function index() {
 		//$data['complain'] = new Complain();
 		//$data['complain']->get_page(10);
-		$data['menu_id'] = 1;
+		$data['menu_id'] = 22;
+		//save_logs($menu_id, $action, $data_id, $description)
+		save_logs($data['menu_id'], 'View', $this->session->userdata("id"), ' View Dashboard ');
 		$this->template->build("index",@$data);
 	}
 	

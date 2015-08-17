@@ -20,9 +20,9 @@ Author URI: http://www.mis-algoritmos.com
 		var $urlF = false;//urlFriendly
 
 		/*Buttons next and previous*/
-		var $nextT = "ต่อไป";
+		var $nextT = "Next";
 		var $nextI = "&#187;"; //&#9658;
-		var $prevT = "ก่อนหน้า";
+		var $prevT = "Previous";
 		var $prevI = "&#171;"; //&#9668;
 
 		/*****/

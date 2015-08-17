@@ -17,49 +17,22 @@ class Networks extends Admin_Controller {
 		$data['menu_id'] = $this->menu_id;
 		$data['modules_name'] = $this->modules_name;
 		$data['result'] = new Network();
-		if(@$_GET['search']!=''){
-			$condition = "  title LIKE '%".$_GET['search']."%'";
-			$data['result']->where($condition);
-		}
+		if(@$_GET['search']!='')$data['result']->where(" title LIKE '%".$_GET['search']."%' OR CODE LIKE '%".$_GET['search']."%' ");		
 		$data["result"]->order_by("show_no","DESC")->get_page();
 		$data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
 		$data['page'] = (empty($_GET['page']))? 1 : $_GET['page'];
+		save_logs($this->menu_id, 'View', 0 , 'View Networks ');
 		$this->template->build('networks/index',$data);
-		/*
-		if(permission("departments","views")) {
-			$data["variable"] = new Department();
-			$data["variable"]->where('parent_id','0');
-			$data["variable"]->order_by('orders', 'asc');
-			$data["variable"]->get();
-			$this->template->build("departments/index",$data);
-		} else {
-			redirect("admin");
-		}*/
-		
 	}
 	
 	public function form($id=null) {
-		/*
-		if(permission("departments","create")) {
-			$data["value"] = new Department($id);
-			if (empty($id)) {
-				@$data['value']->orders = $this->orders(0);
-				@$data['max_orders'] = $data['value']->orders;
-			} else {
-				@$data['max_orders'] = $this->orders($data["value"]->parent_id, $id);
-			}
-			$this->template->build("departments/form",$data);
-		} else {
-			redirect("admin/departments");
-		}
-		 * 
-		 */		 
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
 		 $data["value"] = new Network($id);
 		 $network_org = new Network_Org();
 		 $network_org->where('network_id',$id)->get();
 		 $data['network_org'] = $network_org; 
+		 save_logs($this->menu_id, 'View', @$data['value']->id , 'View Network Detail ');
 		 $this->template->build("networks/form",$data);
 	}
 	
@@ -76,6 +49,8 @@ class Networks extends Admin_Controller {
 				}
 				$save->from_array($_POST);
 				$save->save();
+				$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+				save_logs($this->menu_id, $action, @$save->id , $action.' '.$save->title.' Network');
 			}
 		redirect("admin/networks");
 	}
@@ -119,6 +94,8 @@ class Networks extends Admin_Controller {
 				}
 				*/
 				$data = new Network($id);
+				$action = 'DELETE';
+				save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->title.' Network');
 				$data->delete();
 				
 				//save_logs('delete', $id);

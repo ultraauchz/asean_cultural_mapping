@@ -3,23 +3,31 @@
   <div class="row">
     <div class="col-xs-12">
 		<div class="box">
-
-		<form>		
+			<form method="get" enctype="multipart/form-data">
 			<div class="box-header">
-				  <h3 class="box-title">Search</h3>			  
+			  <h3 class="box-title">Search</h3>			  
 			</div><!-- /.box-header -->
-			Username/Firstname/Lastname
-			<input type="text" class="form-control" name="u" value="<?php echo @$_GET["u"]?>" style="display: inline-block; width: 100px;" />
-			Organization
-			<?php echo form_dropdown("org_id",get_option("id","org_name","acm_organization"," ORDER BY org_name ASC"),@$_GET["org_id"],"class=\"form-control\" style=\"display:inline;width: 150px;\" ","-- Select Organization --","")?>
-			Status
-			<select class="form-control" name="s" style="display: inline-block; width:80px;" >
-				<option value="0" <?php if(@$_GET["s"]==0) echo "selected"?> >Actived</option>
-				<option value="1" <?php if(@$_GET["s"]==1) echo "selected"?> >Inactived</option>
-			</select>
-			
-			<button type="submit" class="btn btn-default" >ค้นหา</button>
-		</form>
+			<div style="float:left;width:100%;">
+				<div class="col-xs-3">
+			  	<label for="country_id">Firstname/Lastname/Username/Email</label> 
+			  	<input type="text" name="search" value="<?php echo @$_GET['search'];?>" class="form-control">
+			    </div>
+				<div class="col-xs-3">
+			  	<label for="country_id">Country</label> 
+			  	<?php echo form_dropdown('country_id',get_option('id','country_name','acm_country'),@$_GET['country_id'],'class="form-control"','-- all country --');?>
+			    </div>
+			  <div class="col-xs-3">
+			  	<label for="search">Organization</label> 
+			  	<span class="span_organization">
+			  		<?php echo form_dropdown('org_id',get_option('id','org_name','acm_organization'),@$_GET['org_id'],'class="form-control"','-- all organization --');?>
+			  	</span>
+			  </div>
+			  <div class="col-xs-3">
+			  	<br>
+			  	<input type="submit" name="b" class="btn btn-primary" value="Search">
+			  </div>
+			</div>
+			</form>
 		<div class="box-body">
 			<?php echo $variable->pagination()?>
 			<table id="example1" class="table table-bordered table-striped table-hover table_data">
