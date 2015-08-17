@@ -41,11 +41,19 @@ $(document).ready(function(){
   <div class="carousel-inner" role="listbox">
   	<?foreach($variable as $key=>$row):?>
   	<div class="item <?=$key==0?"active":"";?>" align="center">
+  	 <?if($row->links != ""):?>
+  	 	<a href="<?=$row->links?>" target="<?=$row->target?>">
+  	 <?else:?>
+  	 	<?if($row->detail != ""):?>
+  	 		<a href="hilights/detail/<?=$row->id?>">
+  	 	<?endif;?>
+  	 <?endif;?>
       <img src="<?=$row->image_path?>" alt="...">
       <div class="carousel-caption">
 	    <h3><?=$row->title?></h3>
 	    <p><?=$row->detail?></p>
 	  </div>
+	 <?=($row->links != "") || ($row->detail != "") ? "</a>" : "" ;?>
     </div>
   	<?endforeach;?>
   </div>

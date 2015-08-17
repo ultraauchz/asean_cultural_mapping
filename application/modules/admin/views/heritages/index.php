@@ -9,6 +9,7 @@
 						<th style="width: 80px;" >SHOW NO</th>
 						<th style="width: 80px;" >STATUS</th>
 						<th>TITLE</th>
+						<th>COUNTRY</th>
 						<th style="width: 160px;" >CREATED/UPDATED DATE</th>
 						<th style="width: 180px;" >
 							<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
@@ -33,7 +34,8 @@
 							<hr />
 							<img src="<?php echo $value->image_path?>" class="img-responsive" style="max-height: 150px;" />
 						</td>
-						<td><small><?php echo mysql_to_th($value->created,"S",TRUE)."<br />".mysql_to_th($value->updated,"S",TRUE)?></small></td>
+						<td><?php echo $value->country->country_name?></td>
+						<td><small><?php echo $value->created."<br />".$value->updated?></small></td>
 						<td>
 							<a href="admin/heritages/form/<?php echo $value->id?>" class="btn btn-primary" ><span class="glyphicon glyphicon-wrench" ></span> Edit</a>
 							<a href="admin/heritages/delete/<?php echo $value->id?>" class="btn btn-danger" onclick="return confirm('ต้องการลบ <?php echo $value->title?> หรือไม่')" ><span class="glyphicon glyphicon-trash" ></span> Delete</a>
