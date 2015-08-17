@@ -27,9 +27,13 @@ class Heritages extends Admin_Controller {
 		}
 		 * 
 		 */
+		 $data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
 		 $data["variable"] = new Heritage();
+		 
+		 if(@$_GET['search'] != '') $data["variable"]->where("  title LIKE '%".$_GET['search']."%' ");
+		 if(@$_GET['country_id'] != '') $data["variable"]->where("  country_id = ".$_GET['country_id']." ");
 		 $data["variable"]->order_by("orders","ASC")->get_page();
 		 $this->template->build("heritages/index",$data);
 	}
