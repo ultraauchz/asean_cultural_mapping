@@ -22,6 +22,10 @@
 		              <input type="text" class="form-control" name="links" value="<?php echo @$value->links;?>">
 	            </div>
 	            <div class="form-group">
+		              <label for="exampleInputEmail1">TARGET</label>
+		              <?php echo form_dropdown('target',array('_blank'=>'_blank','_self'=>'_self'),@$value->target,'class="form-control"') ?>
+	            </div>
+	            <div class="form-group">
 		              <label for="exampleInputEmail1">HILIGHT IMAGE</label>
 		              <div class="input-group">
 						    <input type="text" id="image_path" class="form-control" name="image_path" placeholder="select hilight image" value="<?php echo $value->image_path?>" />
@@ -62,3 +66,14 @@
 	</div>
   </div>
 </section>
+
+<!-- Load TinyMCE -->
+<script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="js/tinymce/config.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	tiny("detail","");
+	
+});
+</script>  

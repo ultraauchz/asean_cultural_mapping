@@ -49,7 +49,8 @@
 						<td>
 							<?php echo $value->country->country_name;?>
 						</td>
-						<td><small><?php echo $value->created."<br />".$value->updated;?></small></td>
+						<td><?php echo $value->country->country_name?></td>
+						<td><small><?php echo $value->created."<br />".$value->updated?></small></td>
 						<td>
 							<a href="admin/heritages/form/<?php echo $value->id?>" class="btn btn-primary" ><span class="glyphicon glyphicon-wrench" ></span> Edit</a>
 							<a href="admin/heritages/delete/<?php echo $value->id?>" class="btn btn-danger" onclick="return confirm('ต้องการลบ <?php echo $value->title?> หรือไม่')" ><span class="glyphicon glyphicon-trash" ></span> Delete</a>
