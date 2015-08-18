@@ -9,7 +9,7 @@ class Menu extends ORM {
 
 	// var $has_one = array();
 
-	// var $has_many = array();
+	 var $has_many = array('system_log');
 	
 	function __construct($id=null) {
 		parent::__construct($id);

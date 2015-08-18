@@ -28,12 +28,22 @@
 	            </div>
 	            <div class="form-group">
 		              <label>COUNTRY</label>
-		              <?php echo form_dropdown('country_id',get_option('id','country_name','acm_country','order by id asc'),@$rs->country_id,'class="form-control"','--- COUNTRY ---') ?>
+		              <?php
+					  	if( $perm->can_access_all == 'y' ){
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country"," ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ","-- Select Country --","");	
+					  	}else{
+					  		$ext_condition = $perm->can_access_all == 'y' ? '' : " WHERE id = ".$current_user->organization->country_id;
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country",$ext_condition." ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ");
+					  	}			  	
+					  ?>
 	            </div> 
 				<div class="form-group">
 		              <label>STATE</label>
 		              <span class="td_states">
-		              <?php echo form_dropdown('state_id',get_option('id','state_name','acm_state','order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') ?>
+		              <?php
+		              	$ext_condition = @$rs->country_id > 0 ? " WHERE country_id = ".$rs->country_id : "";
+		              	echo form_dropdown('state_id',get_option('id','state_name','acm_state',$ext_condition.' order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') 
+		              ?>
 		              </span>
 	            </div>
 	            <div class="form-group">
@@ -64,26 +74,36 @@
 	            <fieldset>
 	            	<legend>Heritage Gallery</legend>
 	            <div class="form-group">
+	            	<?php if($can_save=='y'){ ?>
 		            <label for="exampleInputEmail1">UPLOAD MULTIPLE IMAGE</label>
-		              
 					<input type="file" id="files" name="files[]" multiple accept='image/*' />
+					<?php } ?>
 					<output id="list"></output>
 						
 					<table id="tbimg" class="table table-striped table-bordered">
 						<tr>
-							<th width="110">image</th>
-							<th>detail</th>
-							<th>delete</th>
+							<th width="110">Image</th>
+							<th>Detail</th>
+							<th>Manage</th>
 						</tr>
 						<?foreach($rs->heritage_image->get() as $row):?>
 						<tr>
 							<td>
 								<a rel="image_group" href="uploads/heritage_image/<?=$row->image?>" class="fancybox" title=""><img src="uploads/heritage_image/<?=$row->image?>" width="150"></a>
 							</td>
-							<td><input class="form-control" type="text" name="image_detail2[]" value="<?=$row->image_detail?>" style="display:inline;"></td>
 							<td>
+								<?php if($can_save=='y'){ ?>
+								<input class="form-control" type="text" name="image_detail2[]" value="<?php echo $row->image_detail?>" style="display:inline;">	
+								<? }else{ ?>
+								<?php echo $row->image_detail?>
+								<input class="form-control" type="hidden" name="image_detail2[]" value="<?php echo $row->image_detail?>" style="display:inline;">
+								<? } ?>
+							</td>
+							<td>
+								<?php if($can_save=='y'):?>
 								<input type="hidden" name="image_id[]" value="<?=$row->id?>">
 								<button class="btn btn-danger del_image" onclick="return confirm('ต้องการลบ <?php echo $row->image_detail?> หรือไม่')" ><span class="glyphicon glyphicon-trash" ></span></button>
+								<?php endif;?>
 							</td>
 						</tr>
 						<?endforeach;?>
@@ -94,7 +114,9 @@
 	            <?php if(@$rs->id > 0) : ?>
 	            <fieldset>
 	            	<legend>Responsibility of Organization</legend>
-	            	<a href="admin/organizations/iframe_list?id=<?=@$rs->id;?>&area=admin&ctrl=heritages&action=save_heritage_organization" class="btn btn-success iframe-btn" >Add Member</a>
+	            	<?php if($can_save=='y'):?>
+	            	<a href="admin/settings/organizations/iframe_list?id=<?=@$rs->id;?>&area=admin&ctrl=heritages&action=save_heritage_organization" class="btn btn-success iframe-btn" >Add Member</a>
+	            	<?php endif;?>
 	            	<table class="table table-bordered">
 	            		<thead>
 	            			<tr>
@@ -115,7 +137,9 @@
 	            				<td><?php echo $heritage_org_item->organization->org_name;?></td>
 	            				<td><?php echo $heritage_org_item->organization->country->country_name;?></td>
 	            				<td>
-	            					<a href="admin/heritage/delete_heritage_org/<?=$heritage_org_item->id;?>" class="btn_delete btn btn-danger">X</a>
+	            					<?php if($can_save=='y'):?>
+	            					<a href="admin/heritages/delete_heritage_org/<?=$heritage_org_item->id;?>" class="btn_delete btn btn-danger">X</a>
+	            					<?php endif;?>
 	            				</td>
 	            			</tr>
 	            			<?php endforeach;?>
@@ -146,8 +170,10 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	  <?php if($can_save=='y'):?>
 	            	  <input type="hidden" name="id" value="<?=@$rs->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">	
+		              <input type="submit" class="btn btn-primary" value="Save">
+		              <?php endif;?>	
 		              <a href="admin/heritages/index" class="btn btn-default">Back</a>	              
 	            </div>          	            	           	           
             </div>            

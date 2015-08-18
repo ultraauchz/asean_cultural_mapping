@@ -3,7 +3,9 @@ if(!function_exists("login")) {
 	function login($username,$password) {
 		$CI =& get_instance();		
 		$foo = new User();
-		$foo->where("username",$username)->where("password",$password)->where("status",1)->get(1);
+		//echo $password;
+		//echo encrypt_password($password);
+		$foo->where("username",$username)->where("password",encrypt_password($password))->where("status",1)->get(1);
 		if($foo->id) {
 
 			$CI->session->set_userdata("id",$foo->id);
@@ -105,13 +107,21 @@ if(!function_exists("permission")) {
 		$CI =& get_instance();		
 		if($id > 0 ){
 			$foo = new User_Type_Permission($id);	
-		}else{
+		}else if($user_type_id > 0){
 			$foo = new User_Type_Permission();
 			$foo->where('menu_id = '.$menu_id.' AND user_type_id = '.$user_type_id)->get();	
-		}				
+		}else{
+			$foo = new User_Type_Permission(0);
+		}			
 		return $foo;
 	}
-
+	
+	function current_user_permission($menu_id){
+		$user = user();
+		$perm = get_permission($menu_id, $user->user_type_id);
+		return $perm;	
+	}
+		
 if(!function_exists("debug")) {
 	function debug($value) {
 		echo "<pre>";

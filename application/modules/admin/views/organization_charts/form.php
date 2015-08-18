@@ -12,11 +12,20 @@
 				<div class="form-group">
 		              <label>Country</label>
 		              <div class="form-group">
-		              <?php echo form_dropdown('country_id',get_option('id','country_name','acm_country','order by id asc'),@$rs->country_id,'class="form-control"','--- COUNTRY ---') ?>
+		              <?php
+					  	if( $perm->can_access_all == 'y' ){
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country"," ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ","-- Select Country --","");	
+					  	}else{
+					  		$ext_condition = $perm->can_access_all == 'y' ? '' : " WHERE id = ".$current_user->organization->country_id;
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country",$ext_condition." ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ");
+					  	}			  	
+					  ?>
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">DETAIL</label>
-		              <textarea class="form-control"  name="detail" id="detail" ><?=@$rs->detail;?></textarea>
+		              <span class="span_detail_data">
+		              	<textarea class="form-control"  name="detail" id="detail" ><?=@$rs->detail;?></textarea>
+		              </span>
 	            </div>
 	            <table>
 	            	<tr>
@@ -59,5 +68,14 @@ $(document).ready(function() {
 	
 	tiny("detail","");
 	
+	$("select[name=country_id]").change(function(){
+		var country_id = $(this).val();
+		$.post('admin/organization_charts/load_detail',{
+		'country_id' : country_id,
+		},function(data){
+			$(".span_detail_data").html(data);		
+			tiny("detail","");										
+		});	
+	});
 });
 </script>

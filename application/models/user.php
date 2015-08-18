@@ -6,7 +6,7 @@ class User extends ORM {
 	
 	var $table = "acm_user";
 	var $has_one = array("organization","acm_user_type");
-	var $has_many = array("log");
+	var $has_many = array("log","system_log");
 	/*
 	var $has_one = array("operation_center","user_type",
 		'center' => array(
@@ -27,11 +27,5 @@ class User extends ORM {
 	*/
 	function __construct($id=null) {
 		parent::__construct($id);
-	}
-	
-	public function Organization() {
-		$value = new Center();
-		$value->get_by_org_id($this->org_id);
-		return $value;
 	}
 }

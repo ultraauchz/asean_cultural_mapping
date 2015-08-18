@@ -4,22 +4,14 @@ class blueprint extends Admin_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->menu_id = 11;
-		/*
-		if(!permission("polls","views")) {
+		$this->perm = current_user_permission($this->menu_id);
+		if($this->perm->can_view!='y'){
 			redirect("admin");
 		}
-		 */
 	}
 	
-	public function index() {		
-			/*
-		if(permission("polls","create")) {
-			$data["value"] = new Survey($id);
-			$this->template->build("poll/form",$data);
-		} else {
-			redirect("admin/poll");
-		}
-			 */
+	public function index() {
+		$data['can_save'] = $this->perm->can_create;				
 		save_logs($this->menu_id, 'View', $this->session->userdata("id"), ' View ASEAN Blue Print ');
 		$rs = new Contents();
 		$data['rs'] = $rs->where("slug","blueprint")->get(1);
@@ -28,12 +20,12 @@ class blueprint extends Admin_Controller {
 	}
 	
 	public function save(){
-		$data = new Contents();
-		$data->from_array($_POST);
-		$data->save();
-		save_logs($this->menu_id, 'Update', $this->session->userdata("id"), ' Update ASEAN Blue Print ');
-		// $data->check_last_query();
-		
+		if($this->perm->can_create=='y'){
+			$data = new Contents();
+			$data->from_array($_POST);
+			$data->save();
+			save_logs($this->menu_id, 'Update', $this->session->userdata("id"), ' Update ASEAN Blue Print ');
+		}
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 	

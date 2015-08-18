@@ -10,8 +10,19 @@
 			
 			<div class="box-body">
 				<div class="form-group">
-		              <label for="exampleInputEmail1">Country Name</label>
-		              <input type="text" class="form-control" name="country_name" value="<?php echo @$value->country_name;?>">
+		              <label for="exampleInputEmail1">Country </label>
+		              <?php
+					  	if( $perm->can_access_all == 'y' ){
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country"," ORDER BY country_name ASC"),@$value->country_id,"class=\"form-control\" style=\"display:inline;\" ","-- Select Country --","");	
+					  	}else{
+					  		$ext_condition = $perm->can_access_all == 'y' ? '' : " WHERE id = ".$current_user->organization->country_id;
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country",$ext_condition." ORDER BY country_name ASC"),@$value->country_id,"class=\"form-control\" style=\"display:inline;\" ");
+					  	}			  	
+					  ?>
+	            </div>
+	            <div class="form-group">
+		              <label for="exampleInputEmail1">State Name</label>
+		              <input type="text" class="form-control" name="state_name" value="<?php echo @$value->state_name;?>">
 	            </div>	            
 	            <table>
 	            	<tr>
@@ -36,8 +47,11 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	  <?php if($perm->can_create=='y'){ ?>
 	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">
+		             <?php } ?>		    
+		              <a href="admin/<?php echo $modules_name;?>/index" class="btn btn-default">Back</a>          
 	            </div>          	            	           	           
             </div>            
 			</form>						

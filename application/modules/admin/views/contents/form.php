@@ -36,8 +36,10 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	  <?php if($can_save=='y'): ?>
 	            	  <input type="hidden" name="id" value="<?=@$rs->id?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">
+		              <?php endif;?>		              
 	            </div>          	            	           	           
             </div>            
 			</form>						

@@ -8,64 +8,59 @@ class Heritages extends Admin_Controller {
 		parent::__construct();
 		$this->menu_id = 17;
 		$this->modules_name = 'heritages';
-		/*
-		if(!permission("hilights","views")) {
+		$this->current_user = user();
+		$this->perm = current_user_permission($this->menu_id);
+		if($this->perm->can_view!='y'){
 			redirect("admin");
 		}
-		 * 
-		 */
 	}
 
-	public function index() {
-		/*
-		if(permission("hilights","views")) {
-			$data["variable"] = new Hilight();
-			$data["variable"]->order_by("orders","ASC")->get_page();
-			$this->template->build("hilights/index",$data);
-		} else {
-			redirect("admin");
-		}
-		 * 
-		 */
+	public function index() {		
 		 $data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
+		 $data['page'] = (empty($_GET['page']))? 1 : $_GET['page'];
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
+		 $data['perm'] = $this->perm;
+		 $data['current_user'] = $this->current_user;
 		 $data["variable"] = new Heritage();		 
 		 if(@$_GET['search'] != '') $data["variable"]->where("  title LIKE '%".$_GET['search']."%' ");
-		 if(@$_GET['country_id'] != '') $data["variable"]->where("  country_id = ".$_GET['country_id']." ");
+		 if($this->perm->can_access_all != 'y')
+		 {
+		 	$data["variable"]->where("  country_id = ".$this->current_user->organization->country_id." ");
+		 }
+		 else if(@$_GET['country_id'] != '') 
+		 {
+		 	$data["variable"]->where("  country_id = ".$_GET['country_id']." ");
+		 }
 		 $data["variable"]->order_by("orders","ASC")->get_page();
+		 save_logs($this->menu_id, 'View', 0 , 'View Heritages ');		 
 		 $this->template->build("heritages/index",$data);
 	}
 
 	public function form($id=null) {
-		/*
-		if(permission("hilights","create")) {
-			$data["value"] = new Hilight($id);
-			$this->template->build("hilights/form",$data);
-		} else {
-			redirect("admin/hilights");
-		}
-		 * 
-		 */
+		 $data['can_save'] = $this->perm->can_create;
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
+		 $data['perm'] = $this->perm;
+		 $data['current_user'] = $this->current_user;
 		 $data["rs"] = new Heritage($id);
 		 if($id>0){
 		 	$data["heritage_org"] = new Heritage_Organization();
 		 	$data["heritage_org"]->where('heritage_id = '.$id)->get();
 		 }
+		 save_logs($this->menu_id, 'View', $data['rs']->id , 'View Heritages Detail');
 		 $this->template->build("heritages/form",$data);
 	}
 
 	public function save($id=null) {
-		// if(permission("hilights","create")) {
+		if($this->perm->can_create=='y'){
 			if($_POST) {
 				$data = new Heritage($id);
 				$data->from_array($_POST);
 				$data->save();
-				$id = $data->id;
-				// $type = ($id)?'edit':'add'; // for logs.
-				// save_logs($type, $data->id);
+				$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+				save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->title.' Heritage');
+				$id = $data->id;				
 				
 				// multiupload
 				fix_file($_FILES['files']);
@@ -95,50 +90,72 @@ class Heritages extends Admin_Controller {
 						$heritage_image->save();
 					}
 				}
-				
-				
-			}
-		// }
-		// redirect("admin/heritages");
+			}		
+		}
 		redirect('admin/heritages/form/'.$id);
 	}
 
 	public function save_heritage_organization($heritage_id=null){
-		if($heritage_id > 0){			
-			foreach($_POST['chk_org_id'] as $key){						
-				$ext= new Heritage_Organization();
-				$ext->where('heritage_id',$heritage_id)->where("org_id", $key)->get(1);
-				if($ext->id) {
-					
-				}else{					
-					$data['heritage_id'] = $heritage_id;
-					$data['org_id'] = $key;
-					$save = new Heritage_Organization();	
-					$save->from_array($data);
-					$save->save();
-				}
-			}			
-		}	
+		if($this->perm->can_create=='y'){
+			if($heritage_id > 0){			
+				foreach($_POST['chk_org_id'] as $key){						
+					$ext= new Heritage_Organization();
+					$ext->where('heritage_id',$heritage_id)->where("org_id", $key)->get(1);
+					if($ext->id) {
+						
+					}else{					
+						$data['heritage_id'] = $heritage_id;
+						$data['org_id'] = $key;
+						$save = new Heritage_Organization();	
+						$save->from_array($data);
+						$save->save();
+						$action = 'UPDATE';
+						save_logs($this->menu_id, $action, @$heritage_id , $action.' Heritage:::UPDATE HERITAGE ORGANIZATION');
+					}
+				}			
+			}	
+		}
 		redirect('admin/heritages/form/'.$heritage_id);	
+	}
+	
+	public function delete_heritage_org($id = null){
+		
+		if($id > 0){
+			if($this->perm->can_create=='y'){
+				$data = new Heritage_Organization($id);
+				$heritage_id = $data->heritage_id;
+				$action = 'UPDATE';
+				save_logs($this->menu_id, $action, @$heritage_id , $action.' Heritage:::DELETE HERITAGE ORGANIZATION');
+				$this->db->query('DELETE FROM acm_heritage_organization WHERE id = '.$id);
+			}
+			redirect('admin/heritages/form/'.$heritage_id);	
+		}else{
+			redirect('admin/heritages/index');	
+		}
 	}
 
 	public function delete($id) {
-		// if(permission("hilights","delete")) {
+		if($this->perm->can_delete=='y'){
 			if($id) {
-				$data = new Hilight($id);
-				$data->delete();
-				
-				// save_logs('delete', $id);
+				$data = new Heritage($id);
+				$action = 'DELETE';
+				save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->title.' Heritage');
+				$data->delete();				
 			}
-		// }
-		redirect("admin/hilights");
+		}
+		redirect("admin/heritages");
 	}
 	
 	public function image_delete($id){
-		if($id) {
-			$data = new Heritage_image($id);
-			@unlink("uploads/heritage_image/".$data->image);
-			$data->delete();
+		if($this->perm->can_create=='y'){		
+			if($id) {
+				$data = new Heritage_image($id);
+				@unlink("uploads/heritage_image/".$data->image);
+				$action = 'DELETE';
+				$heritage = new Heritage($data->heritage_id);
+				save_logs($this->menu_id, $action, @$heritage->id , $action.' '.$heritage->title.' Heritage Image.');
+				$data->delete();
+			}
 		}
 	}
 	

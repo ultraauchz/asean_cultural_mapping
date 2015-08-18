@@ -23,12 +23,23 @@
 	            </div>		            
 	            <div class="form-group">
 		              <label>COUNTRY</label>
-		              <?php echo form_dropdown('country_id',get_option('id','country_name','acm_country','order by id asc'),@$rs->country_id,'class="form-control"','--- COUNTRY ---') ?>
+		              <?php
+					  	if( $perm->can_access_all == 'y' ){
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country"," ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ","-- Select Country --","");	
+					  	}else{
+					  		$ext_condition = $perm->can_access_all == 'y' ? '' : " WHERE id = ".$current_user->organization->country_id;
+					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country",$ext_condition." ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ");
+					  	}			  	
+					  ?>
 	            </div> 
 				<div class="form-group">
 		              <label>STATE</label>
 		              <span class="span_state_id">
-		              <?php echo form_dropdown('state_id',get_option('id','state_name','acm_state','order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') ?>
+		              <?php
+		              	$country_id = $rs->country_id > 0 ? $rs->country_id : $current_user->organization->country_id;
+		              	$ext_condition = @$country_id > 0 ? " WHERE country_id = ".$country_id : "";
+		              	echo form_dropdown('state_id',get_option('id','state_name','acm_state',$ext_condition.' order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') 
+		              ?>
 		              </span>
 	            </div>
 	            <div class="form-group">
@@ -83,8 +94,10 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	 <?php if($perm->can_create=='y'){ ?>
 	            	  <input type="hidden" name="id" value="<?php echo @$rs->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		    
+		              <input type="submit" class="btn btn-primary" value="Save">
+		             <?php } ?>		    
 		              <a href="admin/settings/organizations/index" class="btn btn-default">Back</a>          
 	            </div>          	            	           	           
             </div>            

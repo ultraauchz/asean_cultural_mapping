@@ -28,7 +28,9 @@
 	            <?php if(@$value->id > 0) : ?>
 	            <fieldset>
 	            	<legend>Members</legend>
-	            	<a href="admin/organizations/iframe_list?id=<?=@$value->id;?>&area=admin&ctrl=networks&action=save_network_organization" class="btn btn-success iframe-btn" >Add Member</a>
+	            	<?php if($perm->can_create=='y'){?>
+	            	<a href="admin/settings/organizations/iframe_list?id=<?=@$value->id;?>&area=admin&ctrl=networks&action=save_network_organization" class="btn btn-success iframe-btn" >Add Member</a>
+	            	<?php } ?>
 	            	<table class="table table-bordered">
 	            		<thead>
 	            			<tr>
@@ -49,7 +51,9 @@
 	            				<td><?php echo $network_org_item->organization->org_name;?></td>
 	            				<td><?php echo $network_org_item->organization->country->country_name;?></td>
 	            				<td>
+	            					<?php if($perm->can_create=='y'){?>
 	            					<a href="admin/networks/delete_network_org/<?=$network_org_item->id;?>" class="btn_delete btn btn-danger">X</a>
+	            					<?php } ?>
 	            				</td>
 	            			</tr>
 	            			<?php endforeach;?>
@@ -80,8 +84,11 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	  <?php if($perm->can_create=='y'){?>
 	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">
+		              <?php } ?>	
+		              <a href="admin/<?php echo $modules_name;?>/index" class="btn btn-default">Back</a>	              
 	            </div>          	            	           	           
             </div>            
 			</form>						

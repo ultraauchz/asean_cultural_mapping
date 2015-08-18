@@ -36,12 +36,20 @@
 							<td><?php echo $no;?></td>							
 							<td><?php echo $item->country_name;?></td>
 							<td>
+								<?php if($perm->can_create == 'y'){?>
 								<a class="btn btn-info" href="admin/<?php echo $modules_name;?>/form/<?=$item->id;?>">
-				                    <i class="fa fa-edit"></i> Edit
-				                </a>
+									<span class="glyphicon glyphicon-wrench" ></span> Edit
+								</a>
+								<?php }else{ ?>
+								<a class="btn btn-info" href="admin/<?php echo $modules_name;?>/form/<?=$item->id;?>">
+									<span class="glyphicon glyphicon-search" ></span> View
+								</a>
+								<?php } ?>
+								<?php if($perm->can_delete =='y'){?>
 								<a class="btn btn-danger btn_delete" href="admin/<?php echo $modules_name;?>/delete/<?php echo $item->id;?>">
-				                    <i class="fa fa-trash-o"></i> delete
-				                </a>
+									<span class="glyphicon glyphicon-trash" ></span> Delete
+								</a>
+								<?php } ?>
 							</td>
 						</tr>
 					<?php endforeach;?>	      
@@ -54,9 +62,11 @@
 			      </tr>
 			    </tfoot>
 			  </table>
+			  <?php if($perm->can_create=='y'){?>
 			  <div style="text-align:right;">
 			  	<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
 			  </div>
+			  <?php } ?>
 			  <?php echo $result->pagination()?>
 			</div><!-- /.box-body -->
 		</div><!-- /.box -->

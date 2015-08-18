@@ -52,7 +52,7 @@ class Home extends Base_Controller {
 	
 	public function inc_hilight() {
 		$data["variable"] = new Hilight();
-		$data["variable"]->where("status",1)->order_by("orders","ASC")->order_by("created","DESC")->get(5);
+		$data["variable"]->where("status",1)->order_by("show_no","DESC")->order_by("created","DESC")->get(5);
 		
 		$this->load->view("inc_hilight",$data);
 	}

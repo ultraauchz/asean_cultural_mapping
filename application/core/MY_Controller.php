@@ -38,9 +38,9 @@ class Admin_Controller extends MX_Controller {
 		$this->template->append_metadata(js_notify());
 		
 		
-		if(!permission("admin","extra")) {
+		/*if(!permission("admin","extra")) {
 			set_notify('error', 'กรุณาเข้าสู่ระบบ');
 			redirect("admin/signin");
-		}
+		}*/
 	} 
 }

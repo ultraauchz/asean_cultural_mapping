@@ -56,36 +56,6 @@ class Admin extends Admin_Controller {
 		$this->load->view("inc_graph");
 	}
 
-	public function inc_menu() {
-		/*	
-		$data["has_permission"] = 0;
-		
-		$data["contents"] = new Content_Group();
-		$data["contents"]->where("web_type_id",1)->order_by("orders","ASC")->order_by("id","ASC")->get();
-		
-		$data["ebooks"] = new Ebook_Group();
-		$data["ebooks"]->where('status', '1')->get();
-		
-		$data["faqs"] = new Faq_Group();
-		$data["faqs"]->where('status', '1')->get();
-		
-		$data["links"] = new Link_Group();
-		$data["links"]->where('status', '1')->get();
-		
-		$data["events"] = new Event_type();
-		$data["events"]->where('status', '1')->get();
-		
-		$variable = new Permission();
-		$variable->where("module LIKE \"%content\_%\"")->where("module !=","content_groups")->where('user_type_id',user()->user_type_id)->get(1);
-		if($variable->id) {
-			$data["has_permission"] = 1;
-		}
-		
-		$this->load->view("inc_menu",$data);
-		 * 
-		 */
-	}
-	
 	public function inc_statistic()
 	{
 		$ga = new ga();
@@ -131,10 +101,7 @@ class Admin extends Admin_Controller {
 	}
 
 	public function index() {
-		//$data['complain'] = new Complain();
-		//$data['complain']->get_page(10);
 		$data['menu_id'] = 22;
-		//save_logs($menu_id, $action, $data_id, $description)
 		save_logs($data['menu_id'], 'View', $this->session->userdata("id"), ' View Dashboard ');
 		$this->template->build("index",@$data);
 	}
@@ -142,57 +109,5 @@ class Admin extends Admin_Controller {
 	public function signout() {
 		logout();
 		redirect("index");
-	}
-
-	public function get_fullcalendar () {
-		$date_start = date('Y-m-d', $_GET['start']);
-		$date_end = date('Y-m-d', $_GET['end']);
-		$events = new Event();
-		$events->where('start_date <=', $date_end);
-		$events->where('end_date >=', $date_start);
-		$events->where("status",1)->get();
-		
-		foreach ($events as $key => $event) {
-			if (empty($event->everyday)) {
-				$everyday_[] = array(
-									"title"=>$event->title,
-									"start"=>$event->start_date,
-									"end"=>$event->end_date,
-									"url"=>'admin/events/form/'.$event->id,
-									"color"=>$event->event_type->code_color
-							   ); 
-			} else {
-				$stert = $event->start_date;
-				$end = $event->end_date;
-				$one_day = (24 * 60 * 60 * 1000);
-				for ($loop = strtotime($event->start_date); $loop <= strtotime($event->end_date); $loop = strtotime("+1 day", $loop)) {
-					$eventDate = date('Y-m-d', $loop);
-					$loop_day = date('l', $loop);
-					if ($loop_day ==  $event->everyday ) {
-						$everyday_[] = array(
-									"title"=>$event->title,
-									"start"=>$eventDate,
-									"end"=>$eventDate,
-									"url"=>'admin/events/form/'.$event->id,
-									"color"=>$event->event_type->code_color
-							   );
-					}
-				}
-			}
-		}
-
-		echo json_encode(@$everyday_);
-	}
-
-	public function get_xml() {
-		$url = "http://164.115.100.119/BRRAAintranet/reportcenter/OperateDataPublic.xml";
-		$xml = new DOMDocument;
-		$xml->load($url);
-		
-		$variable = $xml->getElementsByTagName("BaseData");
-		foreach ($variable as $key => $value) {
-			$province = $value->getElementsByTagName("base")->item(0)->nodeValue."<br />";
-			echo anchor($value->getElementsByTagName("mapurl")->item(0)->nodeValue,$province);
-		}
-	}
+	}		
 }

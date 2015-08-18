@@ -30,17 +30,21 @@
 		              <div class="col-xs-1" style="padding:0px;">
 		              	<input type="text" class="form-control" name="titulation" placeholder="Titulation" value="<?php echo @$value->titulation;?>">
 		              </div>
-		              <div class="col-xs-2">
+		              <div class="col-xs-3">
 		              	<input type="text" class="form-control" name="firstname" placeholder="Firstname" value="<?php echo @$value->firstname;?>"> 
 		              </div>
-		              <div class="col-xs-2">
+		              <div class="col-xs-3">
 		              	<input type="text" class="form-control" name="lastname" placeholder="Lastname" value="<?php echo @$value->lastname;?>">
 		              </div>
 		              <div class="clearfix"></div>
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Organization</label>
-		              <?php echo form_dropdown('org_id',get_option('id','org_name','acm_organization'),@$value->org_id,'class="form-control required"','--select organization--');?>		              
+		              <?php
+		              $country_id = $perm->can_access_all != 'n' && @$_GET['country_id'] > 0 ? $current_user->organization->country_id : @$value->country_id;
+					  $ext_condition = $country_id > 0 ? " WHERE country_id = ".$country_id : ""; 
+		              echo form_dropdown('org_id',get_option('id','org_name','acm_organization', $ext_condition." ORDER BY org_name ASC "),@$value->org_id,'class="form-control required"','--select organization--');
+		              ?>		              
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Position</label>
@@ -81,8 +85,10 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	  <?php if($perm->can_create=='y'){ ?>
 	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">	
+		              <input type="submit" class="btn btn-primary" value="Save">
+					  <?php } ?>	
 		              <a href="admin/settings/<?php echo $modules_name;?>/index" class="btn btn-default">Back</a>	              
 	            </div>          	            	           	           
             </div>            

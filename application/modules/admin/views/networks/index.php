@@ -36,23 +36,27 @@
 					?>
 						<tr>
 							<td>
+								<?php if($perm->can_create=='y'){?>
 								<a class="btn btn-default" href="admin/networks/ordering?search=<?php echo @$_GET['search'];?>&mode=up&id=<?=$item->id;?>&page=<?php echo $page;?>">
 				                    <i class="fa fa-angle-up"></i> 
 				                </a>
 				                <a class="btn btn-default" href="admin/networks/ordering?search=<?php echo @$_GET['search'];?>&mode=down&id=<?=$item->id;?>&page=<?php echo $page;?>">
 				                    <i class="fa fa-angle-down"></i> 
 				                </a>
+				                <?php } ?>
 							</td>
 							<td><?php echo $no;?></td>							
 							<td><?php echo $item->title;?></td>
 							<td><?php echo $item->code;?></td>
 							<td>
-								<a class="btn btn-info" href="admin/networks/form/<?=$item->id;?>">
-				                    <i class="fa fa-edit"></i> Edit
-				                </a>
-								<a class="btn btn-danger btn_delete" href="admin/networks/delete/<?php echo $item->id;?>">
-				                    <i class="fa fa-trash-o"></i> delete
-				                </a>
+								<?php if($perm->can_create == 'y'){?>
+								<a href="admin/<?php echo $modules_name;?>/form/<?php echo $item->id?>" class="btn btn-primary" ><span class="glyphicon glyphicon-wrench" ></span> Edit</a>
+								<?php }else{ ?>
+								<a href="admin/<?php echo $modules_name;?>/form/<?php echo $item->id?>" class="btn btn-info" ><span class="glyphicon glyphicon-search" ></span> View</a>
+								<?php } ?>
+								<?php if($perm->can_delete =='y'){?>
+								<a href="admin/<?php echo $modules_name;?>/delete/<?php echo $item->id?>" class="btn btn-danger btn_delete"><span class="glyphicon glyphicon-trash" ></span> Delete</a>
+								<?php } ?>
 							</td>
 						</tr>
 					<?php endforeach;?>	      
@@ -67,9 +71,11 @@
 			      </tr>
 			    </tfoot>
 			  </table>
+			  <?php if($perm->can_create=='y'){?>
 			  <div style="text-align:right;">
 			  	<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
 			  </div>
+			  <?php } ?>
 			  <?php echo $result->pagination()?>
 			</div><!-- /.box-body -->
 		</div><!-- /.box -->
