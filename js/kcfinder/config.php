@@ -42,6 +42,7 @@ $_CONFIG = array(
 		// Custom types 
 		'pdf'  =>  "pdf xls xlsx doc docx",
 		'mediafiles'  =>  "mp3 mp4 flv",
+		'hilights' => "*img",
 		'mediapublics'  =>  "",
 		'english_zones'  =>  "",
 		'mediapublics_image'  =>  "*img",
