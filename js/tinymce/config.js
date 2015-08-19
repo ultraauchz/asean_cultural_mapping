@@ -26,6 +26,7 @@ function tiny(elements){
 		pdw_toggle_toolbars: "2,3",
 		force_br_newlines: true,
 		force_p_newlines: false,
+		template_external_list_url : "/FINEARTS/asean_cultural_mapping/js/tinymce/lists/template_list.js",
 		//forced_root_block: ''
 	});
 }
