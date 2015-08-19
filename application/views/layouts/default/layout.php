@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/topmenu.css">
 	<link href="css/style-map.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="js/fancybox/jquery.fancybox.css" media="screen" />
 	<!--[if IE]>
 	<style type="text/css">
 		#headerSection {
@@ -42,6 +43,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/jquery-1.11.2.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js" ></script>
     <script>
     $(document).ready(function(){
 		$(window).scroll(function() {
@@ -59,6 +61,8 @@
 		   //This strange selector seems to work universally
 		   $("html, body").animate({scrollTop: 0}, 1000);
 		});
+		
+		$(".fancybox").fancybox();
 	});
 	</script>
 </head>

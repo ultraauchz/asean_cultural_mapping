@@ -16,4 +16,9 @@
 			<? endforeach;?>
 			</ul>			
 			<div class="clearfix"><p></p></div>
-			<div id="title-page">Gallery</div>            
+			<div id="title-page">Gallery</div>
+			<?if(@$rs->heritage_image->get() != "") : ?>
+				<?foreach($rs->heritage_image->get() as $row):?>
+				<a rel="image_group" href="uploads/heritage_image/<?=$row->image?>" class="fancybox" title="<?=@$row->image_detail?>"><img src="uploads/heritage_image/<?=$row->image?>" width="150"></a>
+				<?endforeach?>
+			<?endif;?>            

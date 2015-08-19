@@ -89,7 +89,7 @@
 						<?foreach($rs->heritage_image->get() as $row):?>
 						<tr>
 							<td>
-								<a rel="image_group" href="uploads/heritage_image/<?=$row->image?>" class="fancybox" title=""><img src="uploads/heritage_image/<?=$row->image?>" width="150"></a>
+								<a rel="image_group" href="uploads/heritage_image/<?=$row->image?>" class="fancybox" title="<?=@$row->image_detail?>"><img src="uploads/heritage_image/<?=$row->image?>" width="150"></a>
 							</td>
 							<td>
 								<?php if($can_save=='y'){ ?>

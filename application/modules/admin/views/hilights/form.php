@@ -28,9 +28,10 @@
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">HILIGHT IMAGE</label>
 		              <div class="input-group">
-						    <input type="text" id="image_path" class="form-control" name="image_path" placeholder="select hilight image" value="<?php echo $value->image_path?>" />
 						    <span class="input-group-btn">
-						    	<a href="js/tinymce/plugins/filemanager/dialog.php?type=1&field_id=image_path" class="btn btn-primary iframe-btn" >เลือกไฟล์</a>
+						    	<? if($value->image_path != "") echo"<img src='".$value->image_path."' width='400' style='margin-bottom:10px;'><br>"?>
+						    	<input type="text" class="form-control" name="image_path" value="<?php echo $value->image_path?>" style="width:90%;"/>
+						    	<input class="btn btn-primary" type="button" name="browse" value="เลือกไฟล์" onclick="browser($(this).prev(),'hilights')" />
 							</span>
 					  </div>
 	            </div>	

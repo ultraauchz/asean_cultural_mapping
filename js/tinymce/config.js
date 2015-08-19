@@ -74,7 +74,7 @@ function browser(element,type) {
 			element.val(path[0]);
         }
     };
-    window.open('media/kcfinder/browse.php?type='+type+'&dir='+type+'/public',
+    window.open('js/kcfinder/browse.php?type='+type+'&dir='+type+'/public',
         'kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, ' +
         'directories=0, resizable=1, scrollbars=0, width=800, height=600'
     );
