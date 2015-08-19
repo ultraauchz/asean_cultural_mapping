@@ -62,7 +62,7 @@
 							<a href="admin/heritages/form/<?php echo $value->id?>" class="btn btn-info" ><span class="glyphicon glyphicon-search" ></span> View</a>
 							<?php } ?>
 							<?php if($perm->can_delete =='y'){?>
-							<a href="admin/heritages/delete/<?php echo $value->id?>" class="btn btn-danger" onclick="return confirm('ต้องการลบ <?php echo $value->title?> หรือไม่')" ><span class="glyphicon glyphicon-trash" ></span> Delete</a>
+							<a href="admin/heritages/delete/<?php echo $value->id?>" class="btn btn-danger btn_delete" ><span class="glyphicon glyphicon-trash" ></span> Delete</a>
 							<?php } ?>
 						</td>
 					</tr>

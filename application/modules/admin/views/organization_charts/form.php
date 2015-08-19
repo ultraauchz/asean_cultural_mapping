@@ -12,13 +12,19 @@
 				<div class="form-group">
 		              <label>Country</label>
 		              <div class="form-group">
+		              <?php echo $rs->country->country_name;?>
 		              <?php
+		                /*
+						 * 
+						 
 					  	if( $perm->can_access_all == 'y' ){
 					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country"," ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ","-- Select Country --","");	
 					  	}else{
 					  		$ext_condition = $perm->can_access_all == 'y' ? '' : " WHERE id = ".$current_user->organization->country_id;
 					  		echo form_dropdown("country_id",get_option("id","country_name","acm_country",$ext_condition." ORDER BY country_name ASC"),@$rs->country_id,"class=\"form-control\" style=\"display:inline;\" ");
 					  	}			  	
+						 * 
+						 */
 					  ?>
 	            </div>
 	            <div class="form-group">
@@ -50,8 +56,11 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	  <?php if($perm->can_create=='y'){ ?>
 	            	  <input type="hidden" name="id" value="<?php echo @$rs->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		              
+		              <input type="submit" class="btn btn-primary" value="Save">
+					  <?php } ?>
+					  <a href="admin/<?php echo $modules_name;?>/index" class="btn btn-default">Back</a>		              
 	            </div>          	            	           	           
             </div>            
 			</form>						

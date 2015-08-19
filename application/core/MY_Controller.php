@@ -37,7 +37,10 @@ class Admin_Controller extends MX_Controller {
 		$this->template->set_layout("admin/layout");
 		$this->template->append_metadata(js_notify());
 		
-		
+		if(user()->id < 1){
+			set_notify('error', 'กรุณาเข้าสู่ระบบ');
+			redirect("admin/signin");
+		}
 		/*if(!permission("admin","extra")) {
 			set_notify('error', 'กรุณาเข้าสู่ระบบ');
 			redirect("admin/signin");

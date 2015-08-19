@@ -18,17 +18,25 @@
 					<?php foreach ($variable as $key => $value):?>
 					<tr>
 						<td>
+								<?php if($perm->can_create=='y'){ ?>
 								<a class="btn btn-default" href="admin/<?php echo $modules_name;?>/ordering?search=<?php echo @$_GET['search'];?>&mode=up&id=<?=$value->id;?>&page=<?php echo $page;?>">
 				                    <i class="fa fa-angle-up"></i> 
 				                </a>
 				                <a class="btn btn-default" href="admin/<?php echo $modules_name;?>/ordering?search=<?php echo @$_GET['search'];?>&mode=down&id=<?=$value->id;?>&page=<?php echo $page;?>">
 				                    <i class="fa fa-angle-down"></i> 
 				                </a>
+				                <?php } ?>
 						</td>
 						<td>
+							<?php if($perm->can_create=='y'){ ?>
 							<button type="button" id="<?php echo $value->id?>" class="btn <?php echo ($value->status==1) ? "btn-primary" : "btn-danger" ?>" data-loading-text="บันทึก..." value="<?php echo ($value->status==1) ? 1 : 0 ?>"  >
 								<?php echo ($value->status==1) ? "On" : "Off" ?>
 							</button>
+							<?php }else{ ?>
+							<span type="button" id="<?php echo $value->id?>" class="btn <?php echo ($value->status==1) ? "btn-primary" : "btn-danger" ?>" data-loading-text="บันทึก..." value="<?php echo ($value->status==1) ? 1 : 0 ?>"  >
+								<?php echo ($value->status==1) ? "On" : "Off" ?>
+							</span>
+							<?php } ?>
 						</td>
 						<td>
 							<strong><?php echo $value->title?></strong>
@@ -37,8 +45,14 @@
 						</td>
 						<td><small><?php echo $value->created."<br />".$value->updated;?></small></td>
 						<td>
-							<a href="admin/hilights/form/<?php echo $value->id?>" class="btn btn-primary" ><span class="glyphicon glyphicon-wrench" ></span> Edit</a>
-							<a href="admin/hilights/delete/<?php echo $value->id?>" class="btn btn-danger" onclick="return confirm('ต้องการลบ <?php echo $value->title?> หรือไม่')" ><span class="glyphicon glyphicon-trash" ></span> Delete</a>
+							<?php if($perm->can_create == 'y'){?>
+							<a href="admin/<?php echo $modules_name;?>/form/<?php echo $value->id?>" class="btn btn-primary" ><span class="glyphicon glyphicon-wrench" ></span> Edit</a>
+							<?php }else{ ?>
+							<a href="admin/<?php echo $modules_name;?>/form/<?php echo $value->id?>" class="btn btn-info" ><span class="glyphicon glyphicon-search" ></span> View</a>
+							<?php } ?>
+							<?php if($perm->can_delete =='y'){?>
+							<a href="admin/<?php echo $modules_name;?>/delete/<?php echo $value->id?>" class="btn btn-danger btn_delete" ><span class="glyphicon glyphicon-trash" ></span> Delete</a>
+							<?php } ?>
 						</td>
 					</tr>
 					<?php endforeach?>
@@ -53,9 +67,11 @@
 					</tr>
 				</thead>
 			</table>
+			<?php if($perm->can_create=='y'){ ?>
 			 <div style="text-align:right;">
 			  	<a href="admin/<?php echo $modules_name;?>/form" class="btn btn-info"><li class="fa fa-plus"></li> Create new</a>
 			 </div> 
+			 <?php } ?>
 			<?php echo $variable->pagination()?>
 		</div>
 	</div>

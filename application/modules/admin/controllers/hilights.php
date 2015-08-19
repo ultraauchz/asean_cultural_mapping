@@ -8,25 +8,16 @@ class Hilights extends Admin_Controller {
 		parent::__construct();
 		$this->menu_id = 13;
 		$this->modules_name = 'hilights';
-		/*
-		if(!permission("hilights","views")) {
+		$this->current_user = user();
+		$this->perm = current_user_permission($this->menu_id);
+		if($this->perm->can_view!='y'){
 			redirect("admin");
 		}
-		 * 
-		 */
 	}
 
 	public function index() {
-		/*
-		if(permission("hilights","views")) {
-			$data["variable"] = new Hilight();
-			$data["variable"]->order_by("orders","ASC")->get_page();
-			$this->template->build("hilights/index",$data);
-		} else {
-			redirect("admin");
-		}
-		 * 
-		 */
+		 $data['current_user'] = $this->current_user;
+		 $data['perm'] = $this->perm;
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
 		 $data["variable"] = new Hilight();
@@ -38,15 +29,8 @@ class Hilights extends Admin_Controller {
 	}
 
 	public function form($id=null) {
-		/*
-		if(permission("hilights","create")) {
-			$data["value"] = new Hilight($id);
-			$this->template->build("hilights/form",$data);
-		} else {
-			redirect("admin/hilights");
-		}
-		 * 
-		 */
+		 $data['current_user'] = $this->current_user;
+		 $data['perm'] = $this->perm;
 		 $data['menu_id'] = $this->menu_id;
 		 $data['modules_name'] = $this->modules_name;
 		 $data["value"] = new Hilight($id);
@@ -55,7 +39,7 @@ class Hilights extends Admin_Controller {
 	}
 
 	public function save($id=null) {
-		// if(permission("hilights","create")) {
+		if($this->perm->can_create=='y'){
 			if($_POST) {
 				if($_POST['id']==''){
 					$show_no = $this->db->query("SELECT MAX(show_no)show_no FROM acm_hilights")->result();
@@ -69,27 +53,25 @@ class Hilights extends Admin_Controller {
 				$data->save();
 				$action = $_POST['id'] > 0 ? "UPDATE" : "CREATE";
 				save_logs($this->menu_id, $action, $data->id , $action.' Hilights ');
-				// $type = ($id)?'edit':'add'; // for logs.
-				// save_logs($type, $data->id);
 			}
-		// }
+		}
 		redirect("admin/hilights");
 	}
 
 	public function delete($id) {
-		// if(permission("hilights","delete")) {
+		if($this->perm->can_delete=='y'){
 			if($id) {
 				$data = new Hilight($id);
 				$action = 'DELETE';
 				save_logs($this->menu_id, $action, $data->id , $action.' Hilights ');
 				$data->delete();				
-				// save_logs('delete', $id);
 			}
-		// }
+		}
 		redirect("admin/hilights");
 	}
 	
 	function ordering() {
+		if($this->perm->can_create=='y'){
 		$mode = @$_GET['mode'];
 		$table_name = 'acm_hilights';
 		$id = @$_GET['id'];
@@ -99,6 +81,7 @@ class Hilights extends Admin_Controller {
 		ordering_data($mode,$table_name,$id,$ext_condition,$step);
 		$action = "UPDATE";
 		save_logs($this->menu_id, $action, $id , $action.' Hilights ');
+		}
 		redirect('admin/hilights/index?search='.@$_GET['search']);
 	}
 	

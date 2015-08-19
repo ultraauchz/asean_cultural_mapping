@@ -57,8 +57,10 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
+	            	  <?php if($perm->can_create=='y'){ ?> 
 	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
-		              <input type="submit" class="btn btn-primary" value="Save">		
+		              <input type="submit" class="btn btn-primary" value="Save">
+		              <?php } ?>		
 		              <a href="admin/hilights/index" class="btn btn-default">Back</a>              
 	            </div>          	            	           	           
             </div>            

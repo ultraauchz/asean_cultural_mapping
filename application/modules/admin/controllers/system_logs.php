@@ -5,17 +5,18 @@ class System_Logs extends Admin_Controller {
 		parent::__construct();
 		$this->menu_id = 21;
 		$this->modules_name = 'system_logs';
-		/*
-		if(!permission("organizations","views")) {
+		$this->current_user = user();
+		$this->perm = current_user_permission($this->menu_id);
+		if($this->perm->can_view!='y'){
 			redirect("admin");
 		}
-		 * 
-		 */
 	}
 	
 	public function index() {		
 		$data['menu_id'] = $this->menu_id;
 		$data['modules_name'] = $this->modules_name;
+		$data['current_user'] = $this->current_user;
+		$data['perm'] = $this->perm;
 		$data['result'] = new System_log();
 		if(@$_GET['start_date']!='' && @$_GET['end_date']!=''){
 			$data['result']->where("date(log_date) >= '".$_GET['start_date']."' AND date(log_date) <= '".$_GET['end_date']."'");

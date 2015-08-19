@@ -20,31 +20,35 @@ class Organization_charts extends Admin_Controller {
 		$data['perm'] = $this->perm;
 		$data['menu_id'] = $this->menu_id;
 		$data['modules_name'] = $this->modules_name;
-		$data['rs'] = new Organization_Chart();
-		$country_id = $this->perm->can_access_all == 'y' && $id > 0 ? $id : $this->current_user->organization->country_id; 
-		$data['rs']->where('country_id',$country_id);
-		$data["rs"]->get(1);
-		save_logs($this->menu_id, 'View', $data['rs']->id, ' View '.$data['rs']->country->country_name.' Organization Chart ');
-		$this->template->build('organization_charts/form',$data);	
+		$data['result'] = new Organization_Chart();
+		$data['no'] = 0;
+		$country_id = $this->perm->can_access_all == 'y' ? 0 : $this->current_user->organization->country_id; 
+		if($country_id > 0 )$data['result']->where('country_id',$country_id);
+		$data['result']->include_related('country', 'country_name', true)->order_by('country_name', 'ASC')->get_page();
+		save_logs($this->menu_id, 'View', 0, ' View Organization Charts ');
+		$this->template->build('organization_charts/index',$data);	
 	}
 	
-	public function load_detail(){
-		$country_id = @$_POST['id'];
-		$rs = new Organization_chart();
-		$rs->where('country_id',$country_id);
-		$rs->get(1);
-		echo '<textarea class="form-control"  name="detail" id="detail" >'.@$rs->detail.'</textarea>';
+	public function form($id=null) {
+		$data['current_user'] = $this->current_user;
+		$data['perm'] = $this->perm;
+		$data['menu_id'] = $this->menu_id;
+		$data['modules_name'] = $this->modules_name;
+		$data['rs'] = new Organization_Chart($id);
+		save_logs($this->menu_id, 'View', $data['rs']->id, ' View '.$data['rs']->country->country_name.' Organization Chart ');
+		$this->template->build('organization_charts/form',$data);	
 	}
 	
 	public function save($id=null) {
 		if($this->perm->can_create=='y'){
 			if ($_POST) {
-				$data = new Organization_Chart();
-				$data->where('country_id',$_POST['country_id'])->get(1);
-				$save = new Organization_Chart();
-				$save->id = @$data->id;
-				$save->country_id = $_POST['country_id'];
-				$save->detail = $_POST['detail'];
+				$save = new Organization_Chart($id);
+				if($_POST['id']==''){
+					$_POST['created_by'] = $this->current_user->id; 
+				}else{
+					$_POST['updated_by'] = $this->current_user->id;
+				}
+				$save->from_array($_POST);
 				$save->save();
 				$action = 'Update ';
 				save_logs($this->menu_id, $action , $save->id, $action.' '.$save->country->coutry_name.' Organization Chart ');
