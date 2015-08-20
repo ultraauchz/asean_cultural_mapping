@@ -7,6 +7,7 @@ class Networks extends Base_Controller {
 	
 	function index(){
 		$data['rs'] = new Network();
+		if(@$_GET['search']!='')$data["rs"]->where("title LIKE '%".$_GET['search']."%' ");
 		$data['rs']->order_by('show_no','desc')->get();
 		$this->template->build('networks/index',$data);
 	}

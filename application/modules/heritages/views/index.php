@@ -37,6 +37,27 @@ ul.heritages>li {
 </style>
 <div id="breadcrumb"><a href="home/index">Home</a> > ASEAN Cultural Heritage Sites</div>
 <div id="title-page">ASEAN Cultural Heritage Sites</div>
+<form method="get" enctype="multipart/form-data">
+<div style="padding:10px 5px;">	
+<div style="float:left;width:100%;">
+  <div class="col-xs-3">
+<label for="search">Title</label> 
+<input type="text" name="search" class="form-control" placeholder="Enter Heritage Title" value="<?=@$_GET['search'];?>">
+  </div>
+  <div class="col-xs-3">
+<label for="coutry_id">Country</label> 
+<?php
+	echo form_dropdown("country_id",get_option("id","country_name","acm_country","WHERE zone = 'ASEAN' ORDER BY country_name ASC"),@$_GET["country_id"],"class=\"form-control\" style=\"display:inline;\" ","-- Select Country --","");	
+?>
+  </div>
+  <div class="col-xs-3">
+<br>
+<input type="submit" name="b" class="btn btn-primary" value="Search">
+  </div>
+</div>
+</form>
+</div>
+<div class="clearfix"></div>
 <?php echo $rs->pagination()?>
 <ul class="heritages">
 <?php 

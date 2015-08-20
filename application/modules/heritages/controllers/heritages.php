@@ -7,6 +7,8 @@ class Heritages extends Base_Controller {
 	
 	function index(){
 		$data['rs'] = new Heritage();
+		if(@$_GET['search']!='')$data["rs"]->where("title LIKE '%".$_GET['search']."%' ");
+		if(@$_GET['country_id']>0)$data["rs"]->where("country_id = ".$_GET['country_id']." ");
 		$data['rs']->order_by('id','desc')->get_page();
 		$this->template->build('heritages/index',$data);
 	}

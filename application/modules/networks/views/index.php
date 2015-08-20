@@ -28,6 +28,22 @@ ul.networks>li {
 </style>
 <div id="breadcrumb"><a href="home/index">Home</a> > Network of ASEAN</div>
 <div id="title-page">Networks of ASEAN</div>
+<form method="get" enctype="multipart/form-data">
+<div style="padding:10px 5px;padding-bottom: 30px;">	
+<div style="float:left;width:100%;">
+  <div class="col-xs-3">
+<label for="search">Title</label> 
+<input type="text" name="search" class="form-control" placeholder="Enter Network Title" value="<?=@$_GET['search'];?>">
+  </div>
+  <div class="col-xs-3">
+<br>
+<input type="submit" name="b" class="btn btn-primary" value="Search">
+  </div>
+</div>
+</form>
+</div>
+<div class="clearfix"></div>
+<br>
 <ul class="networks">
 <?php foreach($rs as $key=>$network): ?>
 	<li class="pin">	
