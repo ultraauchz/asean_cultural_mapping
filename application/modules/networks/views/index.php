@@ -12,7 +12,7 @@ ul.networks {
 }
 
 ul.networks>li {
-    margin: 35px 0px;
+    margin: 0px 0px;
     box-shadow: 0 0 3px #CACACA;
     background: white;
 }

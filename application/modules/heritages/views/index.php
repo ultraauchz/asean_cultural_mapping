@@ -7,7 +7,7 @@ ul.heritages {
 
 
 ul.heritages>li {
-    margin: 30px 0px;
+    margin: 0px 0px;
     box-shadow: 0 0 3px #CACACA;
     background: white;
 }
@@ -37,6 +37,7 @@ ul.heritages>li {
 </style>
 <div id="breadcrumb"><a href="home/index">Home</a> > ASEAN Cultural Heritage Sites</div>
 <div id="title-page">ASEAN Cultural Heritage Sites</div>
+<?php echo $rs->pagination()?>
 <ul class="heritages">
 <?php 
 foreach($rs as $key=>$heritage):
@@ -54,5 +55,5 @@ foreach($rs as $key=>$heritage):
 		</div>
 	</li>
 <?php endforeach;?>
-<?php echo $rs->pagination()?>
 </ul>
+<?php echo $rs->pagination()?>
