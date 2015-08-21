@@ -1,7 +1,7 @@
 <div id="breadcrumb"><a href="home/index">Home</a> > <a href="heritages/index">ASEAN Cultural Heritage Sites</a> > <?php echo $rs->title;?></div>
             <div id="title-page"><?php echo $rs->title;?> ::: <?php echo $rs->country->country_name;?></div>
                 <?php echo $rs->detail;?>                        
-            <div id="title-page">Responsibility of</div>
+            <div id="title-page">Responsibilities of</div>
             <ul>
 			<?php
 			$no = 0; 

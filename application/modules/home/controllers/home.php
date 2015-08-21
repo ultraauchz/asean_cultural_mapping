@@ -39,7 +39,9 @@ class Home extends Base_Controller {
 	}
 
 	public function inc_footer() {
-		$this->load->view("inc_footer");
+		$data['footage'] = new Contents();
+		$data['footage']->where("slug = 'footage'")->get(1);
+		$this->load->view("inc_footer",$data);
 	}
 	
 	public function inc_header() {

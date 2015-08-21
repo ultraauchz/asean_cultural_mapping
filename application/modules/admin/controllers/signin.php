@@ -18,7 +18,7 @@ class Signin extends Base_Controller {
 		} else {
 		
 			set_notify('error', 'Username หรือ Password ไม่ถูกต้อง กรุณาตรวจสอบ');
-			//redirect("admin/signin");
+			redirect("admin/signin");
 		}
 	}
 

@@ -83,7 +83,7 @@ foreach ($org_network as $key => $org_network_item):
 		</li>			
 <? endforeach;?>
 </ul>
-<div id="title-page">Heritage Responsibility</div>
+<div id="title-page">Heritage Responsibilities</div>
 <ul class="heritages">
 <?php 
 foreach($heritage_result as $key=>$heritage):
