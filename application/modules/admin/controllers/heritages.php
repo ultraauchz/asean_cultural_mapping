@@ -74,6 +74,8 @@ class Heritages extends Admin_Controller {
 							$heritage_image->image = $heritage_image->upload($_FILES['files'][$key],'uploads/heritage_image');
 							$heritage_image->heritage_id = $id;
 							$heritage_image->image_detail = $_POST['image_detail'][$key];
+							$show_no = $this->db->query("SELECT MAX(id)id FROM acm_heritage_images")->result();
+							$heritage_image->show_no = (@$show_no[0]->id)+1;
 							$heritage_image->save();
 						}		
 					}
@@ -157,6 +159,18 @@ class Heritages extends Admin_Controller {
 				$data->delete();
 			}
 		}
+	}
+	
+	function ordering() {
+		if($this->perm->can_create=='y'){
+			$mode = @$_GET['mode'];
+			$table_name = 'acm_heritage_images';
+			$id = @$_GET['id'];
+			$step=1;
+			$ext_condition = ' and heritage_id = '.$_GET['heritage_id']." ";
+			ordering_data($mode,$table_name,$id,$ext_condition,$step);
+		}
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
 }

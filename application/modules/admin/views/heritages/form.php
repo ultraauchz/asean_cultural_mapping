@@ -82,12 +82,21 @@
 						
 					<table id="tbimg" class="table table-striped table-bordered">
 						<tr>
+							<th>Ordering</th>
 							<th width="110">Image</th>
 							<th>Detail</th>
 							<th>Manage</th>
 						</tr>
-						<?foreach($rs->heritage_image->get() as $row):?>
+						<?foreach($rs->heritage_image->order_by('show_no','desc')->get() as $row):?>
 						<tr>
+							<td>
+								<a class="btn btn-default" href="admin/heritages/ordering?heritage_id=<?=$rs->id?>&mode=up&id=<?=$row->id;?>">
+				                    <i class="fa fa-angle-up"></i> 
+				                </a>
+				                <a class="btn btn-default" href="admin/heritages/ordering?heritage_id=<?=$rs->id?>&mode=down&id=<?=$row->id;?>">
+				                    <i class="fa fa-angle-down"></i> 
+				                </a>
+							</td>
 							<td>
 								<a rel="image_group" href="uploads/heritage_image/<?=$row->image?>" class="fancybox" title="<?=@$row->image_detail?>"><img src="uploads/heritage_image/<?=$row->image?>" width="150"></a>
 							</td>
@@ -244,7 +253,7 @@ $(document).ready(function() {
           // span.innerHTML = ['<tr><td><img class="thumb" src="', e.target.result,
                             // '" title="', escape(theFile.name), '"/></td><td><input class="form-control" type="text" name="image_detail[]" style="width:50%;display:inline;"></td><td></td></tr>'].join('');
           // document.getElementById('list').insertBefore(span, null);
-          $('#tbimg tr:first').after('<tr><td><img class="thumb" src="'+e.target.result+
+          $('#tbimg tr:first').after('<tr><td></td><td><img class="thumb" src="'+e.target.result+
                             '" title="'+escape(theFile.name)+'"/></td><td><input class="form-control" type="text" name="image_detail[]" style="display:inline;"></td><td></td></tr>');
         };
       })(f);
