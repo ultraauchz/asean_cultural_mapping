@@ -103,14 +103,34 @@ if(!function_exists("permission")) {
 	}
 }
 
-	function get_permission($menu_id,$user_type_id,$id=null) {
+	function get_permission($menu_id,$user_type_id,$id=null,$is_parent=null) {
 		$CI =& get_instance();		
 		if($id > 0 ){
 			$foo = new User_Type_Permission($id);	
-		}else if($user_type_id > 0){
+		}else if($user_type_id > 0 && $is_parent == null){
 			$foo = new User_Type_Permission();
 			$foo->where('menu_id = '.$menu_id.' AND user_type_id = '.$user_type_id)->get();	
-		}else{
+		}else if($is_parent=='y'){
+			$sql = "SELECT
+						count(*)nrec
+					FROM
+						acm_user_type_permission
+					WHERE
+						user_type_id = ".$user_type_id."
+					AND menu_id IN (
+						SELECT
+							id
+						FROM
+							acm_system_menus
+						WHERE
+							parent_id = ".$menu_id."
+					)
+					and can_view = 'y'";
+			$current_data = $CI->db->query($sql)->result();
+			$current_data = @$current_data[0];									
+			$foo = $current_data->nrec;
+		}
+		else{
 			$foo = new User_Type_Permission(0);
 		}			
 		return $foo;

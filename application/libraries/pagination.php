@@ -14,7 +14,7 @@ Author URI: http://www.mis-algoritmos.com
 		var $target = ""; 
 		var $page = 1;
 		var $adjacents = 2;
-		var $showCounter = false;
+		var $showCounter = true;
 		var $className = "pagination";
 		var $parameterName = "page";
 		var $urlF = false;//urlFriendly
@@ -131,7 +131,7 @@ Author URI: http://www.mis-algoritmos.com
 					Now we apply our rules and draw the pagination object. 
 					We're actually saving the code to a variable in case we want to draw it more than once.
 				*/
-				
+				if($this->showCounter)$this->pagination .= "<li><span style=\"border:0px;margin-top:2px;background:none;\">Result::: <b>$this->total_pages</b> Record(s) <b>$lastpage</b> Page(s)</span></li>";
 				if($lastpage > 1){
 						if($this->page){
 								//anterior button
@@ -139,7 +139,7 @@ Author URI: http://www.mis-algoritmos.com
 										$this->pagination .= "<li><a href=\"".$this->get_pagenum_link($prev)."\" class=\"prev\">$p</a><li>";
 									else
 										//	$this->pagination .= "<li class=\"disabled\"><a href=\"".$this->get_pagenum_link($prev)."\" class=\"prev\">$p</a></li>";
-										$this->pagination .= "<li class=\"disabled\"><a class=\"prev\">$p</a></li>";
+										$this->pagination .= "<li><a class=\"prev\" onclick=\"return false;\">$p</a></li>";
 							}
 						//pages	
 						if ($lastpage < 7 + ($this->adjacents * 2)){//not enough pages to bother breaking it up
@@ -195,8 +195,7 @@ Author URI: http://www.mis-algoritmos.com
 										$this->pagination .= "<li><a href=\"".$this->get_pagenum_link($next)."\" class=\"next\">$n</a></li>";
 									else
 										//	$this->pagination .= "<li class=\"disabled\"><a href=\"".$this->get_pagenum_link($next)."\" class=\"next\">$n</a></li>";
-										$this->pagination .= "<li class=\"disabled\"><a class=\"next\">$n</a></li>";
-									if($this->showCounter)$this->pagination .= "<div class=\"pagination_data\">($this->total_pages Pages)</div>";
+										$this->pagination .= "<li class=\"disabled\"><a class=\"next\">$n</a></li>";									
 							}
 					}
 

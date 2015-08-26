@@ -50,7 +50,7 @@ class User_Types extends Admin_Controller {
 				if(@$_POST['id']>0){
 					$_POST['updated_by'] = $this->user->id; 
 				}else{
-					$_POST['created_by'] = $current_user_id; 
+					$_POST['created_by'] = $this->user->id; 
 				}
 				$data = new User_Type();
 				$data->from_array($_POST);
@@ -80,7 +80,7 @@ class User_Types extends Admin_Controller {
 		if($this->perm->can_delete=='y'){
 			if($id) {
 				$data = new User_Type($id);
-				$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
+				$action = 'DELETE';
 				save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->title.' User Type Detail');
 				$this->db->query("DELETE FROM acm_user_type_permission WHERE user_type_id = ".$data->id);
 				$this->db->query("DELETE FROM acm_user_type WHERE id = ".$data->id);

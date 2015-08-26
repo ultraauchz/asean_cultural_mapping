@@ -24,7 +24,14 @@ class Organizations extends Admin_Controller {
 		 $data['current_user'] = $this->user;
 		 $data["rs"] = new Organization();
 		 if(@$_GET['search'] != '') $data["rs"]->where("  org_name LIKE '%".$_GET['search']."%' ");
-		 if(@$_GET['country_id'] != '') $data["rs"]->where("  country_id = ".$_GET['country_id']." ");
+		 if($this->perm->can_access_all != 'y')
+		 {
+		 	$data["rs"]->where("  country_id = ".$this->user->organization->country_id." ");
+		 }
+		 else if(@$_GET['country_id'] != '') 
+		 {
+		 	$data["rs"]->where("  country_id = ".$_GET['country_id']." ");
+		 }		 
 		 $data["rs"]->order_by("id","desc")->get_page();		 
 		 save_logs($this->menu_id, 'View', 0 , 'View Organizations ');
 		 $this->template->build("organizations/index",$data);

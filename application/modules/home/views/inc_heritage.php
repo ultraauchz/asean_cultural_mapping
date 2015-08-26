@@ -5,7 +5,7 @@
             <div id="arrow-right-ac"><a href="#">&nbsp;</a></div>
       </div>
       <div id="content-asean-cultural">
-            <ul>
+            <ul style="max-height:750px;">
             	<?php 
             			$i=0;
 						foreach($rs as $key=>$heritage):

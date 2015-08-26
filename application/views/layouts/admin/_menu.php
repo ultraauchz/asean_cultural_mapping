@@ -37,34 +37,38 @@ $current_user = user();
     <?php 
     foreach($main_menu as $key => $mitem):
 		if($mitem->have_child =='y')
-		{    
+		{
+			$perm = get_permission($mitem->id,$current_user->user_type_id, null,'y');
+			if($perm > 0)
+			{    
    	?>
-    <li class="treeview <?php if($current_menu->id ==$mitem->id || $current_menu->parent_id == $mitem->id){echo 'active';}?>">
-      <a href="#">
-        <i class="fa fa-files-o"></i>
-        <span><?=$mitem->title;?></span>
-        <!-- notify new record-->
-        <!--<span class="label label-primary pull-right">4</span>-->
-        <i class="fa fa-angle-left pull-right"></i>
-      </a>
-      <ul class="treeview-menu">
-      	<?php
-      		$child_menu = $CI->menu->where("show_state = 'y' and parent_id = ".$mitem->id)->order_by('title','asc')->get();
-			foreach($child_menu as $key => $citem):
-				$icon = $citem->custom_icon_style !='' ? $citem->custom_icon_style : "fa-circle-o" ;
-				$perm = get_permission($citem->id,$current_user->user_type_id);
-				if($perm->can_view == 'y'):
-      	?>
-        	<li class="<?php if($menu_id == $citem->id){echo 'active';}?>"><a href="<?php echo $citem->url;?>"><i class="fa <?php echo $icon;?>"></i> <?php echo $citem->title;?></a></li>
-        		<?php endif;?>
-        <?php endforeach;?>
-      </ul>
-    </li>
+			    <li class="treeview <?php if($current_menu->id ==$mitem->id || $current_menu->parent_id == $mitem->id){echo 'active';}?>">
+			      <a href="#">
+			        <i class="fa fa-files-o"></i>
+			        <span><?=$mitem->title;?></span>
+			        <!-- notify new record-->
+			        <!--<span class="label label-primary pull-right">4</span>-->
+			        <i class="fa fa-angle-left pull-right"></i>
+			      </a>
+			      <ul class="treeview-menu">
+			      	<?php
+			      		$child_menu = $CI->menu->where("show_state = 'y' and parent_id = ".$mitem->id)->order_by('title','asc')->get();
+						foreach($child_menu as $key => $citem):
+							$icon = $citem->custom_icon_style !='' ? $citem->custom_icon_style : "fa-circle-o" ;
+							$perm = get_permission($citem->id,$current_user->user_type_id);
+							if($perm->can_view == 'y'):
+			      	?>
+			        	<li class="<?php if($menu_id == $citem->id){echo 'active';}?>"><a href="<?php echo $citem->url;?>"><i class="fa <?php echo $icon;?>"></i> <?php echo $citem->title;?></a></li>
+			        		<?php endif;?>
+			        <?php endforeach;?>
+			      </ul>
+			    </li>
+		    <? } ?>
     <?php 
 		}
 		else
 		{
-			$perm = get_permission($mitem->id,$current_user->user_type_id);
+			$perm = get_permission($mitem->id,$current_user->user_type_id,null,null);
 			if($perm->can_view == 'y'): 
 	?>
     	<li class="<?php if($menu_id == $mitem->id){echo 'active';}?>"><a href="<?php echo $mitem->url;?>"><i class="fa fa-book"></i> <?php echo $mitem->title;?></a></li>

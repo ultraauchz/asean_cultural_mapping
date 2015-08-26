@@ -12,7 +12,7 @@ Author URI: http://www.mis-algoritmos.com
 .pagination {
 	padding: 3px;
 	margin: 3px;
-	text-align:center;
+	text-align:center;   
 }
 
 .pagination a {
@@ -42,3 +42,4 @@ Author URI: http://www.mis-algoritmos.com
 	border: 1px solid #EEE;
 	color: #DDD;
 }
+

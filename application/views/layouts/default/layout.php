@@ -18,6 +18,7 @@
 	<link href="css/style-map.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="js/fancybox/jquery.fancybox.css" media="screen" />
+    <link href="medias/css/pagination.css" rel="stylesheet" type="text/css" />
 	<!--[if IE]>
 	<style type="text/css">
 		#headerSection {

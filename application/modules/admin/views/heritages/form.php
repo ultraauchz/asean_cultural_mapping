@@ -41,7 +41,8 @@
 		              <label>STATE</label>
 		              <span class="td_states">
 		              <?php
-		              	$ext_condition = @$rs->country_id > 0 ? " WHERE country_id = ".$rs->country_id : "";
+		              	$country_id = $rs->country_id > 0 ? $rs->country_id : $current_user->organization->country_id;
+		              	$ext_condition = @$country_id > 0 ? " WHERE country_id = ".$country_id : "";
 		              	echo form_dropdown('state_id',get_option('id','state_name','acm_state',$ext_condition.' order by id asc'),@$rs->state_id,'class="form-control"','--- STATE ---') 
 		              ?>
 		              </span>
