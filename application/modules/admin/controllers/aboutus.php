@@ -22,6 +22,7 @@ class Aboutus extends Admin_Controller {
 	public function save(){
 		if($this->perm->can_create=='y'){
 			$data = new Contents();
+			$_POST['updated_by'] = date("Y-m-d H:i:s");
 			$data->from_array($_POST);
 			$data->save();
 			save_logs($this->menu_id, 'Update', $data->id, ' Update Aboutus ');

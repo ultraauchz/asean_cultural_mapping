@@ -26,9 +26,10 @@ if(!function_exists("logout")) {
 }
 
 if(!function_exists("user")) {
-	function user() {
+	function user($id=null) {
 		$CI =& get_instance();
-		$foo = new User($CI->session->userdata("id"));
+		$user_id = $id != null ? $id : $CI->session->userdata("id");
+		$foo = new User($user_id);
 		return $foo;
 	}
 }
