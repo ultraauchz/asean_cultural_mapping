@@ -44,9 +44,9 @@ class Hilights extends Admin_Controller {
 				if($_POST['id']==''){
 					$show_no = $this->db->query("SELECT MAX(show_no)show_no FROM acm_hilights")->result();
 					$_POST['show_no'] = @$show_no[0]->show_no < 1 ? 1 : $show_no[0]->show_no + 1;
-					$_POST['created_by'] = $current_user_id; 
+					$_POST['created_by'] = $this->current_user->id;
 				}else{
-					$_POST['updated_by'] = $current_user_id;
+					$_POST['updated_by'] = $this->current_user->id;
 				}
 				$data = new Hilight($id);
 				$data->from_array($_POST);

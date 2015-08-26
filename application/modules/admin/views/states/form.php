@@ -31,7 +31,11 @@
 					              <label for="exampleInputEmail1">Create By / Created Date</label>
 					              <div class="input-group" style="width:350px;">
 						              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$item['create_name'].'  '.@$item['created_date'];?>">
+						              <?php 
+						              $user = @$value->created_by > 0 ? user($value->created_by) : '';
+									  $username = $value->created_by > 0 ? $user->titulation.' '.$user->firstname.' '.$user->lastname : '';
+									  ?>
+						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$username.'  '.@$value->created;?>">
 					              </div>
 				            </div>			
 	            		</td>
@@ -40,7 +44,11 @@
 					              <label for="exampleInputEmail1">Update By / Updated Date</label>
 					              <div class="input-group" style="width:350px;">
 						              <span class="input-group-addon"><i class="fa fa-user"></i></span>
-						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$item['update_name'].'  '.@$item['updated_date'];?>">
+						              <?php 
+						              $user = @$value->updated_by > 0 ? user($value->updated_by) : '';
+									  $username = @$value->updated_by > 0 ? $user->titulation.' '.$user->firstname.' '.$user->lastname : '';
+									  ?>
+						              <input type="text" class="form-control" disabled="disabled" id="register_date" name="register_date"  value="<?php echo @$username.'  '.@$value->updated;?>">
 					              </div>
 				            </div>
 	            		</td>

@@ -22,7 +22,11 @@ class Aboutus extends Admin_Controller {
 	public function save(){
 		if($this->perm->can_create=='y'){
 			$data = new Contents();
-			$_POST['updated_by'] = date("Y-m-d H:i:s");
+			if($_POST['id']==''){
+				$_POST['created_by'] = $this->current_user->id; 
+			}else{
+				$_POST['updated_by'] = $this->current_user->id;
+			}
 			$data->from_array($_POST);
 			$data->save();
 			save_logs($this->menu_id, 'Update', $data->id, ' Update Aboutus ');
