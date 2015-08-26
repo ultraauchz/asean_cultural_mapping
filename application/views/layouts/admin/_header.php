@@ -20,6 +20,7 @@ $curr_user = user();
           <!-- Menu Footer-->
           <li class="user-footer">
             <div class="pull-right">
+              <a href="admin/settings/users/form/<?=$curr_user->id?>" class="btn btn-info btn-flat">Edit Profile</a>
               <a href="admin/signout" class="btn btn-default btn-flat">Sign out</a>
             </div>
           </li>
