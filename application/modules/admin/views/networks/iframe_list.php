@@ -131,16 +131,11 @@
 			</div><!-- /.box-header -->
 			<div style="float:left;width:100%;">
 			  <div class="col-xs-3">
-			  	<span>Country</span> 
-			  	<?php echo form_dropdown('country_id',get_option('id','country_name','acm_country'," WHERE zone = 'ASEAN' order by country_name "),@$country_id,'class="form-control"');?>
-			  </div>
-			  <div class="col-xs-3">
-			  	<span>Organization name</span> 
-			  	<input type="text" name="search" class="form-control" placeholder="Enter Organization Name" value="<?=@$_GET['search'];?>">
+			  	<span>Network name</span> 
+			  	<input type="text" name="search" class="form-control" placeholder="Enter Network Name" value="<?=@$_GET['search'];?>">
 			  </div>
 			  <div class="col-xs-3">
 			  	<br>
-			  	
 			  	<!--id=4&area=admin&ctrl=networks&action=save_network_organization-->
 			  	<input type="hidden" name="id" value="<?php echo @$_GET['id'];?>">
 			  	<input type="hidden" name="area" value="<?php echo @$_GET['area'];?>">
@@ -158,8 +153,8 @@
 			    <thead>
 			      <tr>
 			        <th>Select</th>
-			        <th>Name</th>			        
-			        <th>Country</th>
+			        <th>Code</th>			        
+			        <th>Network Name</th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -167,16 +162,16 @@
 					?>
 						<tr>
 							<td><input type="checkbox" value="<?=@$item->id;?>" name="chk_org_id[]"></td>
-							<td><?php echo $item->org_name;?></td>
-							<td><?php echo $item->country->country_name;?></td>
+							<td><?php echo $item->code;?></td>
+							<td><?php echo $item->title;?></td>
 						</tr>
 					<?php endforeach;?>	      
 			    </tbody>
 			    <tfoot>
 			      <tr>
 			      	<th>Select</th>
-			        <th>Name</th>
-			        <th>Code</th>				        
+			        <th>Code</th>			        
+			        <th>Network Name</th>				        
 			      </tr>
 			    </tfoot>
 			  </table>

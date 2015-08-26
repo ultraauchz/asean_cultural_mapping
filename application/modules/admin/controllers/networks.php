@@ -95,7 +95,7 @@ class Networks extends Admin_Controller {
 	}
 	
 	function delete_network_org($id){
-		if($this->perm->can_edit=='y'){
+		if($this->perm->can_create=='y'){
 			$network_org = new Network_Org($id);
 			$network_id = $network_org->network_id;
 			$this->db->query("DELETE FROM acm_network_org WHERE id = ".$id);
@@ -114,5 +114,16 @@ class Networks extends Admin_Controller {
 			ordering_data($mode,$table_name,$id,$ext_condition,$step);
 		}
 		redirect('admin/networks/index?search='.@$_GET['search']);
+	}
+
+	public function iframe_list(){
+		//id=15&area=admin&ctrl=heritages&action=save_heritage_organization
+		$data['action_url'] = $_GET['area'].'/'.$_GET['ctrl'].'/'.$_GET['action'].'/'.$_GET['id'];		
+		$data['result'] = new Network();
+		if(@$_GET['search']!='')$data['result']->where(" title LIKE '%".@$_GET['search']."%' ");
+		$data["result"]->order_by("show_no","desc")->get_page();
+		$data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
+	    $data['page'] = (empty($_GET['page']))? 1 : $_GET['page'];
+		$this->load->view('networks/iframe_list',$data);
 	}
 }

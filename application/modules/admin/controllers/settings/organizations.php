@@ -43,6 +43,9 @@ class Organizations extends Admin_Controller {
 		 $data['perm'] = $this->perm;
 		 $data['current_user'] = $this->user;
 		 $data["rs"] = new Organization($id);
+		 $network_org = new Network_Org();
+		 $network_org->where('org_id',$id)->get();
+		 $data['network_org'] = $network_org; 
 		 save_logs($this->menu_id, 'View', @$data['rs']->id , 'View Organizations Detail '.@$data['rs']->org_name);
 		 $this->template->build("organizations/form",$data);
 	}
@@ -69,9 +72,12 @@ class Organizations extends Admin_Controller {
 	}
 	
 	public function iframe_list(){
-		//id=15&area=admin&ctrl=heritages&action=save_heritage_organization		
-		$data['action_url'] = $_GET['area'].'/'.$_GET['ctrl'].'/'.$_GET['action'].'/'.$_GET['id'];
+		//id=15&area=admin&ctrl=heritages&action=save_heritage_organization
+		$country_id = @$_GET['country_id'] > 0 ? $_GET['country_id'] : $this->user->organization->country_id;		
+		$data['action_url'] = $_GET['area'].'/'.$_GET['ctrl'].'/'.$_GET['action'].'/'.$_GET['id'];		
 		$data['result'] = new Organization();
+		$data['country_id'] = $country_id;			
+		if($country_id > 0)$data['result']->where('country_id = '.$country_id);
 		$data["result"]->order_by("id","desc")->get_page();
 		$data['no'] = (empty($_GET['page']))?0:($_GET['page']-1)*20;
 	    $data['page'] = (empty($_GET['page']))? 1 : $_GET['page'];
@@ -89,5 +95,35 @@ class Organizations extends Admin_Controller {
 			echo '<option value="'.$data_item->id.'">'.$data_item->org_name.'</option>';
 		endforeach;
 		echo '</select>';
+	}
+	
+	function delete_network_org($id){
+		if($this->perm->can_create=='y'){
+			$network_org = new Network_Org($id);
+			$org_id = $network_org->org_id;
+			$this->db->query("DELETE FROM acm_network_org WHERE id = ".$id);
+		}
+		redirect('admin/settings/organizations/form/'.$org_id);
+	}
+	
+	public function save_network_organization($org_id=null){
+		if($this->perm->can_create=='y'){
+			if($org_id > 0){			
+				foreach($_POST['chk_org_id'] as $key){						
+					$ext= new Network_Org();
+					$ext->where('org_id',$org_id)->where("network_id", $key)->get(1);
+					if($ext->id) {
+						
+					}else{					
+						$data['network_id'] = $key;
+						$data['org_id'] = $org_id;
+						$save = new Network_Org();	
+						$save->from_array($data);
+						$save->save();
+					}
+				}			
+			}	
+		}
+		redirect('admin/settings/organizations/form/'.$org_id);	
 	}
 }

@@ -24,7 +24,7 @@
             		<a href="heritages/detail/<?php echo $heritage->id;?>" >
                 	<div class="pic-culture-country">
                 		<div style="max-width:174px;max-height:174px;overflow: hidden;margin:0 auto;">
-                		<img src="uploads/heritage_image/<?php echo $h_image->image;?>" height="174" />
+                		<img src="uploads/heritage_image/<?php echo $h_image->image;?>" height="174" class="image-cropper" />
                 		</div>
                 	</div>
                 	<div style="overflow: hidden;max-height: 210px;">
