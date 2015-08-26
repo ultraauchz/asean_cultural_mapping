@@ -11,11 +11,24 @@
 			<div class="box-body">
 				<div class="form-group">
 		              <label for="exampleInputEmail1">User Type</label>
-		              <?php echo form_dropdown('user_type_id',get_option('id','title','acm_user_type'),@$value->user_type_id,'class="form-control"','--select user type--');?>		              
+		              <?php
+		              if($modules_name=='profile'){
+		              	echo form_dropdown('user_type_id',get_option('id','title','acm_user_type'),@$value->user_type_id,'class="form-control" disabled="disabled"','--select user type--');
+		              }else{
+		              	echo form_dropdown('user_type_id',get_option('id','title','acm_user_type'),@$value->user_type_id,'class="form-control"','--select user type--');
+					  }
+		              ?>		              
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Username</label>
-		              <input type="text" class="form-control" name="username" value="<?php echo @$value->username;?>">		              
+		              <?php
+		              if($modules_name=='profile'){
+		              	echo $value->username;
+		              }else{
+		              	echo '<input type="text" class="form-control" name="username" value="'.@$value->username.'">';
+					  }
+		              ?>
+		              		             
 	            </div>	         	            
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Password</label>
@@ -41,10 +54,14 @@
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Organization</label>
 		              <?php
-		              $country_id = $perm->can_access_all != 'n' && @$_GET['country_id'] > 0 ? $current_user->organization->country_id : @$value->country_id;
-					  $ext_condition = $country_id > 0 ? " WHERE country_id = ".$country_id : ""; 
-		              echo form_dropdown('org_id',get_option('id','org_name','acm_organization', $ext_condition." ORDER BY org_name ASC "),@$value->org_id,'class="form-control required"','--select organization--');
-		              ?>		              
+		              if($modules_name=='profile'){
+		              	echo $value->organization->org_name;
+		              }else{
+		              	$country_id = $perm->can_access_all != 'n' && @$_GET['country_id'] > 0 ? $current_user->organization->country_id : @$value->country_id;
+					  	$ext_condition = $country_id > 0 ? " WHERE country_id = ".$country_id : ""; 
+		              	echo form_dropdown('org_id',get_option('id','org_name','acm_organization', $ext_condition." ORDER BY org_name ASC "),@$value->org_id,'class="form-control required"','--select organization--');
+					  }
+		              ?>	
 	            </div>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Position</label>
@@ -58,10 +75,12 @@
 		              <label for="exampleInputEmail1">Email</label>
 		              <input type="email" class="form-control" name="email" value="<?php echo @$value->email;?>">		              
 	            </div>
+	            <?php if($modules_name!='profile'){ ?>
 	            <div class="form-group">
 		              <label for="exampleInputEmail1">Status</label><br>
 		              <input type="checkbox" name="status" value="1" <?php if(@$value->status=='1')echo 'checked="checked"';?>> Actived		              
 	            </div>
+	            <?php } ?>
 	            <table>
 	            	<tr>
 	            		<td>
@@ -93,7 +112,7 @@
 	            	</tr>
 	            </table>
 	            <div class="form-group">
-	            	  <?php if($perm->can_create=='y'){ ?>
+	            	  <?php if($perm->can_create=='y' || $modules_name == 'profile'){ ?>
 	            	  <input type="hidden" name="id" value="<?php echo @$value->id;?>">
 		              <input type="submit" class="btn btn-primary" value="Save">
 					  <?php } ?>	
