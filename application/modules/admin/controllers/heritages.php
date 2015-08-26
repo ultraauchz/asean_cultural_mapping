@@ -57,6 +57,11 @@ class Heritages extends Admin_Controller {
 			if($_POST) {
 				$data = new Heritage($id);
 				$data->from_array($_POST);
+				if($_POST['id']==''){
+					$_POST['created_by'] = $this->current_user->id; 
+				}else{
+					$_POST['updated_by'] = $this->current_user->id;
+				}
 				$data->save();
 				$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
 				save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->title.' Heritage');

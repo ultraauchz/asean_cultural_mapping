@@ -86,7 +86,7 @@ class Users extends Admin_Controller {
 	
 				//	Username
 				//	$data->username = strip_tags(trim($_POST["username"]));
-	
+				
 				
 				if(!empty($_POST["password"])) {
 					$data->password = encrypt_password(strip_tags(trim($_POST["password"])));
@@ -102,6 +102,11 @@ class Users extends Admin_Controller {
 				$data->user_type_id = $_POST['user_type_id'];			
 				$data->username = strip_tags($_POST['username']);
 				$data->status = !empty($_POST['status']) ? '1' : '0';
+				if($_POST['id']==''){
+					$data->created_by = $this->current_user->id; 
+				}else{
+					$data->updated_by = $this->current_user->id;
+				}
 				$data->save();
 				$action = $_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
 				save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->firstname.' '.$data->lastname.' User Detail');

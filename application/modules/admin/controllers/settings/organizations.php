@@ -52,6 +52,11 @@ class Organizations extends Admin_Controller {
 				$data = new Organization($id);
 				$data->from_array($_POST);
 				$data->save();
+				if($_POST['id']==''){
+					$_POST['created_by'] = $this->user->id; 
+				}else{
+					$_POST['updated_by'] = $this->user->id;
+				}
 				$action = @$_POST['id'] > 0 ? 'UPDATE' : 'CREATE';
 				save_logs($this->menu_id, $action, @$data->id , $action.' '.$data->org_name.' Organizations ');
 			}
