@@ -36,7 +36,6 @@
 				<thead>
 					<tr>
 						<th style="width:50px;">NO</th>
-						<th>STATUS</th>
 						<th>NAME</th>
 						<th>COUNTRY</th>
 						<th style="width: 160px;" >CREATED/UPDATED DATE</th>
@@ -50,11 +49,6 @@
 					?>
 					<tr>
 						<td><?php echo $no;?></td>
-						<td>
-							<button type="button" id="<?php echo $row->id?>" class="btn <?php echo ($row->status==1) ? "btn-primary" : "btn-danger" ?>" data-loading-text="บันทึก..." value="<?php echo ($row->status==1) ? 1 : 0 ?>"  >
-								<?php echo ($row->status==1) ? "On" : "Off" ?>
-							</button>
-						</td>
 						<td><?php echo $row->org_name?></td>
 						<td><?php echo $row->country->country_name;?></td>
 						<td><small><?php echo $row->created."<br />".$row->updated;?></small></td>
@@ -74,7 +68,6 @@
 				 <tfoot>
 			      <tr>
 					<th>NO</th>
-					<th>STATUS</th>					
 					<th>NAME</th>
 					<th>COUNTRY</th>
 					<th style="width: 160px;" >CREATED/UPDATED DATE</th>

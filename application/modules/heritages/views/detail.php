@@ -17,8 +17,12 @@
 			</ul>			
 			<div class="clearfix"><p></p></div>
 			<div id="title-page">Gallery</div>
+			<div class="image-zoom-container">
 			<?if(@$rs->heritage_image->get() != "") : ?>
 				<?foreach($rs->heritage_image->get() as $row):?>
-				<a rel="image_group" href="uploads/heritage_image/<?=$row->image?>" class="fancybox" title="<?=@$row->image_detail?>"><img src="uploads/heritage_image/<?=$row->image?>" width="150"></a>
+				<div class="zoom-container multiple-borders ">
+				<a rel="image_group" href="uploads/heritage_image/<?=$row->image?>" class="fancybox" title="<?=@$row->image_detail?>"><img src="uploads/heritage_image/<?=$row->image?>" class="" width="150"></a>
+				</div>
 				<?endforeach?>
 			<?endif;?>            
+			</div>

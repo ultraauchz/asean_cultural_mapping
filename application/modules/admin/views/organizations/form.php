@@ -71,6 +71,42 @@
 		              <label for="exampleInputEmail1">DETAIL</label>
 		              <textarea class="form-control"  name="org_detail" id="detail" ><?=@$rs->org_detail;?></textarea>
 	            </div>
+	            <?php if(@$rs->id > 0) : ?>
+	            <fieldset>
+	            	<legend>Network Membership</legend>
+	            	<?php if($perm->can_create=='y'){?>
+	            	<a href="admin/networks/iframe_list?id=<?=@$rs->id;?>&area=admin&ctrl=settings/organizations&action=save_network_organization" class="btn btn-success iframe-btn" >Add Member</a>
+	            	<?php } ?>
+	            	<table class="table table-bordered">
+	            		<thead>
+	            			<tr>
+	            				<th>No.</th>
+	            				<th>Network Name</th>
+	            				<th>Code</th>
+	            				<th>Manage</th>
+	            			</tr>
+	            		</thead>
+	            		<tbody>
+	            			<?php
+	            			$no = 0; 
+	            			foreach ($network_org as $key => $network_org_item):
+								$no++; 
+	            			?>
+	            			<tr>
+	            				<td><?php echo $no;?></td>
+	            				<td><?php echo $network_org_item->network->title;?></td>
+	            				<td><?php echo $network_org_item->network->code;?></td>
+	            				<td>
+	            					<?php if($perm->can_create=='y'){?>
+	            					<a href="admin/settings/organizations/delete_network_org/<?=$network_org_item->id;?>" class="btn_delete btn btn-danger">X</a>
+	            					<?php } ?>
+	            				</td>
+	            			</tr>
+	            			<?php endforeach;?>
+	            		</tbody>
+	            	</table>
+	            </fieldset>  
+	            <?php endif;?>
 	            <table>
 	            	<tr>
 	            		<td>
