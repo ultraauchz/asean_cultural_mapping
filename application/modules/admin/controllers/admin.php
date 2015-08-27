@@ -102,7 +102,8 @@ class Admin extends Admin_Controller {
 
 	public function index() {
 		$data['menu_id'] = 22;
-		save_logs($data['menu_id'], 'View', $this->session->userdata("id"), ' View Dashboard ');
+		//save_logs($data['menu_id'], 'View', $this->session->userdata("id"), ' View Dashboard ');
+		redirect('admin/dashboards');
 		$this->template->build("index",@$data);
 	}
 	

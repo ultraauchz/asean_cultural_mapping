@@ -31,7 +31,7 @@ class Analytics {
 		$this->client->setApplicationName("Analytics");
 		
 		$this->analytic = new Google_Service_Analytics($this->client);
-		$cred = new Google_Auth_AssertionCredentials($this->email, array(Google_Service_Analytics::ANALYTICS_READONLY), file_get_contents('c://application/libraries/Analytics/client_secrets.p12'));
+		$cred = new Google_Auth_AssertionCredentials($this->email, array(Google_Service_Analytics::ANALYTICS_READONLY), file_get_contents('c:/wamp/www/FINEARTS/asean_cultural_mapping/application/libraries/Analytics/client_secrets.p12'));
 		
 		$this->client->setAssertionCredentials($cred);
 		if($this->client->getAuth()->isAccessTokenExpired()) {

@@ -85,7 +85,7 @@ p { word-break: break-all;}
 	#footer{ font-size:12px;color:white; background-image: url(../images/bg-footer.jpg); background-repeat:repeat;width:100%;float:left; }
 	#text-footer{ width:1096px; margin:0 auto;}
 		#textAddress{  text-align:left; float:left;  margin-top:10px;}
-		#copy{margin-top:35px; color:white; float:right;}
+		#copy{margin-top:10px; color:white; float:right;}
 			.cp{color:#727272;}
 
 

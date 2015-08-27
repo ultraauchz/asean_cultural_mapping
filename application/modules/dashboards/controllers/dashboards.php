@@ -13,9 +13,9 @@ class Dashboards extends Base_Controller
 	{
 		$ga = new Analytics();
 		echo '<div id="stat">
-            <span id="today"></span> วันนี้ '.number_format($ga->getToday()).' คน &nbsp;
-            <span id="month"></span> เดือนนี้ '.number_format($ga->getMonth()).' คน &nbsp;
-            <span id="all"></span> ทั้งหมด '.number_format($ga->getTotal()).' คน
+            <span id="today"></span> Today '.number_format($ga->getToday()).' users &nbsp;
+            <span id="month"></span> This Month '.number_format($ga->getMonth()).' users &nbsp;
+            <span id="all"></span> All '.number_format($ga->getTotal()).' users
         </div>';	
 	}
 	
