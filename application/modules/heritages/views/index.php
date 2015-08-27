@@ -62,7 +62,7 @@ ul.heritages>li {
 <ul class="heritages">
 <?php 
 foreach($rs as $key=>$heritage):
-		$h_image = $heritage->heritage_image->get(1);	
+		$h_image = $heritage->heritage_image->order_by('show_no','desc')->get(1);	
 ?>
 	<li class="pin">	
 		<div class="thump clip-circle" style="max-height: 130px;overflow: hidden;">

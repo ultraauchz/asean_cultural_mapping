@@ -4,14 +4,14 @@ function tiny(elements){
 		elements: elements,
 		theme: "advanced",
 		skin: "cirkuit",
-		plugins: "pdw,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist",
+		plugins: "pdw,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist,imgmap",
 		
 		file_browser_callback: 'openKCFinder',
 		init_instance_callback : "fixTinyMCETabIssue",
 		
 		theme_advanced_buttons1: "pdw_toggle,formatselect,fontsizeselect,forecolor,|,bold,italic,strikethrough,|,bullist,numlist,|,justifyleft,justifycenter,justifyright,|,link,unlink,|,spellchecker,|,image",
 		theme_advanced_buttons2: "code,paste,pastetext,pasteword,removeformat,|,backcolor,|,underline,justifyfull,sup,|,outdent,indent,|,hr,charmap,|,media,|,search,replace,|,fullscreen,|,undo,redo",
-		theme_advanced_buttons3: "tablecontrols,|,visualaid,template,pagebreak,preview,emotions",
+		theme_advanced_buttons3: "tablecontrols,|,visualaid,template,pagebreak,preview,emotions,imgmap",
 		
 		theme_advanced_toolbar_location: "top",
 		theme_advanced_toolbar_align: "left",
