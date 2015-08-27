@@ -11,4 +11,25 @@
     	<?php echo $footage->detail;?>
     </div>
     <div id="copy"><span class="cp">© Copyright 2015.</span>  2015 ASEAN CULTURAL MAPPING <span class="cp">All Rights Reserved.</span></div>
+<style>
+	#stat{width:100%;}
+	#stat th, #stat td{padding:5px 0;border-bottom:1px dotted #eee;}
+	#stat th{text-align:left;}
+	#stat td{text-align:right;}
+</style>
+<div class="box">
+	<h3>Statistics</h3>
+	<div class="box-content" id="stat-area">
+		
+	</div>
+	<div class="bottom"></div>
+</div>
+<script>
+	$(function(){
+		$('#stat-area').html('<div align="center"><?php echo img('media/images/ajax-loader.gif'); ?></div>');
+		$.get('dashboards/ajax_load', function(data){
+			$('#stat-area').html(data);
+		});
+	});
+</script>
 </div>
