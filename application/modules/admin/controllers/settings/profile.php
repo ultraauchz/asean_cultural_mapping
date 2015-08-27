@@ -23,6 +23,8 @@ class profile extends Admin_Controller {
 	}
 
 	public function save($id=false) {
+			$id = $this->current_user->id;
+			$_POST['updated_by'] = $this->current_user->id;
 			if($_POST) {
 				$data = new User($id);
 	
