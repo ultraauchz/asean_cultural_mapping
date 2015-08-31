@@ -30,7 +30,7 @@
                 	<div style="overflow: hidden;max-height: 210px;">
                 	<div class="title-culture"><?php echo $heritage->title;?></div>
 					<div class="title-country"><?php echo $heritage->country->country_name;?></div>
-					<div class="intro" style="max-height:110px;overflow: hidden;"><?php echo $heritage->description;?></div>
+					<div class="intro" style="max-height:86px;overflow: hidden;"><?php echo $heritage->description;?></div>
 					</div>
 					</a>
                 </li>

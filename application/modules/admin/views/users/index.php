@@ -9,8 +9,8 @@
 			</div><!-- /.box-header -->
 			<div style="float:left;width:100%;">
 				<div class="col-xs-3">
-			  	<label for="country_id">Firstname/Lastname/Username/Email</label> 
-			  	<input type="text" name="search" value="<?php echo @$_GET['search'];?>" class="form-control">
+			  	<label for="search">Search</label> 
+			  	<input type="text" name="search" value="<?php echo @$_GET['search'];?>" placeholder="Firstname/Lastname/Username/Email" class="form-control">
 			    </div>
 				<div class="col-xs-3">
 			  	<label for="country_id">Country</label> 			  	
