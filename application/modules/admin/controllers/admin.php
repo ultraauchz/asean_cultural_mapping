@@ -101,9 +101,9 @@ class Admin extends Admin_Controller {
 	}
 
 	public function index() {
-		$data['menu_id'] = 22;
+		$data['menu_id'] = 0;
 		//save_logs($data['menu_id'], 'View', $this->session->userdata("id"), ' View Dashboard ');
-		redirect('admin/dashboards');
+		//redirect('admin/dashboards');
 		$this->template->build("index",@$data);
 	}
 	
